@@ -1,0 +1,51 @@
+<!--pages/search/search.wxml-->
+<view class="container">
+  <view class='search-area'>
+    <view class='search-city'>
+      <picker mode='selector' bindchange="bindCityPicker" range="{{cityOption.options}}">
+        <view class="picker">
+          {{cityOption.options[cityIndex]}}
+        </view>
+      </picker>
+      <view class='search-arrow'><icon class='fa fa-angle-down'></icon></view>
+    </view>
+    <view class="search-keyword">
+      <input class='padding-left-20' confirm-type='search' maxlength="30" placeholder="请输入公司/职位" bindinput="bindKeywordInput" value='{{keyword}}'/>
+      <view bindtap='doSearch' class='search-btn'><icon class='fa fa-search padding-left-30'></icon></view>
+    </view>
+  </view>
+  <view class='search-hot'>
+    <text class='title'>热门搜索</text>
+    <view class='search-tag'>
+      <view wx:for="{{hotTag}}" wx:for-item="tag">
+        <view class='tag-list' bindtap='selectKeyword' data-word='{{tag}}'>
+          <text>{{tag}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='search-result'>
+    <view wx:for="{{jobList}}" wx:for-item="job" wx:key="id">
+      <view class='job-list' bindtap='jobDetailTap' data-jobid="{{job.id}}">
+        <view class='company-logo'>
+          <image class='logo-style' mode='aspectFill' src='{{job.companyLogo}}'></image>
+        </view>
+        <view class='job-abstract'>
+          <view class='job-head'>
+            <view class='job-title'>{{job.title}}</view>
+            <view wx:if="{{job.tagId != null}}" class='job-tag'>{{job.tagName}}</view>
+          </view>
+          <view class='job-info'>
+            <view class='job-info-detail'><icon class='fa fa-map-marker'/> {{job.cityName}}</view>
+            <view class='job-info-detail'><icon class='fa fa-id-card'/> {{job.expirence}}年</view>
+            <view class='job-info-detail'><icon class='fa fa-graduation-cap'/> {{job.education}}</view>
+          </view>
+        </view>
+        <view class='job-salary'>
+          <text>{{job.salaryLow}}k-{{job.salaryHigh}}k</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='margin-top-25 margin-bottom-25 tips-style '> --- 没有更多数据了 --- </view>
+</view>

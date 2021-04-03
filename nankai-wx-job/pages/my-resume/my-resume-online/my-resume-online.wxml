@@ -1,0 +1,18 @@
+<!--pages/my-resume/my-resume-online/my-resume-online.wxml-->
+<view class="container">
+  <view class='info-edit-row'>
+    <view class='info-edit-title'>
+      <icon class='fa fa-internet-explorer' /> 在线简历
+    </view>
+    <view class='info-edit-content'>
+      <input maxlength="40" placeholder="请输入在线简历地址" bindinput="bindOnlineResumeInput" value='{{userInfo.email}}'></input>
+    </view>
+  </view>
+</view>
+
+<view class='footer ft-30'>
+  <view class='short-block'> </view>
+  <view class='short-block'> </view>
+  <view class='short-block'></view>
+  <view class='long-block' bindtap='saveUserInfo'>保存</view>
+</view>

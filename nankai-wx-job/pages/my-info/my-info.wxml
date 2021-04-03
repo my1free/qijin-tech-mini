@@ -1,0 +1,27 @@
+<!--pages/my-info/my-info.wxml-->
+<view class="container">
+  <view class="info-row" bindtap='infoEditBtn' data-type="email">
+    <view class='info-row-title'>
+      <icon class='fa fa-envelope'/> 邮箱  
+    </view>
+    <view class='info-row-content'>
+      {{userInfo.email ? userInfo.email : "请填写邮箱(必填)"}}
+    </view>
+  </view>
+  <view class="info-row" bindtap='infoEditBtn' data-type="mobile">
+    <view class='info-row-title'>
+      <icon class='fa fa-mobile'/>   手机
+    </view>
+    <view class='info-row-content'>
+      {{userInfo.mobile ? userInfo.mobile : "请填写手机号"}}
+    </view>
+  </view>
+  <view class="info-row" bindtap='infoEditBtn' data-type="wechat">
+    <view class='info-row-title'>
+      <icon class='fa fa-wechat'/>   微信
+    </view>
+    <view class='info-row-content'>
+      {{userInfo.wechat ? userInfo.wechat : "请填写微信"}}
+    </view>
+  </view>
+</view>

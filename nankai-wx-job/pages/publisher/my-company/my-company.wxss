@@ -1,0 +1,132 @@
+/* pages/publisher/my-company/my-company.wxss */
+@import "../../../fontawesome.wxss";
+
+.container {
+  padding: 10rpx;
+}
+
+.company-list {
+  width: 100%;
+  background-color: white;
+  margin-top: 20rpx;
+}
+
+.company-list .company-row {
+  padding: 10rpx 20rpx;
+  font-size: 30rpx;
+  border-bottom: 4rpx solid #eee;
+}
+
+.company-list .company-logo {
+  width: 180rpx;
+  height: 180rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-list .company-logo image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 20rpx;
+}
+
+.company-list .company-title {
+  min-width: 400rpx;
+  text-align: center;
+  overflow: hidden;
+}
+
+.company-list .company-title .company-name {
+  font-size: 42rpx;
+  padding: 15rpx 10rpx;
+  color: #930098;
+  border-bottom:8rpx solid #ddd;
+
+}
+
+.company-list .company-title .company-name text {
+  padding: 0rpx 80rpx;
+}
+
+.company-list .company-title .company-fullname {
+  padding: 10rpx;
+  color: gray;
+}
+
+.company-list .company-location {
+  display: flex;
+  color: #099;
+}
+
+.company-location .location-label {
+  font-size: 40rpx;
+  color: purple;
+  border-right: 4rpx solid #ddd;
+  width: 8%;
+}
+
+.company-location .location-desc {
+  width: 80%;
+  padding: 8rpx 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-location .location-arrow {
+  width: 8%;
+  font-size: 60rpx;
+  display: flex;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-list .company-introduction {
+  color: gray;
+  padding: 20rpx 40rpx;
+}
+
+.company-list .company-edit{
+  width: 150rpx;
+  font-size: 50rpx;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 20rpx;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  color: cornflowerblue;
+}
+
+.fold-mask-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.fold-content-height {
+  height: 200rpx;
+}
+
+.fold-mask {
+  bottom: 0rpx;
+  width: 100%;
+  padding-bottom: 20rpx;
+  text-align: center;
+  color: #930098;
+}
+
+.mask {
+  position: absolute;
+  padding-top: 120rpx;
+  padding-bottom: 40rpx;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(70%, #fff));
+}

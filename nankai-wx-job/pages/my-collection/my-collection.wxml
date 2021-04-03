@@ -1,0 +1,31 @@
+<!--pages/my-collection/my-collection.wxml-->
+<view class='container'>
+  <view wx:for="{{jobList}}" wx:for-item="job" wx:key="id">
+    <view>
+      <view class='job-list' bindtap='jobDetailTap' data-jobid="{{job.id}}">
+        <view class='company-logo'>
+          <image class='logo-style' mode='aspectFill' src='{{job.companyLogo}}'></image>
+        </view>
+        <view class='job-abstract'>
+          <view class='job-head'>
+            <view class='job-title'>{{job.title}}</view>
+            <view wx:if="{{job.tagId != null}}" class='job-tag'>{{job.tagName}}</view>
+          </view>
+          <view class='job-info'>
+            <view class='job-info-detal'><icon class='fa fa-map-marker'/> {{job.cityName}}</view>
+            <view class='job-info-detal'><icon class='fa fa-id-card'/> {{job.expirence}}年</view>
+            <view class='job-info-detal'><icon class='fa fa-graduation-cap'/> {{job.education}}</view>
+          </view>
+        </view>
+        <view class='job-salary'>
+          <text>{{job.salaryLow}}k-{{job.salaryHigh}}k</text>
+        </view>
+      </view>
+      <view class='job-opr'>
+        <view class='job-opr-list border-right' bindtap='cancelCollection' data-jobid="{{job.id}}">取消收藏</view>
+        <view class='job-opr-list'>投递简历</view>
+      </view>
+    </view>
+  </view>
+  <view class='margin-top-50 tips-style {{jobList.length > 0 ? "hidden" : ""}}'> --- 没有数据 --- </view>
+</view>

@@ -1,0 +1,75 @@
+/* pages/my-resume/my-resume-add/my-resume-add.wxss */
+
+@import "../../../fontawesome.wxss";
+
+.work-exp-edit-row{
+  width: 100%;
+  background-color: white;
+  padding-left: 50rpx;
+  margin-top: 20rpx;
+  color: #930098;
+}
+
+.work-exp-edit-row .work-exp-edit-title{
+  height: 70rpx;
+  border-bottom: 1rpx solid #ddd;
+  padding-top: 20rpx;
+  width: 95%
+}
+
+.work-exp-edit-row .work-exp-edit-content{
+  height: 80rpx;
+  font-size: 30rpx;
+  padding-top: 20rpx;
+  color: #333;
+}
+
+.work-exp-edit-row .work-exp-section{
+  font-size: 30rpx;
+  color: #333;
+}
+
+.work-exp-edit-row .work-exp-section .sub-title{
+  font-weight: bold; 
+  color: #930098
+}
+
+.work-exp-edit-row .work-exp-section picker{
+  padding: 20rpx;
+  width: 80%;
+}
+
+.work-exp-edit-row .work-exp-edit-text{
+  font-size: 30rpx;
+  color: #333;
+  border-bottom: 1rpx dashed #ddd;
+  margin-bottom: 50rpx;
+}
+.work-exp-edit-row .work-exp-edit-text textarea{
+  width: 90%;
+  padding-top: 20rpx;
+  margin: 10rpx;
+}
+
+.footer{
+  display: flex;
+  width: 100%;
+  bottom: 1rpx;
+  height: 100rpx;
+}
+
+.footer .short-block{
+  width: 160rpx;
+  height: 100%;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.footer .long-block{
+  width: 270rpx;
+  text-align: center;
+  padding-top: 30rpx;
+  color: white;
+  background-color: #930098;
+  border-radius: 10rpx;
+}

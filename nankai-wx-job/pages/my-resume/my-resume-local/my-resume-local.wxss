@@ -1,0 +1,182 @@
+/* pages/my-resume/my-resume-local/my-resume-local.wxss */
+@import "../../../fontawesome.wxss";
+
+.mask {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(70%, #fff));
+}
+
+.head {
+  width: 100%;
+  background-color: white;
+}
+
+.head .my-avatar {
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head .my-avatar image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.head button {
+  height: 140rpx;
+  background-color: white;
+}
+
+.head .login-avatar {
+  width: 140rpx;
+  border-right: 1rpx solid #eee;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 14rpx;
+}
+
+.head .login-avatar image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  border: 1rpx solid #eee;
+}
+
+.head .login-name {
+  padding-top: 25rpx;
+  padding-left: 20rpx;
+}
+
+.body {
+  width: 100%;
+}
+
+.body .resume-list {
+  width: 95%;
+  background-color: white;
+  margin-top: 30rpx;
+  padding: 25rpx;
+}
+
+.body .resume-list .resume-list-title {
+  color: #930098;
+  padding-bottom: 20rpx;
+  border-bottom: 4rpx solid #ddd;
+}
+
+.body .resume-list .resume-list-content {
+  padding: 50rpx;
+  color: gray;
+  font-size: 30rpx;
+}
+
+.base-info-list {
+  padding: 20rpx;
+  border-bottom: 1rpx #ddd solid;
+  display: flex;
+}
+
+.base-info-list .base-info-title {
+  width: 140rpx;
+  color: #333;
+}
+
+.work-exp-list {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #ddd;
+  position: relative;
+}
+
+.work-exp-list .work-exp-row {
+  display: flex;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+
+.work-exp-list .work-exp-company {
+  font-size: 35rpx;
+  color: black;
+  width: 400rpx;
+}
+
+.work-exp-edit {
+  font-size: 35rpx;
+  width: 350rpx;
+  text-align: right;
+}
+
+.work-exp-edit .fa {
+  margin-left: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.work-exp-list .work-exp-time {
+  font-size: 25rpx;
+}
+
+.work-exp-list .work-exp-position {
+  font-size: 28rpx;
+  padding-bottom: 15rpx;
+  width: 360rpx;
+  color: #333;
+}
+
+.work-exp-list .work-exp-content {
+  font-size: 28rpx;
+  overflow: hidden;
+  margin-bottom: 70rpx;
+}
+
+.work-exp-list .work-exp-mask {
+  position: absolute;
+  bottom: 0rpx;
+  width: 100%;
+  padding-top: 120rpx;
+  padding-bottom: 40rpx;
+  text-align: center;
+  color: #930098;
+}
+
+.exp-add {
+  margin-top: 15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-add .exp-add-btn {
+  border-radius: 5rpx;
+  width: 400rpx;
+  text-align: center;
+  padding-bottom: 10rpx;
+  color: cornflowerblue;
+}
+
+.edu-exp-list {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.edu-exp-list .edu-exp-row {
+  display: flex;
+  padding: 10rpx;
+}
+
+.edu-exp-list .edu-exp-item {
+  width: 50%;
+  font-size: 28rpx;
+}
+
+.edu-exp-list .edu-exp-university {
+  font-size: 35rpx;
+  color: black;
+  width: 400rpx;
+}

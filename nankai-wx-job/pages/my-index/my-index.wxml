@@ -1,0 +1,100 @@
+<!--pages/my-index/my-index.wxml-->
+<view class="container">
+  <view class='head'>
+    <button class="flex" open-type="getUserInfo" bindgetuserinfo='getUserInfo'>
+      <view class='login-avatar'>
+        <image src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+      <view class='login-name'>
+        <view wx:if="{{hasUserInfo && canIUse}}">
+          {{userInfo.nickName}}
+        </view>
+        <view wx:else>
+          编辑个人信息
+        </view>
+        
+      </view>
+    </button>
+  </view>
+  <view wx:if="{{isCandidate}}" class='body'>
+    <view class='list'>
+      <view class='redirect-content' bindtap='myResumeBtn'>
+          <icon class='fa fa-file-word-o'/>
+          <text class='padding-left-40'>我的简历</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list' bindtap='myCollectionBtn'>
+      <view class='redirect-content'>
+        <icon class='fa fa-bookmark-o'/>
+        <text class='padding-left-40'>收藏的职位</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list' bindtap='myConcernedBtn'>
+      <view class='redirect-content'>
+        <icon class='fa fa-heart-o'/>
+        <text class='padding-left-40'>关注的公司</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list' bindtap='myDeliveryBtn'>
+      <view class='redirect-content'>
+        <icon class='fa fa-list-alt'/>
+        <text class='padding-left-40'>投递记录</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list'>
+      <view class='redirect-content' bindtap='feedbackTap'>
+        <icon class='fa fa-pencil-square-o'/>
+        <text class='padding-left-40'>意见反馈</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+  </view>
+  <view wx:else class='body'>
+    <view class='list'>
+      <view class='redirect-content' bindtap='myResumeBtn'>
+          <icon class='fa fa-file-word-o'/>
+          <text class='padding-left-40'>我的发布</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list' bindtap='myCollectionBtn'>
+      <view class='redirect-content'>
+        <icon class='fa fa-bookmark-o'/>
+        <text class='padding-left-40'>我的公司</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+    <view class='list'>
+      <view class='redirect-content' bindtap='feedbackTap'>
+        <icon class='fa fa-pencil-square-o'/>
+        <text class='padding-left-40'>意见反馈</text>
+      </view>
+      <view class='redirect-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+      </view>
+    </view>
+  </view>
+  <view class='footer'>
+    <button type='primary' bindtap='changeUserTypeTap'>
+      {{isCandidate ? "我要招人" : "我要应聘"}}
+    </button>
+  </view>
+</view>

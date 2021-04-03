@@ -1,0 +1,48 @@
+/* pages/feedback/feedback.wxss */
+
+.feedback-title{
+  background-color: white;
+  width: 100%;
+  padding: 20rpx;
+  color: #930098;
+}
+.feedback-title text{
+  padding-left: 30rpx;
+}
+
+.feedback-content{
+  background-color: white;
+  width: 100%;
+  margin-top: 20rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+}
+
+.feedback-content textarea{
+  width: 85%;
+  padding: 50rpx;
+}
+
+.footer{
+  display: flex;
+  margin-top: 20rpx;
+  width: 100%;
+  bottom: 1rpx;
+  height: 100rpx;
+}
+
+.footer .short-block{
+  width: 160rpx;
+  height: 100%;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.footer .long-block{
+  width: 270rpx;
+  text-align: center;
+  padding-top: 30rpx;
+  color: white;
+  background-color: #930098;
+  border-radius: 10rpx;
+}

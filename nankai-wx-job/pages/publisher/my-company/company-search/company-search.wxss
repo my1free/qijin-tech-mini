@@ -1,0 +1,137 @@
+/* pages/publisher/company-search/company-search.wxss */
+
+@import "../../../../fontawesome.wxss";
+
+.container {
+  padding: 10rpx;
+}
+
+.company-search{
+  width: 100%;
+  background-color: white;
+}
+
+.company-search .search-keyword{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-search .search-keyword input{
+  width: 80%;
+  font-size: 30rpx;  
+  border-left: 1rpx solid #eee;
+  margin-left: 20rpx;
+}
+
+.company-search .search-keyword .search-btn{
+  border-left: 1rpx solid #eee;
+  width: 100rpx;
+  height: 100rpx;
+  font-size:50rpx;
+  padding-top:30rpx;
+}
+
+.company-list {
+  width: 100%;
+  background-color: white;
+  margin-top: 20rpx;
+}
+
+.company-list .company-row {
+  padding: 10rpx 20rpx;
+  font-size: 30rpx;
+  border-bottom: 4rpx solid #eee;
+}
+
+.company-list .company-logo {
+  width: 180rpx;
+  height: 180rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-list .company-logo image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 20rpx;
+}
+
+.company-list .company-title {
+  min-width: 400rpx;
+  text-align: center;
+  overflow: hidden;
+}
+
+.company-list .company-title .company-name {
+  font-size: 42rpx;
+  padding: 10rpx;
+  color: #930098;
+}
+
+.company-list .company-title .company-name text {
+  padding: 0rpx 80rpx;
+  border-bottom: 8rpx solid #ddd;
+}
+
+.company-list .company-title .company-fullname {
+  padding: 10rpx;
+  color: gray;
+}
+
+.company-list .company-belong{
+  width: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:60rpx;
+  color: #930098;
+  border-left: 4rpx dashed #ddd;
+}
+
+.company-list .company-location {
+  display: flex;
+  color: #099;
+}
+
+.company-location .location-label {
+  font-size: 40rpx;
+  color: purple;
+  border-right: 4rpx solid #ddd;
+  width: 8%;
+}
+
+.company-location .location-desc {
+  width: 80%;
+  padding: 8rpx 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-location .location-arrow {
+  width: 8%;
+  font-size: 60rpx;
+  display: flex;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-list .company-introduction {
+  color: gray;
+  padding: 20rpx 40rpx;
+}
+
+.company-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 20rpx;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  color: cornflowerblue;
+}

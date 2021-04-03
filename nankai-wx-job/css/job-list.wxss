@@ -1,0 +1,67 @@
+@import "../fontawesome.wxss";
+
+.job-list{
+  height: 150rpx;
+  width: 100%;
+  margin-top:15rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.company-logo{
+  width: 150rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.logo-style{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.job-abstract{
+  width: 400rpx;
+}
+
+.job-head{
+  height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items:flex-end;
+}
+
+.job-title{
+  width: 300rpx;
+  overflow: hidden;
+}
+
+.job-info{
+  font-size: 25rpx;
+  display: flex;
+  color: gray;
+  align-items:center;
+  padding-bottom: 20rpx;
+}
+
+.job-tag{
+  font-size: 15rpx;
+  background: gold;
+  padding: 3rpx 8rpx 3rpx 8rpx;
+  border-radius:5rpx;
+}
+
+ .job-info-detail{
+   width:120rpx;
+   margin-right: 15rpx;
+ }
+
+ .job-salary{
+   width: 130rpx;
+   font-size: 30rpx;
+   display: flex;
+   align-items: center;
+   color: red;
+   padding: 15rpx;
+ }

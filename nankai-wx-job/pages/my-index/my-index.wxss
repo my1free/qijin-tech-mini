@@ -1,0 +1,103 @@
+/* pages/my-index/my-index.wxss */
+
+@import "../../fontawesome.wxss";
+
+.head{
+  width: 100%;
+  background-color: white;
+}
+
+.head .my-avatar{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head .my-avatar image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.head button{
+  height: 140rpx;
+  background-color: white;
+}
+
+.head .login-avatar{
+  width: 140rpx;
+  border-right: 1rpx solid #eee;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 14rpx;
+}
+
+.head .login-avatar image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  border: 1rpx solid #eee
+}
+
+.head .login-name{
+  padding-top: 25rpx;
+  padding-left: 20rpx;
+}
+
+.body{
+  width: 100%;
+  display: flex;
+  margin-top: 50rpx;
+  flex-direction: column;
+}
+
+.list{
+  height: 120rpx;
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  background-color: white;
+  display: flex;
+}
+
+.list icon{
+  color: purple;
+}
+
+.list text{
+  padding-top: 20rpx;
+}
+
+.my-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirect-content{
+  width: 600rpx;
+  padding-left: 50rpx;
+  display: flex;
+  align-items: center;
+}
+
+.list .redirect-arrow icon{
+  font-size: 60rpx;
+  padding-left: 30rpx;
+  padding-top: 25rpx;
+  color: #ddd;
+}
+
+.footer{
+  width: 100%;
+  margin-top: 5rpx;
+  height: 200rpx;
+}
+
+.footer button{
+  margin-top: 50rpx;
+  background-color: #930098;
+}
+

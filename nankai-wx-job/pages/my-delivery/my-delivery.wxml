@@ -1,0 +1,35 @@
+<!--pages/my-delivery/my-delivery.wxml-->
+<view class='container'>
+  <view wx:for="{{[1,2,3,4,5,6,7,8]}}">
+    <view>
+      <view class='job-list' bindtap='jobDetailTap'>
+        <view class='company-logo'>
+          <image class='logo-style' mode='aspectFill' src='http://photocdn.sohu.com/20160301/mp61249116_1456817186185_2.png'></image>
+        </view>
+        <view class='job-abstract'>
+          <view class='job-head'>
+            <view class='job-title'>Java高级开发工程师</view>
+            <view class='job-tag'>热门岗位</view>
+          </view>
+          <view class='job-info'>
+            <view class='job-info-detal'><icon class='fa fa-map-marker'/> 北京</view>
+            <view class='job-info-detal'><icon class='fa fa-id-card'/> 3-5年</view>
+            <view class='job-info-detal'><icon class='fa fa-graduation-cap'/> 本科</view>
+          </view>
+        </view>
+        <view class='job-salary'>
+          <text>25k-40k</text>
+        </view>
+      </view>
+      <view class='flex' bindtap='jobDetailTap'>
+        <view class='delivery-time ft-30 width-40 border-right'>
+          投递时间：
+        </view>
+        <view class='delivery-time ft-25  width-60'>
+          2018-05-01 12:23:45
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

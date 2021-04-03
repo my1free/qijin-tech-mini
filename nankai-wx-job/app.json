@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/publisher/my-company/company-edit/company-edit",
+    "pages/map/map-add/map-add",
+    "pages/publisher/my-company/my-company",
+    "pages/publisher/my-company/company-search/company-search",
+    "pages/my-index/my-index",
+    "pages/my-resume/my-resume",
+    "pages/my-resume/my-resume-local/my-resume-local",
+    "pages/my-resume/my-resume-add/my-resume-add",
+    "pages/my-resume/my-resume-online/my-resume-online",
+    "pages/my-info/my-info-edit/my-info-edit",
+    "pages/my-info/my-info",
+    "pages/job-detail/job-detail",
+    "pages/my-collection/my-collection",
+    "pages/logs/logs",
+    "pages/publisher/publisher",
+    "pages/company/company",
+    "pages/search/search",
+    "pages/my-concerned/my-concerned",
+    "pages/feedback/feedback",
+    "pages/my-delivery/my-delivery",
+    "pages/map/map-show/map-show"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#930098",
+    "navigationBarTitleText": "南开招聘小助手",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#930098",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/pages/img/home-gray.png",
+        "selectedIconPath": "/pages/img/home-purple.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "/pages/img/search-gray.png",
+        "selectedIconPath": "/pages/img/search-purple.png"
+      },
+      {
+        "pagePath": "pages/my-index/my-index",
+        "text": "我的",
+        "iconPath": "/pages/img/user-gray.png",
+        "selectedIconPath": "/pages/img/user-purple.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

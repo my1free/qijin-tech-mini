@@ -1,0 +1,144 @@
+/* pages/my-concerned/my-concerned.wxss */
+
+@import "../../fontawesome.wxss";
+
+.tab{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+}
+
+.tab .tab-item{
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab .tab-seleted{
+  color: #930098;
+  background-color: #eee;
+}
+
+.content{
+  width: 100%;
+  margin-top: 120rpx;
+}
+
+.company-info{
+   display: flex;
+   width: 100%;
+   height:120rpx;
+   margin-top:10rpx;
+   background-color: white;
+   padding-top:15rpx;
+   padding-bottom:15rpx;
+ }
+
+ .company-info .company-logo{
+  width: 150rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border-right: 1rpx solid #eee;
+}
+
+.company-info .logo-style{
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.company-info .company-description{
+  width: 520rpx;
+  border-right: 1rpx solid #eee;
+}
+
+.company-info .company-name{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.company-info .company-info-t{
+  font-size:25rpx;
+  height: 50rpx;
+  color: gray;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.company-arrow{
+  font-size: 80rpx;
+  padding-left: 25rpx;
+  color: #ddd;
+}
+
+.job-list{
+  height: 150rpx;
+  width: 100%;
+  margin-top:15rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.company-logo{
+  width: 150rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.logo-style{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.job-abstract{
+  width: 400rpx;
+}
+
+.job-head{
+  height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items:flex-end;
+}
+
+.job-title{
+  width: 300rpx;
+  overflow: hidden;
+}
+
+.job-info{
+  font-size: 25rpx;
+  display: flex;
+  color: gray;
+  align-items:center;
+  padding-bottom: 20rpx;
+}
+
+.job-tag{
+  font-size: 15rpx;
+  background: gold;
+  padding: 3rpx 8rpx 3rpx 8rpx;
+  border-radius:5rpx;
+}
+
+ .job-info-detal{
+   width:120rpx;
+   margin-right: 15rpx;
+ }
+
+ .job-salary{
+   font-size: 30rpx;
+   display: flex;
+   align-items: center;
+   color: red;
+   padding: 15rpx;
+ }

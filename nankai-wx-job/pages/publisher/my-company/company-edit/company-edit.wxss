@@ -1,0 +1,114 @@
+/* pages/publisher/my-company/company-edit/company-edit.wxss */
+@import "../../../../fontawesome.wxss";
+
+.form-row {
+  width: 95%;
+  background-color: white;
+  padding-left: 5%;
+  margin-top: 20rpx;
+  color: #930098;
+}
+
+.form-row .form-title {
+  height: 70rpx;
+  border-bottom: 1rpx solid #ddd;
+  padding-top: 20rpx;
+  width: 95%;
+}
+
+.form-row .form-input {
+  height: 80rpx;
+  font-size: 30rpx;
+  padding-top: 20rpx;
+  color: #333;
+}
+
+.form-row .form-text {
+  font-size: 30rpx;
+  color: #333;
+  border-bottom: 1rpx dashed #ddd;
+  margin-bottom: 50rpx;
+}
+
+.form-row .form-text textarea {
+  width: 90%;
+  padding-top: 20rpx;
+  margin: 10rpx;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  bottom: 1rpx;
+  height: 100rpx;
+}
+
+.footer .short-block {
+  width: 160rpx;
+  height: 100%;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.footer .long-block {
+  width: 270rpx;
+  text-align: center;
+  padding-top: 30rpx;
+  color: white;
+  background-color: #930098;
+  border-radius: 10rpx;
+}
+
+.company-location {
+  display: flex;
+  font-size: 30rpx;
+  color: #099;
+  margin-top: 20rpx;
+}
+
+.company-location .location-label {
+  font-size: 40rpx;
+  color: purple;
+  border-right: 4rpx solid #ddd;
+  width: 6%;
+}
+
+.company-location .location-desc {
+  width: 68%;
+  padding: 20rpx 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-location .location-arrow {
+  width: 6%;
+  font-size: 60rpx;
+  display: flex;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-location .location-remove {
+  width: 10%;
+  font-size: 25rpx;
+  background-color: orangered;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-add {
+  display: flex;
+  margin-top: 20rpx;
+  padding: 30rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-add text {
+  font-size: 30rpx;
+  color: cornflowerblue;
+}

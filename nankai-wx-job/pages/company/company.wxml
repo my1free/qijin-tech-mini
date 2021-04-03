@@ -1,0 +1,58 @@
+<!--pages/company/company.wxml-->
+
+<view class='container'>
+  <view class='company-info'>
+    <view class='company-logo'>
+      <image class='logo-style' mode='aspectFill' src='{{companyDetail.logo}}'></image>
+    </view>
+    <view class='company-desc'>
+      <view class='company-name-title'>公司全称: </view>
+      <view class='company-name'>{{companyDetail.name}}</view>
+      <view class='company-name-title'>公司简称: </view>
+      <view class='company-name'>{{companyDetail.name}}</view>
+    </view>
+  </view>
+  <!-- <view class='job-filter'>
+    <view class='title'>热招职位</view>
+    <view class='tags'>
+      <view class='job-filter-tag'>技术</view>
+      <view class='job-filter-tag'>产品</view>
+      <view class='job-filter-tag'>产品</view>
+      <view class='job-filter-tag'>产品</view>
+      <view class='job-filter-tag'>产品</view>
+      <view class='job-filter-tag'>产品</view>
+    </view>
+  </view> -->
+  <view class='job-list-all'>
+    <view wx:for="{{jobList}}" wx:for-item="job" wx:key="id">
+      <view class='job-list' bindtap='jobDetailTap' data-jobid="{{job.id}}">
+        <view class='company-logo'>
+          <image class='logo-style' mode='aspectFill' src='{{job.companyLogo}}'></image>
+        </view>
+        <view class='job-abstract'>
+          <view class='job-head'>
+            <view class='job-title'>{{job.title}}</view>
+            <view wx:if="{{job.tagId != null}}" class='job-tag'>{{job.tagName}}</view>
+          </view>
+          <view class='job-info'>
+            <view class='job-info-detail'><icon class='fa fa-map-marker'/> {{job.cityName}}</view>
+            <view class='job-info-detail'><icon class='fa fa-id-card'/> {{job.expirence}}年</view>
+            <view class='job-info-detail'><icon class='fa fa-graduation-cap'/> {{job.education}}</view>
+          </view>
+        </view>
+        <view class='job-salary'>
+          <text>{{job.salaryLow}}k-{{job.salaryHigh}}k</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='footer ft-30'>
+    <view bindtap='toHomePage' class='short-block border-right'>
+      <icon class='fa fa-home'/>  首页
+    </view>
+    <view bindtap='opsConcerned' class='short-block border-right {{concerned ? "color-orangered" : ""}}'>
+      <icon class='fa fa-heart'/>  {{concerned?"取消":"关注"}}
+    </view>
+    <view class='short-block'></view>
+  </view>
+</view>

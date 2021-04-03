@@ -1,0 +1,66 @@
+<!--pages/my-concerned/my-concerned.wxml-->
+<view class='container'>
+  <view class='tab'>
+    <view class="tab-item {{showCompany?'tab-seleted':''}}" bindtap='showCompanyList'>
+      <text>公司列表</text>
+    </view>
+    <view class="tab-item {{!showCompany?'tab-seleted':''}}" bindtap='showJobList'>
+      <text>招聘职位</text>
+    </view>
+  </view>
+  <view class='content'>
+    <view class="company-list" hidden='{{!showCompany}}' animation="{{companyAnimation}}">
+      <view class='company-item' wx:for="{{companyList}}" wx:for-item="company" wx:key="id">
+        <view class='company-info' bindtap='companyInfo' data-id='{{company.id}}'>
+          <view class='company-logo'>
+            <image class='logo-style' mode='aspectFill' src='{{company.logo}}'></image>
+          </view>
+          <view class='company-description'>
+            <view class='company-name'>
+              <text>{{company.name}}</text>
+            </view>
+            <view class='company-info-t'>
+              <view class='job-info-detal'>
+                <icon class='fa fa-map-marker' /> 北京</view>
+              <view class='job-info-detal'>
+                <icon class='fa fa-id-card' /> 3-5年</view>
+              <view class='job-info-detal'>
+                <icon class='fa fa-graduation-cap' /> 本科</view>
+            </view>
+          </view>
+          <view class='company-arrow'>
+            <icon class='fa fa-angle-right'></icon>
+          </view>
+        </view>
+      </view>
+      <view class='margin-top-25 margin-bottom-25 tips-style '> --- 没有更多数据了 --- </view>
+    </view>
+    <view class="job-list-all" hidden='{{showCompany}}' animation="{{jobAnimation}}">
+      <view wx:for="{{jobList}}" wx:for-item="job" wx:key="id">
+        <view class='job-list' bindtap='jobDetailTap' data-jobid="{{job.id}}">
+          <view class='company-logo'>
+            <image class='logo-style' mode='aspectFill' src='{{job.companyLogo}}'></image>
+          </view>
+          <view class='job-abstract'>
+            <view class='job-head'>
+              <view class='job-title'>{{job.title}}</view>
+              <view class='job-tag'>{{job.tagName}}</view>
+            </view>
+            <view class='job-info'>
+              <view class='job-info-detal'>
+                <icon class='fa fa-map-marker' /> {{job.cityName}}</view>
+              <view class='job-info-detal'>
+                <icon class='fa fa-id-card' /> {{job.expirence}}年</view>
+              <view class='job-info-detal'>
+                <icon class='fa fa-graduation-cap' /> {{job.education}}</view>
+            </view>
+          </view>
+          <view class='job-salary'>
+            <text>25k-40k</text>
+          </view>
+        </view>
+      </view>
+      <view class='margin-top-25 margin-bottom-25 tips-style '> --- 没有更多数据了 --- </view>
+    </view>
+  </view>
+</view>

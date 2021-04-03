@@ -1,0 +1,15 @@
+<!--pages/feedback/feedback.wxml-->
+<view class="container">
+  <view class='feedback-title'>
+    <text>填写反馈信息</text>
+  </view>
+  <view class='feedback-content'>
+    <textarea maxlength='-1' placeholder="请填反馈，尽管吐槽" bindconfirm="feedbackConfirm" bindblur='feedbackConfirm'></textarea>
+  </view>
+  <view class='footer ft-30'>
+    <view class='short-block'> </view>
+    <view class='short-block'> </view>
+    <view class='short-block'></view>
+    <view class='long-block' bindtap='saveFeedback'>保存</view>
+  </view>
+</view>

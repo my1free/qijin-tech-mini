@@ -1,0 +1,40 @@
+<!--pages/publisher/company-search/company-search.wxml-->
+<!--pages/publisher/my-company/my-company.wxml-->
+<view class="container">
+  <view class='company-search'>
+    <view class="search-keyword">
+      <input class='padding-left-20' confirm-type='search' maxlength="30" placeholder="请输入公司/职位" bindinput="bindKeywordInput" value='{{keyword}}'/>
+      <view bindtap='doSearch' class='search-btn'><icon class='fa fa-search padding-left-30'></icon></view>
+    </view>
+  </view>
+  <view class='company-list' wx:for="{{companies}}" wx:for-item="company" wx:key="id">
+    <view class='company-row flex'>
+      <view class='company-logo'>
+        <image src='{{company.logo}}'></image>
+      </view>
+      <view class='company-title'>
+        <view class='company-name ellipsis'>
+          <text>{{company.name}}</text>
+        </view>
+        <view class='company-fullname ellipsis'>{{company.fullname}}</view>
+      </view>
+      <view wx:if='{{!company.belonged}}' class='company-belong' data-id='{{company.id}}' bindtap='addBelongedCompany'>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </view>
+    </view>
+    <view class='company-row company-location' wx:for="{{company.locations}}" wx:for-item="location" wx:key="id">
+      <view class='location-label'>
+        <icon class='fa fa-map-marker' />
+      </view>
+      <view class='location-desc'>
+        <text>{{location.address}}-{{location.title}}</text>
+      </view>
+      <view class='location-arrow'>
+        <icon class='fa fa-angle-right' />
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{clicked}}' class='company-list company-add' bindtap='addCompany'>
+      <text>没有找到？新增 +</text>
+  </view>
+</view>

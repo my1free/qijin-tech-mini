@@ -1,0 +1,42 @@
+/* pages/my-info/my-info.wxss */
+
+@import "../../fontawesome.wxss";
+
+.info-row{
+  display: flex;
+  padding: 10rpx;
+  background-color: white;
+  width: 100%;
+  height: 100rpx;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15rpx;
+}
+
+.info-row .info-row-title{
+  width: 170rpx;
+  color: #930098;
+  font-size: 35rpx;
+  border-right: 1rpx solid #ddd
+}
+
+.info-row .info-row-title icon{
+  padding-left: 30rpx;
+}
+
+.info-row .info-row-title .fa-mobile{
+  padding-left: 33rpx;
+  font-size: 45rpx;
+  margin-right: 5rpx;
+}
+
+.info-row .info-row-title .fa-wechat{
+  padding-left: 20rpx;
+}
+
+.info-row .info-row-content{
+  width: 600rpx;
+  color: gray;
+  font-size: 30rpx;
+  padding-left: 30rpx;
+}

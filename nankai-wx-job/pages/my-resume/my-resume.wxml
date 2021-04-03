@@ -1,0 +1,20 @@
+<!--pages/my-resume/my-resume.wxml-->
+<!--pages/my-info/my-info-edit/my-info-edit.wxml-->
+<view class="container">
+  <view class="info-row" bindtap='infoEditBtn' data-type="email">
+    <view class='info-row-title'>
+      <icon class='fa fa-envelope' /> 在线简历
+    </view>
+    <view class='info-row-content'>
+      {{userInfo.email ? userInfo.email : "在线简历地址(如果有的话)"}}
+    </view>
+  </view>
+  <view class="info-row" bindtap='onlineResume' data-type="email">
+    <view class='info-row-title'>
+      <icon class='fa fa-envelope' /> 本地简历
+    </view>
+    <view class='info-row-content'>
+      编辑本地简历
+    </view>
+  </view>
+</view>

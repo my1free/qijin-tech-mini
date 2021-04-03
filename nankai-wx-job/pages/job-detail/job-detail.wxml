@@ -1,0 +1,76 @@
+<!--pages/seeker-detail/seeker-detail.wxml-->
+<view class="container">
+  <view class='job-title-all'>
+    <view class='job-title-left'>
+      <view class='job-head'>
+        <view class='job-title'>{{jobDetail.title}}</view>
+        <view class='job-tag'>热门岗位</view>
+      </view>
+      <view class='job-info'>
+        <view class='job-info-detail'><icon class='fa fa-map-marker'/> {{jobDetail.cityName}}</view>
+        <view class='job-info-detail'><icon class='fa fa-id-card'/> {{jobDetail.expirence}}年</view>
+        <view class='job-info-detail'><icon class='fa fa-graduation-cap'/> {{jobDetail.education}}</view>
+      </view>
+    </view>
+    <view class='job-title-right'>
+      <view class='job-salary'>
+        <text>{{jobDetail.salaryLow}}k-{{jobDetail.salaryHigh}}k</text>
+      </view>
+    </view>
+  </view>
+  <view class='company-info' bindtap='companyInfo' data-id='{{jobDetail.companyId}}'>
+    <view class='company-logo'><image class='logo-style' mode='aspectFill' src='{{jobDetail.companyLogo}}'></image>
+    </view>
+    <view class='company-description'>
+      <view class='company-name'>
+        <text>{{jobDetail.companyName}}</text>
+      </view>
+      <view class='company-info-t'>
+         <view class='job-info-detal'>北京三快在线科技有限公司</view> 
+         <!-- <view class='job-info-detal'><icon class='fa fa-map-marker'/> 北京</view>
+        <view class='job-info-detal'><icon class='fa fa-id-card'/> 3-5年</view>
+        <view class='job-info-detal'><icon class='fa fa-graduation-cap'/> 本科</view>  -->
+      </view>
+    </view>
+    <view class='company-arrow'>
+        <icon class='fa fa-angle-right'></icon>
+    </view>
+  </view>
+  <view class='job-description padding-left-40'>
+    <view class='sub-title'>
+      <icon class='fa fa-newspaper-o'/>  职位描述
+    </view>
+  </view>
+  <view class='company-location padding-left-40'>
+    <view class='sub-title'>
+      <icon class='fa fa-map-o'/>  办公地点
+    </view>
+    <view class='sub-title-content ft-25 ft-gray'>
+      <text>北京市朝阳区望京东路6号恒电大厦</text>
+    </view>
+  </view>
+  <view class='publisher padding-left-40'>
+    <view class='sub-title'>
+      <icon class='fa fa-user-o'/>  发布者
+    </view>
+    <view class='publisher-info'>
+      <view class='publisher-avatar'>
+        <image src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+      <view class='publisher-name padding-left-30 ft-30 ft-gray'>
+        <text>{{userInfo.nickName}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='footer ft-30'>
+  <view bindtap='toHomePage' class='short-block border-right'>
+    <icon class='fa fa-home'/>  首页
+  </view>
+  <view bindtap='opsCollection' class='short-block border-right {{collected ? "color-orangered" : ""}}'>
+    <icon class='fa fa-home'/>  {{collected?"取消":"收藏"}}
+  </view>
+  <view class='short-block'></view>
+  <view class='long-block'>投递简历</view>
+</view>

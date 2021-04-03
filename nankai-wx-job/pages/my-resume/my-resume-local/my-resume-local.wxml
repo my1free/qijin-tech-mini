@@ -1,0 +1,120 @@
+<!--pages/my-resume/my-resume-local/my-resume-local.wxml-->
+<view class="container">
+  <view class='head'>
+    <button class="flex" open-type="getUserInfo" bindgetuserinfo='getUserInfo'>
+      <view class='login-avatar'>
+        <image src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+      <view class='login-name'>
+        <view wx:if="{{hasUserInfo && canIUse}}">
+          {{userInfo.nickName}}
+        </view>
+        <view wx:else>
+          编辑个人信息
+        </view>
+
+      </view>
+    </button>
+  </view>
+  <view class='body'>
+    <view class='resume-list'>
+      <view class='resume-list-title'>
+        <icon class='fa fa-address-book-o' /> 基本信息
+      </view>
+      <view class='resume-list-content'>
+        <view class='base-info-list' bindtap='infoEditBtn' data-type="email">
+          <view class='base-info-title'>邮箱</view>
+          <view>{{userDto.email ? userDto.email : "未知，点击填写"}}</view>
+        </view>
+        <view class='base-info-list' bindtap='infoEditBtn' data-type="mobile">
+          <view class='base-info-title'>手机号</view>
+          <view>{{userDto.mobile ? userDto.mobile : "未知，点击填写"}}</view>
+        </view>
+        <view class='base-info-list' bindtap='infoEditBtn' data-type="wechat">
+          <view class='base-info-title'>微信号</view>
+          <view>{{userDto.wechat ? userDto.wechat : "未知，点击填写"}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='resume-list'>
+      <view class='resume-list-title'>
+        <icon class='fa fa-id-card-o' /> 工作经历
+      </view>
+      <view class='resume-list-content'>
+        <view wx:for="{{workExp}}" wx:for-item="work" wx:key="id">
+          <view class='work-exp-list' data-id='{{work.id}}'>
+            <view class='work-exp-row'>
+              <view class='work-exp-company'>{{work.company}}</view>
+              <view class='work-exp-edit'>
+                <icon class='fa fa-pencil-square-o' bindtap='editWorkExp' data-id='{{work.id}}'/>  
+                <icon class='fa fa-trash' bindtap='delWorkExp' data-id='{{work.id}}' />
+              </view>
+            </view>
+            <view class='work-exp-row'>
+              <view class='work-exp-position'>职位：{{work.position}}</view>
+              <view class='work-exp-time'>{{work.startDate}} ~ {{work.endDate ? work.endDate : "今"}}</view>
+            </view>
+            <view class='work-exp-content {{showDict[work.id] ? "" : "ht-200"}}'>
+              <text>{{work.content}}</text>
+            </view>
+            <view class='work-exp-mask {{showDict[work.id] ? "" : "mask"}}' data-id='{{work.id}}' bindtap='showWorkDesc'>
+              <view wx:if="{{!showDict[work.id]}}">
+                展开
+                <icon class='fa fa-angle-double-down' />
+              </view>
+              <view wx:else>
+                折叠
+                <icon class='fa fa-angle-double-up' />
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='exp-add' bindtap='addWorkExp'>
+          <view class='exp-add-btn'>
+            <icon class='fa fa-plus' /> 添加工作经历
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class='resume-list'>
+      <view class='resume-list-title'>
+        <icon class='fa fa-graduation-cap' /> 教育经历
+      </view>
+      <view class='resume-list-content'>
+        <view wx:for="{{eduExp}}" wx:for-item="edu" wx:key="id">
+          <view class='edu-exp-list' bindlongtap='editEduExp' data-id='{{edu.id}}'>
+            <view class='edu-exp-row flex'>
+              <view class='edu-exp-item edu-exp-university'>{{edu.name}}</view>
+              <view class='work-exp-edit'>
+                <icon class='fa fa-pencil-square-o' bindtap='editEduExp' data-id='{{edu.id}}'/>  
+                <icon class='fa fa-trash' bindtap='delEduExp' data-id='{{edu.id}}' />
+              </view>
+              
+            </view>
+            <view class='edu-exp-row'>
+              <view class='edu-exp-item'>{{edu.startDate}} ~ {{edu.endDate}}</view>
+            </view>
+            <view class='edu-exp-row'>
+              <view class='edu-exp-item'>{{edu.degree}}</view>
+              <view class='edu-exp-item'>{{edu.major}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='exp-add' bindtap='addEduExp'>
+          <view class='exp-add-btn'>
+            <icon class='fa fa-plus' /> 添加教育经历
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='resume-list'>
+      <view class='resume-list-title'>
+        <icon class='fa fa-thumbs-o-up' /> 个人评价
+      </view>
+      <view class='resume-list-content'>
+        {{personalEvaluation}}
+      </view>
+    </view> -->
+  </view>
+</view>

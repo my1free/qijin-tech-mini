@@ -1,0 +1,59 @@
+<!--pages/publisher/my-company/company-edit/company-edit.wxml-->
+<view class="container">
+  <view class='form-row'>
+    <view class='form-title'>
+      <icon class='fa fa-bank' /> 公司简称
+    </view>
+    <view class='form-input'>
+      <input maxlength="40" placeholder="填写众所周知的名字" bindinput="bindInputName" value='{{company.name}}'></input>
+    </view>
+  </view>
+  <view class='form-row'>
+    <view class='form-title'>
+      <icon class='fa fa-bank' /> 公司全称
+    </view>
+    <view class='form-input'>
+      <input maxlength="40" placeholder="填写公司注册名称" bindinput="bindInputFullname" value='{{company.fullname}}'></input>
+    </view>
+  </view>
+  <view class='form-row'>
+    <view class='form-title'>
+      <icon class='fa fa-map-marker' /> 公司地址
+    </view>
+    <view class='company-row company-location' wx:for="{{company.locations}}" wx:for-item="location" wx:for-index="idx" wx:key="id">
+      <view class='location-label'>
+        <icon class='fa fa-map-marker' />
+      </view>
+      <view class='location-desc'>
+        <text>{{location.address}}-{{location.title}}</text>
+      </view>
+      <view class='location-arrow'>
+        <icon class='fa fa-angle-right' />
+      </view>
+      <view class='location-remove' bindtap='removeLocation' data-idx='{{idx}}' data-id='{{location.id}}'>
+        <text>删除</text>
+      </view>
+    </view>
+    <view class='company-row location-add' bindtap='addLocation'>
+      <view class='location-desc'>
+        <text>+ 添加地址</text>
+      </view>
+    </view>
+  </view>
+  <view class='form-row'>
+    <view class='form-title'>
+      <icon class='fa fa-eercast' /> 公司简介
+    </view>
+    <view class='form-text'>
+      <textarea maxlength='-1' placeholder="请填写工作内容" bindconfirm="bindInputIntroduction" bindblur='bindInputIntroduction' value='{{company.introduction}}'></textarea>
+    </view>
+  </view>
+
+
+  <view class='footer ft-30'>
+    <view class='short-block'> </view>
+    <view class='short-block'> </view>
+    <view class='short-block'></view>
+    <view class='long-block' bindtap='saveOrUpdate'>保存</view>
+  </view>
+</view>

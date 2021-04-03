@@ -1,0 +1,125 @@
+/**index.wxss**/
+@import "../../fontawesome.wxss";
+
+.navi-area{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  background-color: white;
+  border-bottom: 1rpx solid #eee;
+}
+
+.navi-city{
+  width: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index:999;
+  background-color:white;
+}
+
+.navi-city picker{
+  width: 120rpx;
+  padding-left:30rpx;
+}
+
+.navi-city icon{
+  color: gray;
+}
+
+.navi-tab{
+  background-color:white;
+}
+
+.navi-tab scroll-view{
+  height: 100%;
+   width: 550rpx; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.navi-tab .scroll-view-item{
+  width: 200rpx;
+  height: 100rpx;
+  display: inline-block;
+  text-align: center;
+  padding-top: 30rpx;
+  border-left: 2rpx solid #eee;
+}
+
+.navi-tab .tab-seleted{
+  color: #930098;
+  background-color: #eee;
+}
+
+.job-list{
+  height: 150rpx;
+  width: 100%;
+  margin-top:15rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.company-logo{
+  width: 150rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.logo-style{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+}
+
+.job-abstract{
+  width: 400rpx;
+}
+
+.job-head{
+  height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items:flex-end;
+}
+
+.job-title{
+  width: 300rpx;
+  overflow: hidden;
+}
+
+.job-info{
+  font-size: 25rpx;
+  display: flex;
+  color: gray;
+  align-items:center;
+  padding-bottom: 20rpx;
+}
+
+.job-tag{
+  font-size: 15rpx;
+  background: gold;
+  padding: 3rpx 8rpx 3rpx 8rpx;
+  border-radius:5rpx;
+}
+
+ .job-info-detail{
+   width:120rpx;
+   margin-right: 15rpx;
+ }
+
+ .job-salary{
+   width: 130rpx;
+   font-size: 30rpx;
+   display: flex;
+   align-items: center;
+   color: red;
+   padding: 15rpx;
+ }

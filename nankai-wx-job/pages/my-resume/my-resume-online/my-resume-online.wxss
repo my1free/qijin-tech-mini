@@ -1,0 +1,49 @@
+/* pages/my-resume/my-resume-online/my-resume-online.wxss */
+
+@import "../../../fontawesome.wxss";
+
+.info-edit-row{
+  width: 100%;
+  background-color: white;
+  padding-left: 50rpx;
+  color: #930098;
+}
+
+.info-edit-row .info-edit-title{
+  height: 70rpx;
+  border-bottom: 1rpx solid #ddd;
+  padding-top: 20rpx;
+  width: 95%
+}
+
+.info-edit-row .info-edit-content{
+  height: 80rpx;
+  font-size: 30rpx;
+  padding-top: 20rpx;
+  color: gray;
+}
+
+.footer{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  bottom: 1rpx;
+  height: 100rpx;
+  background-color: white;
+}
+
+.footer .short-block{
+  width: 160rpx;
+  height: 100%;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.footer .long-block{
+  width: 270rpx;
+  text-align: center;
+  padding-top: 30rpx;
+  color: white;
+  background-color: #930098;
+  border-radius: 10rpx;
+}

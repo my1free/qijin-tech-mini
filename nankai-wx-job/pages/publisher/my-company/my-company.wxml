@@ -1,0 +1,49 @@
+<!--pages/publisher/my-company/my-company.wxml-->
+<view class="container">
+  <view class='company-list' wx:for="{{companies}}" wx:for-item="company" wx:key="id">
+    <view class='company-row flex'>
+      <view class='company-logo'>
+        <image src='{{company.logo}}'></image>
+      </view>
+      <view class='company-title'>
+        <view class='company-name'>
+          <text>{{company.name}}</text>
+        </view>
+        <view class='company-fullname'>{{company.fullname}}</view>
+      </view>
+      <view class='company-edit' bindtap='editCompany' data-id='{{company.id}}'>
+        <icon class='fa fa-edit' />
+      </view>
+    </view>
+    <view class='company-row company-location' wx:for="{{company.locations}}" wx:for-item="location" wx:key="id">
+      <view class='location-label'>
+        <icon class='fa fa-map-marker' />
+      </view>
+      <view class='location-desc'>
+        <text>{{location.address}}-{{location.title}}</text>
+      </view>
+      <view class='location-arrow'>
+        <icon class='fa fa-angle-right' />
+      </view>
+
+    </view>
+    <view class='company-row fold-mask-parent'>
+      <view class='company-introduction {{showMask[company.id]==1 ? "fold-content-height" : ""}}'>
+        <text>{{company.introduction}}</text>
+      </view>
+      <view class='fold-mask {{showMask[company.id]==1 ? "mask" : ""}}' data-id='{{company.id}}' bindtap='bindFoldMask'>
+        <view wx:if="{{showMask[company.id]==1}}">
+          展开
+          <icon class='fa fa-angle-double-down' />
+        </view>
+        <view wx:if="{{showMask[company.id]==2}}">
+          折叠
+          <icon class='fa fa-angle-double-up' />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='company-list company-add' bindtap='addCompany'>
+      <text>+ 添加公司</text>
+  </view>
+</view>

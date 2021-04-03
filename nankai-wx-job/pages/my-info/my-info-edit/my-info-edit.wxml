@@ -1,0 +1,35 @@
+<!--pages/my-info/my-info-edit/my-info-edit.wxml-->
+<view class="container">
+  <view class='info-edit-row' hidden='{{types != "email"}}'>
+    <view class='info-edit-title'>
+      <icon class='fa fa-envelope'/>  邮箱
+    </view>
+    <view class='info-edit-content'>
+      <input maxlength="40" placeholder="请输入邮箱地址" bindinput="bindEmailInput" value='{{userInfo.email}}'></input>
+    </view>
+  </view>
+  <view class='info-edit-row' hidden='{{types != "mobile"}}'>
+    <view class='info-edit-title'>
+      <icon class='fa fa-mobile'/>  手机
+    </view>
+    <view class='info-edit-content'>
+      <input maxlength="40" placeholder="请输入手机号" bindinput="bindMobileInput" value='{{userInfo.mobile}}'></input>
+    </view>
+  </view>
+   <view class='info-edit-row' hidden='{{types != "wechat"}}'>
+    <view class='info-edit-title'>
+      <icon class='fa fa-wechat'/>  微信
+    </view>
+    <view class='info-edit-content'>
+      <input maxlength="40" placeholder="请输入微信号" bindinput="bindWeChatInput" value='{{userInfo.wechat}}'></input>
+    </view>
+   </view> 
+  <view hidden='{{types == "email" || types == "mobile" || types == "wechat"}}'>错误！不存在的类型</view>
+</view>
+
+<view class='footer ft-30'>
+  <view class='short-block'> </view>
+  <view class='short-block'> </view>
+  <view class='short-block'></view>
+  <view class='long-block' bindtap='saveUserInfo'>保存</view>
+</view>

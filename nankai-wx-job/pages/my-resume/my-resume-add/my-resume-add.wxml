@@ -1,0 +1,73 @@
+<!--pages/my-resume/my-resume-add/my-resume-add.wxml-->
+<view class="container">
+  <view class='work-exp-edit-row'>
+  </view>
+  <view class='work-exp-edit-row'>
+    <view class='work-exp-edit-title'>
+      <icon class='fa fa-bank' /> {{types=="edu" ? "学校名称" : "公司名称"}}
+    </view>
+    <view wx:if="{{types!='edu'}}" class='work-exp-edit-content'>
+      <input maxlength="40" placeholder="请填写公司名称" bindinput="companyInput" value='{{workexp.company}}'></input>
+    </view>
+    <view wx:else class='work-exp-edit-content'>
+      <input maxlength="40" placeholder="请填写学校名称" bindinput="schoolInput" value='{{eduexp.name}}'></input>
+    </view>
+  </view>
+  <view class='work-exp-edit-row'>
+    <view class='work-exp-edit-title'>
+      <icon class='fa fa-calendar' /> 起止时间
+    </view>
+    <view class="work-exp-section">
+      <picker mode="date" value="{{startDate}}" fields='month' bindchange="startDatePickerChange">
+        <view class="picker flex">
+          <view class='sub-title'>开始时间: </view>
+          <view class='margin-left-100'>{{startDate}}</view>
+        </view>
+      </picker>
+      <picker mode="date" value="{{endDate}}" fields='month' bindchange="endDatePickerChange">
+        <view class="picker flex">
+          <view class='sub-title'>结束时间: </view>
+          <view class='margin-left-100'>{{endDate}}</view>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class='work-exp-edit-row'>
+    <view class='work-exp-edit-title'>
+      <icon class='fa fa-id-card' /> {{types == "edu" ? "所学专业" : "工作职位"}}
+    </view>
+    <view wx:if="{{types!='edu'}}" class='work-exp-edit-content'>
+      <input maxlength="40" placeholder="请填写工作职位，如产品经理、后端开发工程师" bindinput="positionInput" value='{{workexp.position}}'></input>
+    </view>
+    <view wx:else class='work-exp-edit-content'>
+      <input maxlength="40" placeholder="请填写专业名称" bindinput="majorInput" value='{{eduexp.major}}'></input>
+    </view>
+  </view>
+  <view class='work-exp-edit-row' wx:if="{{types!='edu'}}">
+    <view class='work-exp-edit-title'>
+      <icon class='fa fa-file-text' /> 工作内容
+    </view>
+    <view class='work-exp-edit-text'>
+      <textarea maxlength='-1' placeholder="请填写工作内容" bindconfirm="workContentConfirm" bindblur='workContentConfirm' value='{{workexp.content}}'></textarea>
+    </view>
+  </view>
+  <view wx:else class='work-exp-edit-row'>
+    <view class='work-exp-edit-title'>
+      <icon class='fa fa-file-text' /> 选择学历
+    </view>
+    <view class='work-exp-section'>
+      <picker mode='selector' bindchange="degreePickerChange" value='{{degreeIndex}}' range="{{degreeArr}}">
+        <view class="picker">
+          {{degreeArr[degreeIndex]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class='footer ft-30'>
+    <view class='short-block'> </view>
+    <view class='short-block'> </view>
+    <view class='short-block'></view>
+    <view class='long-block' bindtap='saveOrUpdate'>保存</view>
+  </view>
+</view>
