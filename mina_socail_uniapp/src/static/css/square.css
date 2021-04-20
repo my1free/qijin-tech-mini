@@ -1,0 +1,148 @@
+.my-square-list{
+    width: 100%;
+    margin-top: 20rpx;
+}
+
+.my-square-list .my-square-item{
+    width: 91%;
+    margin-left: 4%;
+    border-bottom: 1rpx #eee solid;
+    margin-bottom: 20rpx;
+}
+
+.my-square-list .my-square-avatar{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 10%;
+}
+
+.my-square-item .my-square-title{
+    height: 48rpx;
+}
+
+.my-square-item .my-square-name{
+    display: flex;
+    color: steelblue;
+    font-size: 36rpx;
+    padding: 10rpx 10rpx;
+}
+
+.my-square-item .my-square-date{
+    text-align: right;
+    color: grey;
+    margin-top: 12rpx;
+    display: inline-block;
+}
+.my-square-item .my-square-content{
+    padding: 30rpx 20rpx;
+}
+
+.my-square-item .my-square-text{
+    margin-bottom: 10rpx;
+}
+
+.my-square-item .my-square-image-multi{
+    width: 100%;
+}
+.my-square-item .my-square-image-thumbnail{
+    width: 30%;
+    height: 200rpx;
+    display: inline-block;
+    overflow: hidden;
+    height: 173rpx;
+    margin-left: 1%;
+    border-radius: 10rpx;
+}
+.my-square-item .my-square-image-thumbnail image{
+    width: 100%;
+}
+
+.my-square-item .my-square-image{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20rpx;
+}
+
+.my-square-list .my-square-btn{
+    font-size: 40rpx;
+}
+
+.my-square-list .my-square-btn text{
+    margin-left: 20rpx;    
+}
+
+.my-square-list .my-square-btn .number{
+    font-size: 20rpx;
+    margin-left: 5rpx;
+    margin-right: 30rpx;    
+}
+
+.my-square-list .my-square-like{
+    margin-top: 10rpx;
+    background-color: #eee;
+    padding: 5rpx 15rpx;
+}
+
+.my-square-list .my-square-like text{
+    color: darkcyan;
+}
+
+.my-square-list .my-square-like .text-red{
+    color:#e54d42;
+}
+
+.my-square-list .my-square-like .my-square-like-item{
+    margin-left: 18rpx;
+}
+
+.my-square-list .my-square-comments{
+    background-color: #eee;
+}
+
+.my-square-list .my-square-comments-line{
+    padding: 5rpx 10rpx;
+}
+.my-square-list .my-square-comments-line .my-square-comments-name{
+    color: darkcyan;
+}
+
+.my-square-list .my-square-comments-line:active{
+    background-color: #ccc;
+}
+
+.my-square-list .my-square-comment-input{
+    border: 10rpx#eee solid;
+}
+
+.my-floating-op-container{
+    position: fixed;
+    top: 0rpx;
+    left: 0rpx;
+}
+.my-floating-op{
+    width: 120px;
+    height: 25px;
+    position: relative;
+    margin: 30px auto 0;
+    background: #131210;
+    border-radius: 5px;
+    color: rgb(218, 218, 218);
+    text-align: center;
+}
+.my-floating-op:after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 23px;
+    right:50px;
+    border: solid 8px;
+    border-color: #131210 transparent transparent transparent;
+    font-size: 0;
+}
+
+.my-square-del{
+    color: rgb(161, 2, 2);
+    margin-top: 12rpx;
+    display: inline-block;
+}
