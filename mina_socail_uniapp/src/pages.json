@@ -8,7 +8,7 @@
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
-            "path": "pages/social/detail/index",
+            "path": "pages/me/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
@@ -19,12 +19,12 @@
                 "navigationBarTitleText": "my-social"
             }
         },
-        // {
-        //     "path": "pages/social/detail/index",
-        //     "style": {
-        //         "navigationBarTitleText": "my-social"
-        //     }
-        // },
+        {
+            "path": "pages/social/detail/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
         {
             "path": "pages/im/index",
             "style": {
@@ -32,23 +32,35 @@
             }
         },
         {
-            "path": "pages/square/single/index",
+            "path": "pages/square/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
         },
         {
-            "path": "pages/square/me/index",
+            "path": "pages/group/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
         },
         {
-            "path": "pages/me/index",
+            "path": "pages/group/info/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/group/unauth/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
         }
+        // {
+        //     "path": "pages/me/index",
+        //     "style": {
+        //         "navigationBarTitleText": "my-social"
+        //     }
+        // }
     ],
     "tabBar": {
         "color": "#7A7E83",
@@ -66,18 +78,18 @@
                 "selectedIconPath": "static/image/card-color.png",
                 "text": "推荐"
             },
-            {
-                "pagePath": "pages/social/detail/index",
-                "iconPath": "static/image/chat-gray.png",
-                "selectedIconPath": "static/image/chat-color.png",
-                "text": "聊天"
-            },
-            {
-                "pagePath": "pages/square/me/index",
-                "iconPath": "static/image/square-gray.png",
-                "selectedIconPath": "static/image/square-color.png",
-                "text": "广场"
-            },
+            // {
+            //     "pagePath": "pages/square/index",
+            //     "iconPath": "static/image/square-gray.png",
+            //     "selectedIconPath": "static/image/square-color.png",
+            //     "text": "广场"
+            // },
+            // {
+            //     "pagePath": "pages/group/info/index",
+            //     "iconPath": "static/image/chat-gray.png",
+            //     "selectedIconPath": "static/image/chat-color.png",
+            //     "text": "群组"
+            // },
             {
                 "pagePath": "pages/me/index",
                 "iconPath": "static/image/me-gray.png",

@@ -1,17 +1,18 @@
 <template>
   <view class="content">
-    <my-me-head class="width100" />
-    <my-profile class="width100" />
+    <view class="my-group">
+      <uni-row class="demo-uni-row">
+        <my-group />
+      </uni-row>
+    </view>
   </view>
 </template>
 
 <script>
-import myMeHead from "../../components/my-me-head.vue";
-import myProfile from "../../components/my-profile.vue";
+import myGroup from "../../components/chat-group.vue";
 export default {
   components: {
-    myMeHead,
-    myProfile,
+    myGroup,
   },
   data() {
     return {
@@ -170,5 +171,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.my-group {
+  width: 100%;
 }
 </style>

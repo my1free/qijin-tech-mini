@@ -1,5 +1,19 @@
 <template>
   <view class="content" v-bind:class="{ 'fix-full': isPreview }">
+    <view class="big-operation">
+      <swiper class="swiper" autoplay="true" interval="3000" duration="500">
+        <swiper-item>
+          <view class="swiper-item uni-bg-red"><image src="/static/image/1.jpg"></view>
+        </swiper-item>
+        <swiper-item>
+          <view class="swiper-item uni-bg-green"><image src="/static/image/2.jpg"></view>
+        </swiper-item>
+        <swiper-item>
+          <view class="swiper-item uni-bg-blue"><image src="/static/image/3.jpg"></view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <!-- <view class="small-operation"> 小运营位 </view> -->
     <view class="my-square-list">
       <view
         class="my-square-item"
@@ -9,14 +23,14 @@
         <uni-row class="demo-uni-row">
           <uni-col :span="4">
             <!-- 头像区域 -->
-            <image class="my-square-avatar" :src="item.user.avatar"></image>
+            <image class="my-square-avatar" :src="item.user.avatar" v-on:click="onCardDetail(item.user.id)"></image>
           </uni-col>
           <uni-col :span="20">
             <!-- 内容区域 -->
             <view class="my-square-title">
               <uni-row class="demo-uni-row">
                 <uni-col :span="12">
-                  <text class="my-square-name">{{ item.user.name }} </text>
+                  <text class="my-square-name" v-on:click="onCardDetail(item.user.id)">{{ item.user.name }} </text>
                 </uni-col>
                 <uni-col :span="12">
                   <text class="my-square-date">2020-04-11 12:33</text>
@@ -430,6 +444,27 @@ export default {
       // clear
       this.currFromUser = null;
     },
+    onCardDetail(uid) {
+      console.log(uid);
+      uni.navigateTo({
+        url: "/pages/social/detail/index",
+        events: {
+          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+          acceptDataFromOpenedPage: function (data) {
+            console.log(data);
+          },
+          someEvent: function (data) {
+            console.log(data);
+          },
+        },
+        success: function (res) {
+          console.log("success", res);
+        },
+        fail: function (res) {
+          console.log("fail", res);
+        },
+      });
+    },
   },
 };
 </script>
@@ -451,5 +486,21 @@ export default {
   -webkit-transition: width 2s, height 2s, background-color 2s,
     -webkit-transform 2s;
   transition: width 2s, height 2s, background-color 2s, transform 2s;
+}
+
+.big-operation {
+  width: 100%;
+  background-color: gray;
+  height: 30vh;
+}
+.big-operation swiper {
+  height: 100%;
+}
+.big-operation .swiper-item {
+  width: 100%;
+  height: 100%;
+}
+.big-operation image {
+  width: 750rpx;
 }
 </style>

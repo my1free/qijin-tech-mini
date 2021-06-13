@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <view class="header">
+    <!-- <view class="header">
       <uni-row class="demo-uni-row">
         <uni-col :span="6">
           <text>筛选</text>
@@ -17,14 +17,18 @@
           </view>
         </uni-col>
       </uni-row>
+    </view> -->
+    <view class="card-bg" v-if="cardList == null || cardList.length <= 0">
+      <uni-load-more :status="loadingStatus" class="card-load"></uni-load-more>
     </view>
     <swiper
       class="swiper card-list"
       :duration="500"
       @change="onCardSwiperChange"
+      v-if="cardList.length > 0"
     >
       <swiper-item v-for="card in cardList" :key="card.uid">
-        <view class="card">
+        <view class="card" v-on:click="onCardDetail(card.uid)">
           <image class="cover" :src="card.cover" mode="heightFix"></image>
           <view class="info-area">
             <uni-row class="demo-uni-row">
@@ -59,7 +63,7 @@
                 class="thumbnail"
                 v-for="(thumbnail, idx) in card.thumbnails"
                 :key="thumbnail.url"
-                v-on:click="onClickThumbnail(idx, thumbnail.url)"
+                @click.stop="onClickThumbnail(idx, thumbnail.url)"
                 v-bind:class="{
                   selected: thumbnail.selected,
                   unselected: !thumbnail.selected,
@@ -82,6 +86,7 @@
 export default {
   data() {
     return {
+      loadingStatus: "noMore",
       currCardIdx: 0,
       currCity: "北京市",
       cardList: [
@@ -190,6 +195,27 @@ export default {
 
   onLoad() {},
   methods: {
+    onCardDetail(uid) {
+      console.log(uid);
+      uni.navigateTo({
+        url: "./detail/index",
+        events: {
+          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+          acceptDataFromOpenedPage: function (data) {
+            console.log(data);
+          },
+          someEvent: function (data) {
+            console.log(data);
+          },
+        },
+        success: function (res) {
+          console.log("success", res);
+        },
+        fail: function (res) {
+          console.log("fail", res);
+        },
+      });
+    },
     onCardSwiperChange(e) {
       this.currCardIdx = e.detail.current;
       console.log(this.currCardIdx);
@@ -230,7 +256,7 @@ export default {
 
 .content .card-list {
   width: 96%;
-  height: 94vh;
+  height: 100vh;
   text-align: center;
   position: relative;
   border-radius: 10rpx;
@@ -260,7 +286,7 @@ export default {
   bottom: 20rpx;
   color: white;
   text-align: left;
-  text-shadow: 0 0 0.1em #888888, 0 0 0.1em #888888;
+  text-shadow: 0 0 0.1em #000, 0 0 0.1em #000;
 }
 
 .info-area .name {
@@ -304,5 +330,11 @@ export default {
 .info-area .thumbnail-list .thumbnail image {
   width: 100rpx;
   height: 100rpx;
+}
+
+.card-bg {
+  width: 100%;
+  height: 100vh;
+  padding-top: 20%;
 }
 </style>

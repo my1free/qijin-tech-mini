@@ -62,4 +62,7 @@ export default {
   margin: 10rpx 10rpx;
   display: inline-block;
 }
+.width100 {
+  width: 100%;
+}
 </style>

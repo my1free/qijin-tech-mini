@@ -79,91 +79,110 @@
         </uni-col>
       </uni-row>
     </view>
-
-    <view class="personal-tag panel">
-      <uni-card
-        title="个人标签"
-        mode="title"
-        :is-shadow="true"
-        is-full="true"
-        thumbnail="/static/image/tag.png"
-        extra="我就是我，不一样的烟火"
-      >
-        <span
-          class="my-tag .bg-cyan.light"
-          v-for="tag in cardDetail.tagList"
-          v-bind:class="tag.cl"
-          :key="tag"
+    <wuc-tab
+      class="wuc-tab-style"
+      :tab-list="tabList"
+      :tabCur.sync="TabCur"
+      @change="tabChange"
+    ></wuc-tab>
+    <view v-show="showType === 'info'">
+      <!-- <view class="personal-tag panel">
+        <uni-card
+          title="个人标签"
+          mode="title"
+          :is-shadow="true"
+          is-full="true"
+          thumbnail="/static/image/tag.png"
+          extra="我就是我，不一样的烟火"
         >
-          {{ tag.text }}
-        </span>
-      </uni-card>
-    </view>
-    <view class="personal-tag panel">
-      <uni-card
-        title="个人爱好"
-        mode="title"
-        :is-shadow="true"
-        is-full="true"
-        thumbnail="/static/image/mm.png"
-        extra="斜杠青年"
-      >
-        <span
-          class="my-tag"
-          v-bind:class="tag.cl"
-          v-for="tag in cardDetail.interestList"
-          :key="tag.text"
+          <span
+            class="my-tag .bg-cyan.light"
+            v-for="tag in cardDetail.tagList"
+            v-bind:class="tag.cl"
+            :key="tag"
+          >
+            {{ tag.text }}
+          </span>
+        </uni-card>
+      </view> -->
+      <view class="personal-tag panel">
+        <uni-card
+          title="个人爱好"
+          mode="title"
+          :is-shadow="true"
+          is-full="true"
+          thumbnail="/static/image/mm.png"
+          extra="斜杠青年"
         >
-          {{ tag.text }}
-        </span>
-      </uni-card>
+          <span
+            class="my-tag"
+            v-bind:class="tag.cl"
+            v-for="tag in cardDetail.interestList"
+            :key="tag.text"
+          >
+            {{ tag.text }}
+          </span>
+        </uni-card>
+      </view>
+      <view class="personal-tag panel">
+        <uni-card
+          title="自我介绍"
+          mode="title"
+          :is-shadow="true"
+          is-full="true"
+          thumbnail="/static/image/aa.png"
+          extra="知己知彼"
+        >
+          <view class="self-intro">
+            <view class="info-title">
+              <text>个人信息</text>
+            </view>
+            <view class="info-content">
+              90双子座173cm,普通高校本科毕业，公司的一个小项目负责人，工作偏忙，收入稳定，偶尔加班，较少应酬。即使目前一切安逸，也没有停止学习，始终在为能够创造更美好的努力生活着。
+            </view>
+          </view>
+          <view class="self-intro">
+            <view class="info-title">
+              <text>性格爱好</text>
+            </view>
+            <view class="info-content">
+              性格开朗，内心平和，风趣幽默，是大家公认的开心果。热爱旅行、阅读，与音乐。每周羽毛球，每年去一个国内喜欢的地方，到一个未去过的国家。
+            </view>
+          </view>
+          <view class="self-intro">
+            <view class="info-title"> 家庭背景 </view>
+            <view class="info-content">
+              出生山西省朔州市区，城市户口，工薪家庭，家中有一小妹从小勤勉，未有任何娇生惯养的恶习。母亲温暖，父亲严肃，都是通情达理之人，不世故，讲道理，识大体。
+            </view>
+          </view>
+          <view class="self-intro">
+            <view class="info-title"> 期望的另一半 </view>
+            <view class="info-content">
+              希望你是热爱生活的好姑凉，脾气好，感情经历简单，对生活有品位，有幽默感，160以上，本科以上，家人脾气温和
+            </view>
+          </view>
+        </uni-card>
+      </view>
     </view>
-    <view class="personal-tag panel">
-      <uni-card
-        title="自我介绍"
-        mode="title"
-        :is-shadow="true"
-        is-full="true"
-        thumbnail="/static/image/aa.png"
-        extra="知己知彼"
-      >
-        <view class="self-intro">
-          <view class="info-title">
-            <text>个人信息</text>
-          </view>
-          <view class="info-content">
-            90双子座173cm,普通高校本科毕业，公司的一个小项目负责人，工作偏忙，收入稳定，偶尔加班，较少应酬。即使目前一切安逸，也没有停止学习，始终在为能够创造更美好的努力生活着。
-          </view>
-        </view>
-        <view class="self-intro">
-          <view class="info-title">
-            <text>性格爱好</text>
-          </view>
-          <view class="info-content">
-            性格开朗，内心平和，风趣幽默，是大家公认的开心果。热爱旅行、阅读，与音乐。每周羽毛球，每年去一个国内喜欢的地方，到一个未去过的国家。
-          </view>
-        </view>
-        <view class="self-intro">
-          <view class="info-title"> 家庭背景 </view>
-          <view class="info-content">
-            出生山西省朔州市区，城市户口，工薪家庭，家中有一小妹从小勤勉，未有任何娇生惯养的恶习。母亲温暖，父亲严肃，都是通情达理之人，不世故，讲道理，识大体。
-          </view>
-        </view>
-        <view class="self-intro">
-          <view class="info-title"> 期望的另一半 </view>
-          <view class="info-content">
-            希望你是热爱生活的好姑凉，脾气好，感情经历简单，对生活有品位，有幽默感，160以上，本科以上，家人脾气温和
-          </view>
-        </view>
-      </uni-card>
+    <view v-show="showType === 'square'">
+      <my-square :itemList="itemList" kind="me" />
     </view>
   </view>
 </template>
 
 <script>
+import WucTab from "@/components/wuc-tab.vue";
+import mySquare from "@/components/square.vue";
+
 export default {
+  components: { WucTab, mySquare },
   data() {
     return {
+      TabCur: 0,
+      tabList: [
+        { name: "个人信息", type: "info" },
+        { name: "个人动态", type: "square" },
+      ],
       dotsStyles: {
         backgroundColor: "rgba(200, 200, 200, .3)",
         border: "1px rgba(0, 0, 0, .3) solid",
@@ -222,6 +241,143 @@ export default {
           el: ".swiper-pagination",
         },
       },
+      itemList: [
+        {
+          id: 20000002,
+          user: {
+            id: 10001,
+            name: "德善",
+            avatar: "/static/image/deshan.jpeg",
+          },
+          content: {
+            type: "text",
+            text:
+              "每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n",
+          },
+          hasLiked: false,
+          doInput: false,
+          likeList: [
+            {
+              uid: 10002,
+              name: "阿泽",
+            },
+            {
+              uid: 10004,
+              name: "狗焕",
+            },
+            {
+              uid: 10005,
+              name: "娃娃鱼",
+            },
+          ],
+          commentList: [
+            {
+              id: 40000001,
+              fromUser: {
+                uid: 10002,
+                name: "阿泽",
+              },
+              text: "我亲爱的德善",
+            },
+            {
+              id: 40000002,
+              fromUser: {
+                uid: 10005,
+                name: "娃娃鱼",
+              },
+              toUser: {
+                uid: 10002,
+                name: "阿泽",
+              },
+              text: "能不能不要这么恶心",
+            },
+            {
+              id: 40000003,
+              fromUser: {
+                uid: 10004,
+                name: "狗焕",
+              },
+              text: "藏起来~~",
+            },
+            {
+              id: 40000004,
+              fromUser: {
+                uid: 10004,
+                name: "狗焕",
+              },
+              text: "阿萨德富兰克林水电费尽量少打飞机",
+            },
+            {
+              id: 40000005,
+              fromUser: {
+                uid: 10004,
+                name: "狗焕",
+              },
+              text:
+                "阿士大夫撒旦法 撒打飞机拉双方均对拉丝解放路撒 发苏打绿发撒拉发动机",
+            },
+            {
+              id: 40000006,
+              fromUser: {
+                uid: 10004,
+                name: "狗焕",
+              },
+              text: "仨",
+            },
+            {
+              id: 40000007,
+              fromUser: {
+                uid: 10004,
+                name: "狗焕",
+              },
+              text: "藏起来~~",
+            },
+          ],
+        },
+        {
+          id: 20000003,
+          user: {
+            id: 10002,
+            name: "阿泽",
+            avatar: "/static/image/aze.jpeg",
+          },
+          content: {
+            type: "image",
+            text: "第一个动态",
+            urls: [
+              "/static/image/deshan2.jpg",
+              "/static/image/deshan3.jpg",
+              "/static/image/aze.jpeg",
+              "/static/image/aze2.jpeg",
+            ],
+          },
+          doInput: false,
+          hasLiked: false,
+        },
+        {
+          id: 20000004,
+          user: {
+            id: 10003,
+            name: "宝拉",
+            avatar: "/static/image/baola.jpeg",
+          },
+          content: {
+            type: "image",
+            text: "每天都要元气满满",
+            urls: ["/static/image/baola3.jpeg"],
+          },
+          doInput: false,
+          hasLiked: false,
+        },
+      ],
+      showPreview: false,
+      imgList: [
+        "/static/image/deshan2.jpg",
+        "/static/image/deshan3.jpg",
+        "/static/image/aze.jpeg",
+        "/static/image/aze2.jpeg",
+      ],
+      showType: "info",
     };
   },
 
@@ -231,17 +387,28 @@ export default {
       this.currCardIdx = e.detail.current;
       console.log(this.currCardIdx);
     },
+    tabChange(index) {
+      this.showType = this.tabList[index].type;
+      this.TabCur = index;
+      console.log(this.showType);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .content {
   display: flex;
   width: 750rpx;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+swiper {
+  width: 100%;
+  height: 500rpx;
+  min-height: 150rpx;
 }
 
 .content .detail-card {
@@ -296,10 +463,6 @@ export default {
   height: 28rpx;
 }
 
-.info-area .uni-row {
-  /* margin-bottom: 2px; */
-}
-
 .info-area .thumbnail-list .thumbnail {
   display: inline-block;
   vertical-align: top;
@@ -341,7 +504,15 @@ export default {
   line-height: 40rpx;
 }
 
+.wuc-tab-style {
+  margin-bottom: 10rpx;
+}
+
+.wuc-tab-style .wuc-tab-item {
+  padding: 0 100rpx;
+}
+
 .ft-34 {
   font-size: 34rpx;
 }
-</style>
+</style>  
