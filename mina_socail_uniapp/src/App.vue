@@ -65,4 +65,29 @@ export default {
 .width100 {
   width: 100%;
 }
+.width90 {
+  width: 90%;
+}
+.pd20{
+  padding: 20rpx;
+}
+
+.pd-20{
+  padding: 20rpx;
+}
+.pd-40{
+  padding: 40rpx;
+}
+.pd-l-r-20{
+  padding: 0rpx 20rpx;
+}
+
+.pd-l-r-40{
+  padding: 0rpx 40rpx;
+}
+
+
+.ft-35{
+  font-size: 35rpx;
+}
 </style>
