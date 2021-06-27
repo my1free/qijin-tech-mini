@@ -72,7 +72,9 @@
                 <image :src="thumbnail.url" mode="widthFix"></image>
               </view>
               <text class="mg-l-20rpx"
-                >{{ card.currThumbnailIdx + 1 }}/{{ card.total }}</text
+                >{{ card.currThumbnailIdx + 1 }}/{{
+                  card.thumbnails.length
+                }}</text
               >
             </view>
           </view>
@@ -100,11 +102,11 @@ export default {
           constellation: "处女座",
           born: "首尔",
           city: "北京",
-          edu: "北京航空航天大学",
+          edu: "延世大学",
           degree: "学士",
           job: "航空",
           currIdx: 1,
-          total: 3,
+          total: 5,
           currThumbnailIdx: 0,
           thumbnails: [
             {
@@ -112,11 +114,23 @@ export default {
               selected: true,
             },
             {
-              url: "/static/image/deshan2.jpg",
+              url:
+                "http://img.qijin.tech/1nRczRSkxuSq4b66f781091993e1a7ea81b3fc3ed955.png",
               selected: false,
             },
             {
-              url: "/static/image/deshan3.jpg",
+              url:
+                "http://img.qijin.tech/tcW82sLalUYd2f5c23683ee9f1dbcc39b86fe6c935ae.png",
+              selected: false,
+            },
+            {
+              url:
+                "http://img.qijin.tech/kxPqgPMVLUDRe65f240de00a01e854308b237a77f634.png",
+              selected: false,
+            },
+            {
+              url:
+                "http://img.qijin.tech/EoM0DHvXHQXXe4bb53c34bf66b143fdc2fc684d2ce41.png",
               selected: false,
             },
           ],
@@ -147,7 +161,8 @@ export default {
               selected: false,
             },
             {
-              url: "/static/image/aze3.jpeg",
+              url:
+                "http://img.qijin.tech/ZJxLLMiSm0GL4501bd050d15a047feaaa158e345ac61.png",
               selected: false,
             },
           ],
@@ -174,7 +189,8 @@ export default {
               selected: true,
             },
             {
-              url: "/static/image/baola2.jpeg",
+              url:
+                "http://img.qijin.tech/vAvRLB0SyaCfd6bdf6bee548c5317b4da8a722d4e6ad.png",
               selected: false,
             },
             {
@@ -201,17 +217,17 @@ export default {
         url: "./detail/index",
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function (data) {
+          acceptDataFromOpenedPage: function(data) {
             console.log(data);
           },
-          someEvent: function (data) {
+          someEvent: function(data) {
             console.log(data);
           },
         },
-        success: function (res) {
+        success: function(res) {
           console.log("success", res);
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log("fail", res);
         },
       });
@@ -306,15 +322,17 @@ export default {
 
 .info-area .thumbnail-list {
   width: 95%;
+  display: flex;
+  align-items: flex-end;
 }
 
 .info-area .thumbnail-list .thumbnail {
   display: inline-block;
   vertical-align: top;
   height: 100rpx;
-  width: 100rpx;
+  width: 63rpx;
   margin-top: 10rpx;
-  margin-right: 8rpx;
+  margin-right: 12rpx;
   border-radius: 10rpx;
   overflow: hidden;
 }
@@ -328,7 +346,7 @@ export default {
 }
 
 .info-area .thumbnail-list .thumbnail image {
-  width: 100rpx;
+  width: 63rpx;
   height: 100rpx;
 }
 

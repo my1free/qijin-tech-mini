@@ -95,11 +95,23 @@ export default {
               selected: true,
             },
             {
-              url: "/static/image/deshan2.jpg",
+              url:
+                "http://img.qijin.tech/FahO6nbj13pu2aeb664b1ccf21879674a586888fc1fb.png",
               selected: false,
             },
             {
-              url: "/static/image/deshan3.jpg",
+              url:
+                "http://img.qijin.tech/dhFFSgtFQvVgc1fb788ed9895897b2640d334e8a0cc4.png",
+              selected: false,
+            },
+            {
+              url:
+                "http://img.qijin.tech/1nRczRSkxuSq4b66f781091993e1a7ea81b3fc3ed955.png",
+              selected: false,
+            },
+            {
+              url:
+                "http://img.qijin.tech/SEuCo1Eoa9SK06b9fe375e337b878ad9422701284267.png",
               selected: false,
             },
           ],
@@ -184,17 +196,17 @@ export default {
         url: "/pages/social/detail/index",
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function (data) {
+          acceptDataFromOpenedPage: function(data) {
             console.log(data);
           },
-          someEvent: function (data) {
+          someEvent: function(data) {
             console.log(data);
           },
         },
-        success: function (res) {
+        success: function(res) {
           console.log("success", res);
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log("fail", res);
         },
       });

@@ -175,13 +175,22 @@ import WucTab from "@/components/wuc-tab.vue";
 import mySquare from "@/components/square.vue";
 
 export default {
-  components: { WucTab, mySquare },
+  components: {
+    WucTab,
+    mySquare,
+  },
   data() {
     return {
       TabCur: 0,
       tabList: [
-        { name: "个人信息", type: "info" },
-        { name: "个人动态", type: "square" },
+        {
+          name: "个人信息",
+          type: "info",
+        },
+        {
+          name: "个人动态",
+          type: "square",
+        },
       ],
       dotsStyles: {
         backgroundColor: "rgba(200, 200, 200, .3)",
@@ -207,18 +216,48 @@ export default {
         total: 3,
         currThumbnailIdx: 0,
         tagList: [
-          { text: "女汉子", cl: ".bg-cyan.light" },
-          { text: "嘤嘤怪", cl: ".bg-brown.light" },
+          {
+            text: "女汉子",
+            cl: ".bg-cyan.light",
+          },
+          {
+            text: "嘤嘤怪",
+            cl: ".bg-brown.light",
+          },
         ],
         interestList: [
-          { text: "羽毛球", cl: ".bg-cyan.light" },
-          { text: "王者荣耀", cl: ".bg-orange.light" },
-          { text: "摄影", cl: ".bg-grey.light" },
-          { text: "做饭", cl: ".bg-brown.light" },
-          { text: "绘画", cl: ".bg-purple.light" },
-          { text: "旅游", cl: ".bg-blue.light" },
-          { text: "户外探险", cl: ".bg-mauve.light" },
-          { text: "徒步", cl: ".bg-cyan.light" },
+          {
+            text: "羽毛球",
+            cl: ".bg-cyan.light",
+          },
+          {
+            text: "王者荣耀",
+            cl: ".bg-orange.light",
+          },
+          {
+            text: "摄影",
+            cl: ".bg-grey.light",
+          },
+          {
+            text: "做饭",
+            cl: ".bg-brown.light",
+          },
+          {
+            text: "绘画",
+            cl: ".bg-purple.light",
+          },
+          {
+            text: "旅游",
+            cl: ".bg-blue.light",
+          },
+          {
+            text: "户外探险",
+            cl: ".bg-mauve.light",
+          },
+          {
+            text: "徒步",
+            cl: ".bg-cyan.light",
+          },
         ],
         thumbnails: [
           {
@@ -226,11 +265,28 @@ export default {
             selected: true,
           },
           {
-            url: "/static/image/deshan2.jpg",
+            url:
+              "http://img.qijin.tech/FahO6nbj13pu2aeb664b1ccf21879674a586888fc1fb.png",
             selected: false,
           },
           {
-            url: "/static/image/deshan3.jpg",
+            url:
+              "http://img.qijin.tech/tcW82sLalUYd2f5c23683ee9f1dbcc39b86fe6c935ae.png",
+            selected: false,
+          },
+          {
+            url:
+              "http://img.qijin.tech/1nRczRSkxuSq4b66f781091993e1a7ea81b3fc3ed955.png",
+            selected: false,
+          },
+          {
+            url:
+              "http://img.qijin.tech/kxPqgPMVLUDRe65f240de00a01e854308b237a77f634.png",
+            selected: false,
+          },
+          {
+            url:
+              "http://img.qijin.tech/EoM0DHvXHQXXe4bb53c34bf66b143fdc2fc684d2ce41.png",
             selected: false,
           },
         ],
@@ -495,9 +551,11 @@ swiper {
 .self-intro {
   margin-bottom: 20rpx;
 }
+
 .self-intro .info-title {
   font-size: 30rpx;
 }
+
 .self-intro .info-content {
   color: gray;
   padding: 10rpx 5px;
@@ -515,4 +573,4 @@ swiper {
 .ft-34 {
   font-size: 34rpx;
 }
-</style>  
+</style>

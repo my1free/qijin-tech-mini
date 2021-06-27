@@ -207,7 +207,7 @@ export default {
           user: {
             id: 10001,
             name: "德善",
-            avatar: "/static/image/deshan.jpeg",
+            avatar: "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
           },
           content: {
             type: "text",
@@ -299,7 +299,7 @@ export default {
           user: {
             id: 10002,
             name: "阿泽",
-            avatar: "/static/image/aze.jpeg",
+            avatar: "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
           },
           content: {
             type: "image",
@@ -311,6 +311,34 @@ export default {
               "/static/image/aze2.jpeg",
             ],
           },
+          likeList: [
+            {
+              uid: 10001,
+              name: "德善",
+            }
+          ],
+          commentList: [
+            {
+              id: 40000002,
+              fromUser: {
+                uid: 10005,
+                name: "娃娃鱼",
+              },
+              text: "狗粮狗粮",
+            },
+            {
+              id: 40000003,
+              fromUser: {
+                uid: 10002,
+                name: "阿泽",
+              },
+              toUser: {
+                uid: 10005,
+                name: "娃娃鱼",
+              },
+              text: "要勇敢秀出❤️",
+            }
+          ],
           doInput: false,
           hasLiked: false,
         },
@@ -319,7 +347,7 @@ export default {
           user: {
             id: 10003,
             name: "宝拉",
-            avatar: "/static/image/baola.jpeg",
+            avatar: "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
           },
           content: {
             type: "image",

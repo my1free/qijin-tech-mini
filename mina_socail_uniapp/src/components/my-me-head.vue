@@ -1,7 +1,7 @@
 <template>
   <view class="content">
     <view class="left">
-      <image src="/static/image/deshan.jpeg">
+      <image src="http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png">
     </view>
     <view class="right">
       <view class="name">

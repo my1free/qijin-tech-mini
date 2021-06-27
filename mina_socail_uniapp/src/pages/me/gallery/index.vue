@@ -41,7 +41,7 @@
           :src="src"
           :cutWidth="cutWidth"
           :cutHeight="cutHeight"
-          canvasBackground="red"
+          canvasBackground="#eeeeee"
           @cropped="cropped"
           @afterDraw="afterDraw"
           @beforeDraw="beforeDraw"
@@ -62,6 +62,7 @@
 
 <script>
 import ImageCropper from "@/components/nice-cropper/cropper.vue";
+import api from "@/static/js/api.js";
 export default {
   components: {
     ImageCropper,
@@ -69,12 +70,16 @@ export default {
   data() {
     return {
       src: "",
+      type: "",
+      idx: 0,
       cutImage: false,
       cutWidth: "50%",
       cutHeight: "50%",
+      imagePath: "",
       galleryInfo: {
         uid: 100001,
-        avatar: "/static/image/deshan.jpeg",
+        avatar:
+          "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
         covers: [
           {
             url: "/static/image/deshan.jpeg",
@@ -116,18 +121,12 @@ export default {
   },
   methods: {
     beforeDraw(context, transform) {
-      context.setFillStyle("yellow");
       transform.zoom = 2;
     },
-    afterDraw(ctx, info) {
-      ctx.fillText("我是一行文字水印", 20, 20);
-      console.log(`当前画布大小：${info.width}*${info.height}`);
-    },
-    load(img) {
-      console.log("load", img);
-    },
+    afterDraw(ctx, info) {},
+    load(img) {},
     cropped(imagePath, imageInfo) {
-      console.log(imagePath, imageInfo);
+      this.imagePath = imagePath;
     },
     addIntrest(tag) {
       this.interestList.push(tag);
@@ -150,6 +149,17 @@ export default {
       this.$refs.popup.close();
     },
     choseImage(type, idx) {
+      this.type = type;
+      this.idx = idx;
+      if ("avatar" === this.type) {
+        this.cutWidth = "50%";
+        this.cutHeight = "50%";
+      }
+      if ("add" === this.type || "cover" === this.type) {
+        this.cutWidth = "50%";
+        this.cutHeight = "80%";
+      }
+
       uni.chooseImage({
         count: 1,
         sizeType: ["original"],
@@ -157,29 +167,7 @@ export default {
         success: (chooseImageRes) => {
           this.cutImage = true;
           const tempFilePaths = chooseImageRes.tempFilePaths;
-          console.log(tempFilePaths);
           this.src = tempFilePaths[0];
-          if ("avatar" === type) {
-            this.galleryInfo.avatar = tempFilePaths;
-          }
-          if ("add" === type) {
-            this.cutWidth = "50%";
-            this.cutHeight = "88.5%";
-            this.galleryInfo.covers.push({
-              url: tempFilePaths,
-            });
-          }
-          if ("cover" === type) {
-            this.cutWidth = "50%";
-            this.cutHeight = "88.5%";
-            for (var i = 0; i < this.galleryInfo.covers.length; i++) {
-              console.log(i, idx);
-              if (i === idx) {
-                this.galleryInfo.covers[i].url = tempFilePaths;
-                break;
-              }
-            }
-          }
         },
       });
     },
@@ -188,6 +176,26 @@ export default {
     },
     cutImageConfirm() {
       this.cutImage = false;
+      api.uploadImageWithPath(this.imagePath).then((res) => {
+        console.log(res);
+      });
+      if ("avatar" === this.type) {
+        this.galleryInfo.avatar = this.imagePath;
+      }
+      if ("add" === this.type) {
+        this.galleryInfo.covers.push({
+          url: this.imagePath,
+        });
+      }
+      if ("cover" === this.type) {
+        for (var i = 0; i < this.galleryInfo.covers.length; i++) {
+          console.log(i, this.idx);
+          if (i === this.idx) {
+            this.galleryInfo.covers[i].url = this.imagePath;
+            break;
+          }
+        }
+      }
     },
   },
 };

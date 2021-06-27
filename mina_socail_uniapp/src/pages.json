@@ -7,18 +7,6 @@
         }
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-        // {
-        //     "path": "pages/me/editor/index",
-        //     "style": {
-        //         "navigationBarTitleText": "个人信息编辑"
-        //     }
-        // },
-        {
-            "path": "pages/me/index",
-            "style": {
-                "navigationBarTitleText": "my-social"
-            }
-        },
         {
             "path": "pages/social/index",
             "style": {
@@ -61,12 +49,12 @@
                 "navigationBarTitleText": "my-social"
             }
         },
-        // {
-        //     "path": "pages/me/index",
-        //     "style": {
-        //         "navigationBarTitleText": "my-social"
-        //     }
-        // }
+        {
+            "path": "pages/me/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
         {
             "path": "pages/me/editor/index",
             "style": {
@@ -102,12 +90,12 @@
                 "selectedIconPath": "static/image/card-color.png",
                 "text": "推荐"
             },
-            // {
-            //     "pagePath": "pages/square/index",
-            //     "iconPath": "static/image/square-gray.png",
-            //     "selectedIconPath": "static/image/square-color.png",
-            //     "text": "广场"
-            // },
+            {
+                "pagePath": "pages/square/index",
+                "iconPath": "static/image/square-gray.png",
+                "selectedIconPath": "static/image/square-color.png",
+                "text": "广场"
+            },
             // {
             //     "pagePath": "pages/group/info/index",
             //     "iconPath": "static/image/chat-gray.png",

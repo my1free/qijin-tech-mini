@@ -22,7 +22,8 @@ export default {
           user: {
             id: 10001,
             name: "德善",
-            avatar: "/static/image/deshan.jpeg",
+            avatar:
+              "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
           },
           content: {
             type: "text",
