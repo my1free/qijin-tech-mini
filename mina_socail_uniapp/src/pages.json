@@ -72,6 +72,18 @@
             "style": {
                 "navigationBarTitleText": "个人信息编辑"
             }
+        },
+        {
+            "path": "pages/me/tags/index",
+            "style": {
+                "navigationBarTitleText": "个人爱好编辑"
+            }
+        },
+        {
+            "path": "pages/me/gallery/index",
+            "style": {
+                "navigationBarTitleText": "编辑画廊"
+            }
         }
     ],
     "tabBar": {
@@ -122,7 +134,6 @@
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "uni-app",
         "navigationBarBackgroundColor": "#F8F8F8",
-        "enablePullDownRefresh": true,
         "backgroundColor": "#F8F8F8"
     }
 }

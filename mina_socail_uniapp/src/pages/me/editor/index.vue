@@ -33,21 +33,23 @@
 
     <view class="width100" v-if="key === 'selfInfo'">
         <view class="pd-40 text-bold ft-35">个人信息</view>
-        <textarea class="pd-l-r-40" :value="value" placeholder="请简要介绍下自己" focus="true">
-    </view>
+        <textarea class="pd-l-r-40 width100" :value="value" placeholder="请简要介绍下自己" focus="true" auto-height />
+        </view>
     <view class="width100" v-if="key === 'selfHobby'">
         <view class="pd-40 text-bold ft-35">性格爱好</view>
-        <textarea class="pd-l-r-40" :value="value" placeholder="请介绍下自己的性格爱好" focus="true">
+        <textarea class="pd-l-r-40 width100" :value="value" placeholder="请介绍下自己的性格爱好" focus="true" auto-height />
     </view>
     <view class="width100" v-if="key === 'selfFamily'">
-        <view class="pd-40 text-bold ft-35">性格爱好</view>
-        <textarea class="pd-l-r-40" :value="value" placeholder="介绍下自己的家庭背景" focus="true">
+        <view class="pd-40 text-bold ft-35">家庭背景</view>
+        <textarea class="pd-l-r-40 width100" :value="value" placeholder="介绍下自己的家庭背景" focus="true" auto-height />
     </view>
     <view class="width100" v-if="key === 'whoExpected'">
         <view class="pd-40 text-bold ft-35">期望的另一半</view>
-        <textarea class="pd-l-r-40" :value="value" placeholder="请说出对另一半的期望" focus="true">
+        <textarea class="pd-l-r-40 width100" :value="value" placeholder="请说出对另一半的期望" focus="true" auto-height />
     </view>
-
+    <view class="width100" style="text-align:right; margin-right: 100rpx; margin-top: 20rpx">
+        <button class="mini-btn" type="primary" size="mini" v-on:click="onSave()">保存</button>
+    </view>
 </view>
 </template>
 
@@ -69,7 +71,13 @@ export default {
             this.genderIdx = 1
         }
     },
-    methods: {},
+    methods: {
+        onSave() {
+            uni.navigateBack({
+                delta: 1
+            });
+        }
+    },
 };
 </script>
 

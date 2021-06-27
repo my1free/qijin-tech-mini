@@ -1,5 +1,19 @@
 <template>
 <view class="content">
+    <view class="panel pd-20 img-edit" v-on:click="onEditImg()">
+        <view class="left">
+            <image class="img-avatar mg-l-20rpx" :src="avatar.url"></image>
+        </view>
+        <view class="right">
+            <view class="img-cover mg-l-20rpx" v-for="cover in covers" :key="cover.id">
+                <image :src="cover.url" mode="widthFix"></image>
+            </view>
+        </view>
+        <view class="side">
+            <text>></text>
+        </view>
+
+    </view>
     <view class="panel">
         <view class="panel-head">
             <view class="panel-head-title">个人信息</view>
@@ -42,7 +56,7 @@
             </view>
         </view>
     </view>
-    <!-- <view class="panel">
+    <view class="panel" v-on:click="onEditTags()">
         <view class="panel-head">
             <view class="panel-head-title">个人爱好</view>
         </view>
@@ -84,7 +98,7 @@
                 <view class="info-content" v-on:click="onEdit('whoExpected', infoDetail.whoExpected)">
                     {{infoDetail.whoExpected}}
                 </view>
-            </view> -->
+            </view>
         </view>
     </view>
 </view>
@@ -99,6 +113,25 @@ export default {
     },
     data() {
         return {
+            avatar: {
+                "id": 200001,
+                url: "/static/image/deshan.jpeg"
+            },
+            covers: [{
+                        "id": 200001,
+                        url: "/static/image/deshan2.jpg"
+                    },
+                    {
+                        "id": 200001,
+                        url: "/static/image/deshan.jpeg"
+                    },
+                    {
+                        "id": 200002,
+                        url: "/static/image/img-placeholder.png"
+                    },
+                ]
+
+                ,
             infoDetail: {
                 uid: 1000001,
                 avatar: "/static/image/deshan.jpeg",
@@ -233,6 +266,47 @@ export default {
                     console.log("fail", res);
                 },
             });
+        },
+        onEditTags: function (key, value) {
+            var url = `/pages/me/tags/index?key=${key}&value=${value}`
+            console.log(url)
+            uni.navigateTo({
+                url: url,
+                events: {
+                    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                    acceptDataFromOpenedPage: function (data) {
+                        console.log(data);
+                    },
+                    someEvent: function (data) {
+                        console.log(data);
+                    },
+                },
+                success: function (res) {
+                    console.log("success", res);
+                },
+                fail: function (res) {
+                    console.log("fail", res);
+                },
+            });
+        },
+        onEditImg: function(){
+            uni.navigateTo({
+                url: "/pages/me/gallery/index",
+                events: {
+                    acceptDataFromOpenedPage: function (data) {
+                        console.log(data);
+                    },
+                    someEvent: function (data) {
+                        console.log(data);
+                    },
+                },
+                success: function (res) {
+                    console.log("success", res);
+                },
+                fail: function (res) {
+                    console.log("fail", res);
+                },
+            });
         }
     },
 };
@@ -319,5 +393,49 @@ export default {
     line-height: 40rpx;
     border-left: 10rpx #ddd solid;
     margin: 10rpx 0rpx;
+}
+
+.img-edit{
+    display: flex;
+}
+
+.left {
+    display: flex;
+    width: 120rpx;
+    align-items: center;
+    padding-right: 20rpx;
+    border-right: 1rpx #eee solid;
+}
+
+.left .img-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+
+.right{
+    display: flex;
+    width: 530rpx;
+    align-items: center;
+}
+
+.side{
+    display: flex;
+    width: 50rpx;
+    align-items: center;
+    color: gray;
+}
+
+.right .img-cover {
+    display: flex;
+    height: 100rpx;
+    align-items: center;
+    border-radius: 10rpx;
+}
+
+.right .img-cover image {
+    width: 68rpx;
+    height: 100rpx;
+    border-radius: 10rpx;
 }
 </style>

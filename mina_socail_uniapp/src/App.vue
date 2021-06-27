@@ -82,12 +82,45 @@ export default {
   padding: 0rpx 20rpx;
 }
 
+.pd-lr-20{
+  padding: 0rpx 20rpx;
+}
+
 .pd-l-r-40{
   padding: 0rpx 40rpx;
+}
+
+.pd-lr-40{
+  padding: 0rpx 40rpx;
+}
+
+.pd-tb-20{
+  padding: 20rpx 0rpx;
+}
+
+.pd-tb-40{
+  padding: 40rpx 0rpx;
+}
+
+.pd-b-20{
+  padding-bottom: 20rpx;
+}
+
+
+.mg-top-20{
+  margin-top: 20rpx;
+}
+
+.mg-top-40{
+  margin-top: 40rpx;
 }
 
 
 .ft-35{
   font-size: 35rpx;
+}
+
+.border-bottom{
+  border-bottom: 1rpx gray solid;
 }
 </style>
