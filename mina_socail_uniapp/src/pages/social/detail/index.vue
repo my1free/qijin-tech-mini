@@ -2,7 +2,7 @@
   <view class="content">
     <view class="detail-card">
       <uni-swiper-dot
-        :info="cardDetail.thumbnails"
+        :info="cardDetail.images"
         :current="currCardIdx"
         field="content"
         mode="round"
@@ -14,7 +14,7 @@
           @change="onCardSwiperChange"
         >
           <swiper-item
-            v-for="thumbnail in cardDetail.thumbnails"
+            v-for="thumbnail in cardDetail.images"
             :key="thumbnail.url"
           >
             <view class="card">
@@ -26,12 +26,12 @@
     </view>
     <view class="info-area">
       <uni-row class="demo-uni-row">
-        <text class="name">{{ cardDetail.name }}</text>
+        <text class="name">{{ cardDetail.profile.name }}</text>
         <image class="seximg mg-l-20rpx" src="/static/image/sexw.png"></image>
         <text class="mg-l-20rpx"
-          >{{ cardDetail.sex }}/{{ cardDetail.age }}/{{
-            cardDetail.constellation
-          }}</text
+          >{{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}/{{
+            cardDetail.profile.age
+          }}/{{ cardDetail.profile.constellation }}</text
         >
       </uni-row>
       <uni-row class="demo-uni-row">
@@ -63,28 +63,28 @@
       </uni-row>
       <uni-row class="demo-uni-row">
         <uni-col :span="12">
-          <text>籍贯: {{ cardDetail.born }}</text>
+          <text>籍贯: {{ cardDetail.profile.bornCity }}</text>
         </uni-col>
         <uni-col :span="12">
-          <text>现居地: {{ cardDetail.city }}</text>
+          <text>现居地: {{ cardDetail.profile.liveCity }}</text>
         </uni-col>
       </uni-row>
       <uni-row class="demo-uni-row">
         <uni-col :span="12">
-          <text>学校: {{ cardDetail.edu }}</text>
-          <text class="mg-l-15rpx">{{ cardDetail.degree }}</text>
+          <text>学校: {{ cardDetail.profile.edu }}</text>
+          <text class="mg-l-15rpx">{{ cardDetail.profile.eduDegree }}</text>
         </uni-col>
         <uni-col :span="12">
-          <text>工作: {{ cardDetail.job }}</text>
+          <text>工作: {{ cardDetail.profile.job }}</text>
         </uni-col>
       </uni-row>
     </view>
-    <wuc-tab
+    <!-- <wuc-tab
       class="wuc-tab-style"
       :tab-list="tabList"
       :tabCur.sync="TabCur"
       @change="tabChange"
-    ></wuc-tab>
+    ></wuc-tab> -->
     <view v-show="showType === 'info'">
       <!-- <view class="personal-tag panel">
         <uni-card
@@ -117,10 +117,10 @@
           <span
             class="my-tag"
             v-bind:class="tag.cl"
-            v-for="tag in cardDetail.interestList"
-            :key="tag.text"
+            v-for="tag in cardDetail.hobbies"
+            :key="tag.id"
           >
-            {{ tag.text }}
+            {{ tag.content }}
           </span>
         </uni-card>
       </view>
@@ -138,7 +138,7 @@
               <text>个人信息</text>
             </view>
             <view class="info-content">
-              90双子座173cm,普通高校本科毕业，公司的一个小项目负责人，工作偏忙，收入稳定，偶尔加班，较少应酬。即使目前一切安逸，也没有停止学习，始终在为能够创造更美好的努力生活着。
+              {{ cardDetail.love.selfInfo }}
             </view>
           </view>
           <view class="self-intro">
@@ -146,33 +146,34 @@
               <text>性格爱好</text>
             </view>
             <view class="info-content">
-              性格开朗，内心平和，风趣幽默，是大家公认的开心果。热爱旅行、阅读，与音乐。每周羽毛球，每年去一个国内喜欢的地方，到一个未去过的国家。
+              {{ cardDetail.love.interest }}
             </view>
           </view>
           <view class="self-intro">
             <view class="info-title"> 家庭背景 </view>
             <view class="info-content">
-              出生山西省朔州市区，城市户口，工薪家庭，家中有一小妹从小勤勉，未有任何娇生惯养的恶习。母亲温暖，父亲严肃，都是通情达理之人，不世故，讲道理，识大体。
+              {{ cardDetail.love.family }}
             </view>
           </view>
           <view class="self-intro">
             <view class="info-title"> 期望的另一半 </view>
             <view class="info-content">
-              希望你是热爱生活的好姑凉，脾气好，感情经历简单，对生活有品位，有幽默感，160以上，本科以上，家人脾气温和
+              {{ cardDetail.love.expected }}
             </view>
           </view>
         </uni-card>
       </view>
     </view>
-    <view v-show="showType === 'square'">
+    <!-- <view v-show="showType === 'square'">
       <my-square :itemList="itemList" kind="me" />
-    </view>
+    </view> -->
   </view>
 </template>
 
 <script>
 import WucTab from "@/components/wuc-tab.vue";
 import mySquare from "@/components/square.vue";
+import api from "@/static/js/api.js";
 
 export default {
   components: {
@@ -199,233 +200,13 @@ export default {
         selectedBorder: "1px rgba(0, 0, 0, .9) solid",
       },
       currCardIdx: 0,
-      cardDetail: {
-        uid: 1000001,
-        avatar: "/static/image/deshan.jpeg",
-        cover: "/static/image/deshan.jpeg",
-        name: "德善",
-        age: 19,
-        sex: "女",
-        constellation: "处女座",
-        born: "首尔",
-        city: "北京",
-        edu: "延世大学",
-        degree: "学士",
-        job: "航空",
-        currIdx: 1,
-        total: 3,
-        currThumbnailIdx: 0,
-        tagList: [
-          {
-            text: "女汉子",
-            cl: ".bg-cyan.light",
-          },
-          {
-            text: "嘤嘤怪",
-            cl: ".bg-brown.light",
-          },
-        ],
-        interestList: [
-          {
-            text: "羽毛球",
-            cl: ".bg-cyan.light",
-          },
-          {
-            text: "王者荣耀",
-            cl: ".bg-orange.light",
-          },
-          {
-            text: "摄影",
-            cl: ".bg-grey.light",
-          },
-          {
-            text: "做饭",
-            cl: ".bg-brown.light",
-          },
-          {
-            text: "绘画",
-            cl: ".bg-purple.light",
-          },
-          {
-            text: "旅游",
-            cl: ".bg-blue.light",
-          },
-          {
-            text: "户外探险",
-            cl: ".bg-mauve.light",
-          },
-          {
-            text: "徒步",
-            cl: ".bg-cyan.light",
-          },
-        ],
-        thumbnails: [
-          {
-            url: "/static/image/deshan.jpeg",
-            selected: true,
-          },
-          {
-            url:
-              "http://img.qijin.tech/FahO6nbj13pu2aeb664b1ccf21879674a586888fc1fb.png",
-            selected: false,
-          },
-          {
-            url:
-              "http://img.qijin.tech/tcW82sLalUYd2f5c23683ee9f1dbcc39b86fe6c935ae.png",
-            selected: false,
-          },
-          {
-            url:
-              "http://img.qijin.tech/1nRczRSkxuSq4b66f781091993e1a7ea81b3fc3ed955.png",
-            selected: false,
-          },
-          {
-            url:
-              "http://img.qijin.tech/kxPqgPMVLUDRe65f240de00a01e854308b237a77f634.png",
-            selected: false,
-          },
-          {
-            url:
-              "http://img.qijin.tech/EoM0DHvXHQXXe4bb53c34bf66b143fdc2fc684d2ce41.png",
-            selected: false,
-          },
-        ],
-      },
+      cardDetail: {},
       swiperOption: {
         //这里配置的参数参考官网API设置，这里的pagination就是下图中的官方配置
         pagination: {
           el: ".swiper-pagination",
         },
       },
-      itemList: [
-        {
-          id: 20000002,
-          user: {
-            id: 10001,
-            name: "德善",
-            avatar: "/static/image/deshan.jpeg",
-          },
-          content: {
-            type: "text",
-            text:
-              "每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n",
-          },
-          hasLiked: false,
-          doInput: false,
-          likeList: [
-            {
-              uid: 10002,
-              name: "阿泽",
-            },
-            {
-              uid: 10004,
-              name: "狗焕",
-            },
-            {
-              uid: 10005,
-              name: "娃娃鱼",
-            },
-          ],
-          commentList: [
-            {
-              id: 40000001,
-              fromUser: {
-                uid: 10002,
-                name: "阿泽",
-              },
-              text: "我亲爱的德善",
-            },
-            {
-              id: 40000002,
-              fromUser: {
-                uid: 10005,
-                name: "娃娃鱼",
-              },
-              toUser: {
-                uid: 10002,
-                name: "阿泽",
-              },
-              text: "能不能不要这么恶心",
-            },
-            {
-              id: 40000003,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "藏起来~~",
-            },
-            {
-              id: 40000004,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "阿萨德富兰克林水电费尽量少打飞机",
-            },
-            {
-              id: 40000005,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text:
-                "阿士大夫撒旦法 撒打飞机拉双方均对拉丝解放路撒 发苏打绿发撒拉发动机",
-            },
-            {
-              id: 40000006,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "仨",
-            },
-            {
-              id: 40000007,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "藏起来~~",
-            },
-          ],
-        },
-        {
-          id: 20000003,
-          user: {
-            id: 10002,
-            name: "阿泽",
-            avatar: "/static/image/aze.jpeg",
-          },
-          content: {
-            type: "image",
-            text: "第一个动态",
-            urls: [
-              "/static/image/deshan2.jpg",
-              "/static/image/deshan3.jpg",
-              "/static/image/aze.jpeg",
-              "/static/image/aze2.jpeg",
-            ],
-          },
-          doInput: false,
-          hasLiked: false,
-        },
-        {
-          id: 20000004,
-          user: {
-            id: 10003,
-            name: "宝拉",
-            avatar: "/static/image/baola.jpeg",
-          },
-          content: {
-            type: "image",
-            text: "每天都要元气满满",
-            urls: ["/static/image/baola3.jpeg"],
-          },
-          doInput: false,
-          hasLiked: false,
-        },
-      ],
       showPreview: false,
       imgList: [
         "/static/image/deshan2.jpg",
@@ -437,7 +218,13 @@ export default {
     };
   },
 
-  onLoad() {},
+  onLoad(option) {
+    var userId = option.userId;
+    api.getCardDetail(userId).then((res) => {
+      console.log("getCardDetail=", res);
+      this.cardDetail = res;
+    });
+  },
   methods: {
     onCardSwiperChange(e) {
       this.currCardIdx = e.detail.current;

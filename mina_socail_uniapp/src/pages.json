@@ -7,12 +7,32 @@
         }
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        // {
+        //     "path": "pages/activity/index",
+        //     "style": {
+        //         "navigationBarTitleText": "my-social"
+        //     }
+        // },
         {
             "path": "pages/social/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
         },
+        {
+            "path": "pages/login/profile/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/login/mobile/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        
+        
         {
             "path": "pages/social/detail/index",
             "style": {
@@ -27,6 +47,18 @@
         },
         {
             "path": "pages/square/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/activity/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/activity/detail/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
@@ -90,11 +122,17 @@
                 "selectedIconPath": "static/image/card-color.png",
                 "text": "推荐"
             },
+            // {
+            //     "pagePath": "pages/square/index",
+            //     "iconPath": "static/image/square-gray.png",
+            //     "selectedIconPath": "static/image/square-color.png",
+            //     "text": "广场"
+            // },
             {
-                "pagePath": "pages/square/index",
-                "iconPath": "static/image/square-gray.png",
-                "selectedIconPath": "static/image/square-color.png",
-                "text": "广场"
+                "pagePath": "pages/activity/index",
+                "iconPath": "static/image/activity-gray.png",
+                "selectedIconPath": "static/image/activity-color.png",
+                "text": "活动"
             },
             // {
             //     "pagePath": "pages/group/info/index",

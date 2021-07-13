@@ -1,12 +1,12 @@
 <script>
 export default {
-  onLaunch: function () {
+  onLaunch: function() {
     console.log("App Launch");
   },
-  onShow: function () {
+  onShow: function() {
     console.log("App Show");
   },
-  onHide: function () {
+  onHide: function() {
     console.log("App Hide");
   },
 };
@@ -68,59 +68,61 @@ export default {
 .width90 {
   width: 90%;
 }
-.pd20{
+.pd20 {
   padding: 20rpx;
 }
 
-.pd-20{
+.pd-20 {
   padding: 20rpx;
 }
-.pd-40{
+.pd-40 {
   padding: 40rpx;
 }
-.pd-l-r-20{
+.pd-l-r-20 {
   padding: 0rpx 20rpx;
 }
 
-.pd-lr-20{
+.pd-lr-20 {
   padding: 0rpx 20rpx;
 }
 
-.pd-l-r-40{
+.pd-l-r-40 {
   padding: 0rpx 40rpx;
 }
 
-.pd-lr-40{
+.pd-lr-40 {
   padding: 0rpx 40rpx;
 }
 
-.pd-tb-20{
+.pd-tb-20 {
   padding: 20rpx 0rpx;
 }
 
-.pd-tb-40{
+.pd-tb-40 {
   padding: 40rpx 0rpx;
 }
 
-.pd-b-20{
+.pd-b-20 {
   padding-bottom: 20rpx;
 }
 
-
-.mg-top-20{
+.mg-top-20 {
   margin-top: 20rpx;
 }
 
-.mg-top-40{
+.mg-top-40 {
   margin-top: 40rpx;
 }
 
-
-.ft-35{
+.ft-35 {
   font-size: 35rpx;
 }
 
-.border-bottom{
+.ft-bold {
+  font-weight: bold;
+}
+
+.border-bottom {
   border-bottom: 1rpx gray solid;
 }
 </style>

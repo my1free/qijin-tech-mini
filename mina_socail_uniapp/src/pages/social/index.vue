@@ -1,80 +1,62 @@
 <template>
   <view class="content">
-    <!-- <view class="header">
-      <uni-row class="demo-uni-row">
-        <uni-col :span="6">
-          <text>筛选</text>
-          <uni-icons type="arrowdown" size="16" class="pd-l-5rpx"></uni-icons>
-        </uni-col>
-        <uni-col :span="8">
-          <view class="location">
-            <uni-icons
-              type="location-filled"
-              size="16"
-              color="#d97704"
-            ></uni-icons>
-            <text>{{ currCity }}</text>
-          </view>
-        </uni-col>
-      </uni-row>
-    </view> -->
-    <view class="card-bg" v-if="cardList == null || cardList.length <= 0">
+    <view class="card-bg" v-if="cards == null || cards.length <= 0">
       <uni-load-more :status="loadingStatus" class="card-load"></uni-load-more>
     </view>
     <swiper
       class="swiper card-list"
       :duration="500"
       @change="onCardSwiperChange"
-      v-if="cardList.length > 0"
+      v-if="cards.length > 0"
     >
-      <swiper-item v-for="card in cardList" :key="card.uid">
-        <view class="card" v-on:click="onCardDetail(card.uid)">
+      <swiper-item v-for="card in cards" :key="card.userId">
+        <view class="card" v-on:click="onCardDetail(card.userId)">
           <image class="cover" :src="card.cover" mode="heightFix"></image>
           <view class="info-area">
             <uni-row class="demo-uni-row">
-              <text class="name">{{ card.name }}</text>
+              <text class="name">{{ card.profile.name }}</text>
               <image
                 class="seximg mg-l-20rpx"
                 src="/static/image/sexw.png"
               ></image>
               <text class="mg-l-20rpx"
-                >{{ card.sex }}/{{ card.age }}/{{ card.constellation }}</text
+                >{{ card.profile.gender === "FEMALE" ? "女" : "男" }}/{{
+                  card.profile.age
+                }}/{{ card.profile.constellation }}</text
               >
             </uni-row>
             <uni-row class="demo-uni-row">
               <uni-col :span="16">
-                <text>籍贯: {{ card.born }}</text>
+                <text>籍贯: {{ card.profile.bornCity }}</text>
               </uni-col>
               <uni-col :span="8">
-                <text>现居地: {{ card.city }}</text>
+                <text>现居地: {{ card.profile.liveCity }}</text>
               </uni-col>
             </uni-row>
             <uni-row class="demo-uni-row">
               <uni-col :span="16">
-                <text>学校: {{ card.edu }}</text>
-                <text class="mg-l-15rpx">{{ card.degree }}</text>
+                <text>学校: {{ card.profile.edu }}</text>
+                <text class="mg-l-15rpx">{{ card.profile.eduDegree }}</text>
               </uni-col>
               <uni-col :span="8">
-                <text>工作: {{ card.job }}</text>
+                <text>工作: {{ card.profile.job }}</text>
               </uni-col>
             </uni-row>
             <view class="thumbnail-list">
               <view
                 class="thumbnail"
-                v-for="(thumbnail, idx) in card.thumbnails"
-                :key="thumbnail.url"
-                @click.stop="onClickThumbnail(idx, thumbnail.url)"
+                v-for="(image, idx) in card.images"
+                :key="image.id"
+                @click.stop="onClickThumbnail(idx, image)"
                 v-bind:class="{
-                  selected: thumbnail.selected,
-                  unselected: !thumbnail.selected,
+                  selected: image.selected,
+                  unselected: !image.selected,
                 }"
               >
-                <image :src="thumbnail.url" mode="widthFix"></image>
+                <image :src="image.url" mode="widthFix"></image>
               </view>
               <text class="mg-l-20rpx"
-                >{{ card.currThumbnailIdx + 1 }}/{{
-                  card.thumbnails.length
-                }}</text
+                >{{ card.currThumbnailIdx + 1 }}/{{ card.images.length }}</text
               >
             </view>
           </view>
@@ -85,121 +67,13 @@
 </template>
 
 <script>
+import api from "@/static/js/api.js";
 export default {
   data() {
     return {
+      cards: [],
       loadingStatus: "noMore",
       currCardIdx: 0,
-      currCity: "北京市",
-      cardList: [
-        {
-          uid: 1000001,
-          avatar: "/static/image/deshan.jpeg",
-          cover: "/static/image/deshan.jpeg",
-          name: "德善",
-          age: 19,
-          sex: "女",
-          constellation: "处女座",
-          born: "首尔",
-          city: "北京",
-          edu: "延世大学",
-          degree: "学士",
-          job: "航空",
-          currIdx: 1,
-          total: 5,
-          currThumbnailIdx: 0,
-          thumbnails: [
-            {
-              url: "/static/image/deshan.jpeg",
-              selected: true,
-            },
-            {
-              url:
-                "http://img.qijin.tech/1nRczRSkxuSq4b66f781091993e1a7ea81b3fc3ed955.png",
-              selected: false,
-            },
-            {
-              url:
-                "http://img.qijin.tech/tcW82sLalUYd2f5c23683ee9f1dbcc39b86fe6c935ae.png",
-              selected: false,
-            },
-            {
-              url:
-                "http://img.qijin.tech/kxPqgPMVLUDRe65f240de00a01e854308b237a77f634.png",
-              selected: false,
-            },
-            {
-              url:
-                "http://img.qijin.tech/EoM0DHvXHQXXe4bb53c34bf66b143fdc2fc684d2ce41.png",
-              selected: false,
-            },
-          ],
-        },
-        {
-          uid: 1000002,
-          avatar: "/static/image/aze.jpeg",
-          cover: "/static/image/aze.jpeg",
-          name: "阿泽",
-          age: 19,
-          sex: "男",
-          constellation: "金牛座",
-          born: "首尔",
-          city: "首尔",
-          edu: "围棋学院",
-          degree: "学士",
-          job: "围棋",
-          currIdx: 1,
-          total: 3,
-          currThumbnailIdx: 0,
-          thumbnails: [
-            {
-              url: "/static/image/aze.jpeg",
-              selected: true,
-            },
-            {
-              url: "/static/image/aze2.jpeg",
-              selected: false,
-            },
-            {
-              url:
-                "http://img.qijin.tech/ZJxLLMiSm0GL4501bd050d15a047feaaa158e345ac61.png",
-              selected: false,
-            },
-          ],
-        },
-        {
-          uid: 1000003,
-          avatar: "/static/image/baola.jpeg",
-          cover: "/static/image/baola.jpeg",
-          name: "宝拉",
-          age: 21,
-          sex: "女",
-          constellation: "天蝎座",
-          born: "首尔",
-          city: "首尔",
-          edu: "首尔大学",
-          degree: "学士",
-          job: "航空",
-          currIdx: 1,
-          total: 3,
-          currThumbnailIdx: 0,
-          thumbnails: [
-            {
-              url: "/static/image/baola.jpeg",
-              selected: true,
-            },
-            {
-              url:
-                "http://img.qijin.tech/vAvRLB0SyaCfd6bdf6bee548c5317b4da8a722d4e6ad.png",
-              selected: false,
-            },
-            {
-              url: "/static/image/baola3.jpeg",
-              selected: false,
-            },
-          ],
-        },
-      ],
       swiperOption: {
         //这里配置的参数参考官网API设置，这里的pagination就是下图中的官方配置
         pagination: {
@@ -209,39 +83,37 @@ export default {
     };
   },
 
-  onLoad() {},
+  onLoad() {
+    // api.login();
+    api.listCard().then((res) => {
+      // console.log("listCard=", res);
+      var cards = res.cards;
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        card.images[0].selected = true;
+        // TODO default cover
+        card.cover = card.images[0].url;
+        card.currThumbnailIdx = 0;
+      }
+      this.cards = cards;
+    });
+  },
   methods: {
-    onCardDetail(uid) {
-      console.log(uid);
+    onCardDetail(userId) {
       uni.navigateTo({
-        url: "./detail/index",
-        events: {
-          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function(data) {
-            console.log(data);
-          },
-          someEvent: function(data) {
-            console.log(data);
-          },
-        },
-        success: function(res) {
-          console.log("success", res);
-        },
-        fail: function(res) {
-          console.log("fail", res);
-        },
+        url: "./detail/index?userId=" + userId,
       });
     },
     onCardSwiperChange(e) {
       this.currCardIdx = e.detail.current;
       console.log(this.currCardIdx);
     },
-    onClickThumbnail(idx, url) {
-      var currCard = this.cardList[this.currCardIdx];
-      currCard.cover = url;
-      currCard.thumbnails[currCard.currThumbnailIdx].selected = false;
+    onClickThumbnail(idx, image) {
+      var currCard = this.cards[this.currCardIdx];
+      currCard.cover = image.url;
+      currCard.images[currCard.currThumbnailIdx].selected = false;
       currCard.currThumbnailIdx = idx;
-      currCard.thumbnails[idx].selected = true;
+      currCard.images[idx].selected = true;
     },
   },
 };
