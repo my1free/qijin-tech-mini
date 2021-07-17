@@ -1,5 +1,6 @@
 const baseUrl = "http://127.0.0.1:8080";
 
+import api from "./api.js";
 const showToast = (title) => {
   uni.showToast({
     title: title,
@@ -52,6 +53,9 @@ const http = (url, data = {}, option = {}) => {
           }
           reject(result.message);
           if (!hideMsg) showToast(result.message);
+          if (result.code === 401) {
+            api.login();
+          }
         } else {
           // 返回值非 200，强制显示提示信息
           showToast("[" + res.statusCode + "] 系统处理失败");
@@ -61,6 +65,7 @@ const http = (url, data = {}, option = {}) => {
       fail: (err) => {
         // 接口调用失败的回调函数
         if (!hideLoading) uni.hideLoading();
+        console.log("errrr=", err);
         if (err.errMsg != "request:fail abort") {
           showToast("连接超时，请检查您的网络。");
           reject("连接超时，请检查您的网络。");
@@ -82,4 +87,5 @@ export default {
   http,
   post,
   get,
+  getToken,
 };

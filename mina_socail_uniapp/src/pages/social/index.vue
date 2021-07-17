@@ -86,7 +86,7 @@ export default {
   onLoad() {
     // api.login();
     api.listCard().then((res) => {
-      // console.log("listCard=", res);
+      console.log("listCard=", res);
       var cards = res.cards;
       for (var i = 0; i < cards.length; i++) {
         var card = cards[i];

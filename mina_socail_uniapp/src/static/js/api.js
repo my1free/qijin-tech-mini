@@ -1,11 +1,9 @@
 // import request from '@/api/request'; // 引入封装好的request
 
 const host = "http://127.0.0.1:8080";
-const isMock = true;
+const isMock = false;
 
 import mock from "./mock.js";
-import post from "./http.js";
-import get from "./http.js";
 import http from "./http.js";
 
 const headers = {
@@ -17,7 +15,7 @@ const headers = {
 // 上传图片
 function uploadImageWithFile(file) {
   var url = host + "/api/v1/base/upload/image";
-  // return post(url, data)
+  headers.token = http.getToken();
   return uni.uploadFile({
     url: url,
     filePath: "",
@@ -29,8 +27,12 @@ function uploadImageWithFile(file) {
 }
 
 function uploadImageWithPath(filePath) {
+  headers.token = http.getToken();
   var url = host + "/api/v1/base/upload/image";
-  // return post(url, data)
+  uni.showLoading({
+    title: "加载中...",
+    mask: true,
+  });
   return uni.uploadFile({
     url: url,
     filePath: filePath,
@@ -40,23 +42,20 @@ function uploadImageWithPath(filePath) {
 }
 
 function login() {
-  var url = host + "/api/v1/user/account/login/mini";
+  console.log("ssssssssss");
+  //   var url = host + "/api/v1/user/account/login/mini";
   wx.login({
     success(res) {
-      ppost(url, { code: res.code }).then((res) => {
-        var data = res[1].data;
-        if (data.code == 200) {
+      console.log("resssssss=", res);
+      http
+        .post("/api/v1/user/account/login/mini", { code: res.code })
+        .then((res) => {
           uni.setStorage({
             key: "token",
-            data: data.data.token,
-            success: function() {
-              console.log("success");
-            },
+            data: res.token,
+            success: function() {},
           });
-        } else if (data.code == 401) {
-          // 跳转到信息补充页面
-        }
-      });
+        });
     },
     fail(err) {
       console.log("err", err);
@@ -133,6 +132,65 @@ function getCardDetail(userId) {
   return http.get("/incubator/social/card/detail?userId=" + userId);
 }
 
+function listActivity() {
+  if (isMock)
+    return new Promise((resolve) => resolve(mock.listActivity().data));
+  return http.get("/incubator/social/activity/list");
+}
+
+function getActivityDetail(activityId) {
+  if (isMock)
+    return new Promise((resolve) =>
+      resolve(mock.getActivityDetail(activityId).data)
+    );
+  return http.get("/incubator/social/activity/detail?activityId=" + activityId);
+}
+
+function getMe() {
+  if (isMock) return new Promise((resolve) => resolve(mock.getMe().data));
+  return http.get("/incubator/social/me/detail");
+}
+
+function getGallery() {
+  if (isMock) return new Promise((resolve) => resolve(mock.getGallery().data));
+  return http.get("/incubator/social/me/gallery");
+}
+
+function updateProfile(data = {}) {
+  if (isMock) return;
+  return http.post("/api/v1/user/profile/update", data);
+}
+
+function addUserImage(data = {}) {
+  if (isMock) return;
+  return http.post("/api/v1/user/image/add", data);
+}
+
+function replaceUserImage(data = {}) {
+  if (isMock) return;
+  return http.post("/api/v1/user/image/replace", data);
+}
+
+function getHobbies() {
+  if (isMock) return new Promise((resolve) => resolve(mock.getHobbies().data));
+  return http.get("/incubator/social/me/hobbies");
+}
+
+function addHobby(content) {
+  if (isMock) return;
+  return http.post("/incubator/social/me/hobby/add", { content: content });
+}
+
+function delHobby(content) {
+  if (isMock) return;
+  return http.post("/incubator/social/me/hobby/del", { content: content });
+}
+
+function updateLove(data) {
+  if (isMock) return;
+  return http.post("/incubator/social/me/love/update", data);
+}
+
 // ====== 以下是基础方法 ========
 
 function ppost(url, data) {
@@ -174,6 +232,10 @@ function onError(err) {
   });
 }
 
+// ====== 以下是工具类 ========
+function showToast(title) {
+  http.showToast(title);
+}
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -184,8 +246,20 @@ export default {
   login,
   saveProfile,
   sleep,
+  showToast,
 
   // social 业务
   listCard,
   getCardDetail,
+  listActivity,
+  getActivityDetail,
+  getMe,
+  getGallery,
+  updateProfile,
+  addUserImage,
+  replaceUserImage,
+  getHobbies,
+  addHobby,
+  delHobby,
+  updateLove,
 };

@@ -1,11 +1,11 @@
 <template>
   <view class="content">
     <view class="left">
-      <image src="http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png">
+      <image :src="avatar">
     </view>
     <view class="right">
       <view class="name">
-        <text>齐晋</text>
+        <text>{{name}}</text>
       </view>
       <view class="description">广告位招租~</view>
     </view>
@@ -16,8 +16,8 @@
 export default {
   name: "myMeHead",
   props: {
-    title: "Title",
-    content: "This content",
+    name: "",
+    avatar: ""
   },
   data() {
     return {};

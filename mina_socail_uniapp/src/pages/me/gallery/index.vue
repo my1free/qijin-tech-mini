@@ -6,10 +6,10 @@
       </view>
       <view class="width100 avatars">
         <view class="avatar" v-on:click="choseImage('avatar', 0)">
-          <image :src="galleryInfo.avatar"></image>
+          <image :src="gallery.profile.avatar"></image>
         </view>
         <view class="avatar-small">
-          <image :src="galleryInfo.avatar"></image>
+          <image :src="gallery.profile.avatar"></image>
         </view>
       </view>
       <view class="width100 description">
@@ -22,7 +22,7 @@
       </view>
       <view
         class="cover"
-        v-for="(cover, idx) in galleryInfo.covers"
+        v-for="(cover, idx) in gallery.images"
         :key="cover.url"
         v-on:click="choseImage('cover', idx)"
       >
@@ -76,48 +76,14 @@ export default {
       cutWidth: "50%",
       cutHeight: "50%",
       imagePath: "",
-      galleryInfo: {
-        uid: 100001,
-        avatar:
-          "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
-        covers: [
-          {
-            url: "/static/image/deshan.jpeg",
-          },
-          {
-            url: "/static/image/deshan2.jpg",
-          },
-          {
-            url: "/static/image/deshan3.jpg",
-          },
-          {
-            url: "/static/image/aze.jpeg",
-          },
-          {
-            url: "/static/image/aze2.jpeg",
-          },
-          {
-            url: "/static/image/aze3.jpeg",
-          },
-          {
-            url: "/static/image/baola.jpeg",
-          },
-          {
-            url: "/static/image/baola2.jpeg",
-          },
-          {
-            url: "/static/image/baola3.jpeg",
-          },
-        ],
-      },
+      gallery: {},
     };
   },
   onLoad(option) {
-    this.key = option.key;
-    this.value = option.value;
-    if (option.key == "gender" && option.value == "女") {
-      this.genderIdx = 1;
-    }
+    api.getGallery().then((result) => {
+      console.log("gallery=", result);
+      this.gallery = result;
+    });
   },
   methods: {
     beforeDraw(context, transform) {
@@ -177,25 +143,64 @@ export default {
     cutImageConfirm() {
       this.cutImage = false;
       api.uploadImageWithPath(this.imagePath).then((res) => {
-        console.log(res);
-      });
-      if ("avatar" === this.type) {
-        this.galleryInfo.avatar = this.imagePath;
-      }
-      if ("add" === this.type) {
-        this.galleryInfo.covers.push({
-          url: this.imagePath,
-        });
-      }
-      if ("cover" === this.type) {
-        for (var i = 0; i < this.galleryInfo.covers.length; i++) {
-          console.log(i, this.idx);
-          if (i === this.idx) {
-            this.galleryInfo.covers[i].url = this.imagePath;
-            break;
+        uni.hideLoading();
+        if (res[1].statusCode != 200) {
+          uni.showToast({
+            title: res[1].statusCode,
+            icon: "error",
+          });
+          return;
+        }
+        var result = JSON.parse(res[1].data);
+        console.log("result=", result);
+        if (result.code != 200) {
+          uni.showToast({
+            title: "上传图片失败",
+            icon: "error",
+          });
+          return;
+        }
+        var url = result.data.url;
+        if ("avatar" === this.type) {
+          api.updateProfile({ avatar: url }).then((result) => {
+            this.gallery.profile.avatar = url;
+            uni.showToast({
+              title: "更新头像成功",
+              icon: "success",
+            });
+          });
+        }
+        if ("add" === this.type) {
+          api.addUserImage({ url: url }).then((result) => {
+            this.gallery.images.push({
+              id: result,
+              url: url,
+            });
+            uni.showToast({
+              title: "添加图片成功",
+              icon: "success",
+            });
+          });
+        }
+        if ("cover" === this.type) {
+          for (var i = 0; i < this.gallery.images.length; i++) {
+            console.log(i, this.idx);
+            if (i === this.idx) {
+              api
+                .replaceUserImage({ url: url, id: this.gallery.images[i].id })
+                .then((result) => {
+                  this.gallery.images[i].url = url;
+                  uni.showToast({
+                    title: "更新图片成功",
+                    icon: "success",
+                  });
+                });
+
+              break;
+            }
           }
         }
-      }
+      });
     },
   },
 };
@@ -256,6 +261,7 @@ page {
   width: 750rpx;
   flex-wrap: wrap;
   margin-top: 20rpx;
+  margin-bottom: 100rpx;
 }
 
 .cover-area .cover {

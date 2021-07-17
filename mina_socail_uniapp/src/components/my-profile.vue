@@ -2,15 +2,18 @@
   <view class="content">
     <view class="panel pd-20 img-edit" v-on:click="onEditImg()">
       <view class="left">
-        <image class="img-avatar mg-l-20rpx" :src="avatar.url"></image>
+        <image
+          class="img-avatar mg-l-20rpx"
+          :src="myProfile.profile.avatar"
+        ></image>
       </view>
       <view class="right">
         <view
           class="img-cover mg-l-20rpx"
-          v-for="cover in covers"
-          :key="cover.id"
+          v-for="(image, idx) in myProfile.images"
+          :key="image.id"
         >
-          <image :src="cover.url" mode="widthFix"></image>
+          <image :src="image.url" mode="widthFix" v-if="idx < 5"></image>
         </view>
       </view>
       <view class="side">
@@ -22,51 +25,62 @@
         <view class="panel-head-title">个人信息</view>
       </view>
       <view class="panel-body">
-        <view class="info-item" v-on:click="onEdit('name', infoDetail.name)">
+        <view
+          class="info-item"
+          v-on:click="onEdit('name', myProfile.profile.name)"
+        >
           <view class="info-item-title">姓名</view>
-          <view class="info-item-value">{{ infoDetail.name }}</view>
+          <view class="info-item-value">{{ myProfile.profile.name }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
           class="info-item"
-          v-on:click="onEdit('gender', infoDetail.gender)"
+          v-on:click="onEdit('gender', myProfile.profile.gender)"
         >
           <view class="info-item-title">性别</view>
-          <view class="info-item-value">{{ infoDetail.gender }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.gender === "FEMALE" ? "女" : "男"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
           class="info-item"
-          v-on:click="onEdit('birthday', infoDetail.birthday)"
+          v-on:click="onEdit('birthday', myProfile.profile.birthday)"
         >
           <view class="info-item-title">生日</view>
-          <view class="info-item-value">{{ infoDetail.birthday }}</view>
+          <view class="info-item-value">{{ myProfile.profile.birthday }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
           class="info-item"
-          v-on:click="onEdit('bornCity', infoDetail.bornCity)"
+          v-on:click="onEdit('bornCity', myProfile.profile.bornCity)"
         >
           <view class="info-item-title">籍贯</view>
-          <view class="info-item-value">{{ infoDetail.bornCity }}</view>
+          <view class="info-item-value">{{ myProfile.profile.bornCity }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
           class="info-item"
-          v-on:click="onEdit('liveCity', infoDetail.liveCity)"
+          v-on:click="onEdit('liveCity', myProfile.profile.liveCity)"
         >
           <view class="info-item-title">现居地</view>
-          <view class="info-item-value">{{ infoDetail.liveCity }}</view>
+          <view class="info-item-value">{{ myProfile.profile.liveCity }}</view>
           <view class="info-item-ops">></view>
         </view>
-        <view class="info-item" v-on:click="onEdit('edu', infoDetail.edu)">
+        <view
+          class="info-item"
+          v-on:click="onEdit('edu', myProfile.profile.edu)"
+        >
           <view class="info-item-title">学校</view>
-          <view class="info-item-value">{{ infoDetail.edu }}</view>
+          <view class="info-item-value">{{ myProfile.profile.edu }}</view>
           <view class="info-item-ops">></view>
         </view>
-        <view class="info-item" v-on:click="onEdit('job', infoDetail.job)">
+        <view
+          class="info-item"
+          v-on:click="onEdit('job', myProfile.profile.job)"
+        >
           <view class="info-item-title">工作</view>
-          <view class="info-item-value">{{ infoDetail.job }}</view>
+          <view class="info-item-value">{{ myProfile.profile.job }}</view>
           <view class="info-item-ops">></view>
         </view>
       </view>
@@ -79,10 +93,10 @@
         <span
           class="my-tag"
           v-bind:class="tag.cl"
-          v-for="tag in interestList"
-          :key="tag.text"
+          v-for="tag in myProfile.hobbies"
+          :key="tag.id"
         >
-          {{ tag.text }}
+          {{ tag.content }}
         </span>
       </view>
     </view>
@@ -97,9 +111,9 @@
           </view>
           <view
             class="info-content"
-            v-on:click="onEdit('selfInfo', infoDetail.selfInfo)"
+            v-on:click="onEdit('selfInfo', myProfile.love.selfInfo)"
           >
-            {{ infoDetail.selfInfo }}
+            <text>{{ myProfile.love.selfInfo }}</text>
           </view>
         </view>
         <view class="self-intro">
@@ -108,27 +122,27 @@
           </view>
           <view
             class="info-content"
-            v-on:click="onEdit('selfHobby', infoDetail.selfHobby)"
+            v-on:click="onEdit('hobbies', myProfile.love.interest)"
           >
-            {{ infoDetail.selfHobby }}
+            <text>{{ myProfile.love.interest }}</text>
           </view>
         </view>
         <view class="self-intro">
           <view class="info-title"> 家庭背景 </view>
           <view
             class="info-content"
-            v-on:click="onEdit('selfFamily', infoDetail.selfFamily)"
+            v-on:click="onEdit('family', myProfile.love.family)"
           >
-            {{ infoDetail.selfFamily }}
+            <text>{{ myProfile.love.family }}</text>
           </view>
         </view>
         <view class="self-intro">
           <view class="info-title"> 期望的另一半 </view>
           <view
             class="info-content"
-            v-on:click="onEdit('whoExpected', infoDetail.whoExpected)"
+            v-on:click="onEdit('expected', myProfile.love.expected)"
           >
-            {{ infoDetail.whoExpected }}
+            <text>{{ myProfile.love.expected }}</text>
           </view>
         </view>
       </view>
@@ -140,151 +154,10 @@
 export default {
   name: "myProfile",
   props: {
-    title: "Title",
-    content: "This content",
+    myProfile: {},
   },
   data() {
-    return {
-      avatar: {
-        id: 200001,
-        url:
-          "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
-      },
-      covers: [
-        {
-          id: 200001,
-          url: "/static/image/deshan2.jpg",
-        },
-        {
-          id: 200001,
-          url: "/static/image/deshan.jpeg",
-        },
-        {
-          id: 200002,
-          url: "/static/image/img-placeholder.png",
-        },
-      ],
-
-      infoDetail: {
-        uid: 1000001,
-        avatar:
-          "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
-        cover: "/static/image/deshan.jpeg",
-        name: "德善",
-        birthday: "2020-01-01",
-        age: 19,
-        gender: "女",
-        constellation: "处女座",
-        bornCity: "首尔",
-        liveCity: "北京",
-        edu: "延世大学",
-        degree: "学士",
-        job: "航空",
-        currIdx: 1,
-        total: 3,
-        currThumbnailIdx: 0,
-        selfInfo:
-          "90双子座173cm,普通高校本科毕业，公司的一个小项目负责人，工作偏忙，收入稳定，偶尔加班，较少应酬。即使目前一切安逸，也没有停止学习，始终在为能够创造更美好的努力生活着。",
-        selfHobby:
-          "性格开朗，内心平和，风趣幽默，是大家公认的开心果。热爱旅行、阅读，与音乐。每周羽毛球，每年去一个国内喜欢的地方，到一个未去过的国家。",
-        selfFamily:
-          "出生山西省朔州市区，城市户口，工薪家庭，家中有一小妹从小勤勉，未有任何娇生惯养的恶习。母亲温暖，父亲严肃，都是通情达理之人，不世故，讲道理，识大体。",
-        whoExpected:
-          "希望你是热爱生活的好姑凉，脾气好，感情经历简单，对生活有品位，有幽默感，160以上，本科以上，家人脾气温和",
-        tagList: [
-          {
-            text: "女汉子",
-            cl: ".bg-cyan.light",
-          },
-          {
-            text: "嘤嘤怪",
-            cl: ".bg-brown.light",
-          },
-        ],
-        interestList: [
-          {
-            text: "羽毛球",
-            cl: ".bg-cyan.light",
-          },
-          {
-            text: "王者荣耀",
-            cl: ".bg-orange.light",
-          },
-          {
-            text: "摄影",
-            cl: ".bg-grey.light",
-          },
-          {
-            text: "做饭",
-            cl: ".bg-brown.light",
-          },
-          {
-            text: "绘画",
-            cl: ".bg-purple.light",
-          },
-          {
-            text: "旅游",
-            cl: ".bg-blue.light",
-          },
-          {
-            text: "户外探险",
-            cl: ".bg-mauve.light",
-          },
-          {
-            text: "徒步",
-            cl: ".bg-cyan.light",
-          },
-        ],
-        thumbnails: [
-          {
-            url: "/static/image/deshan.jpeg",
-            selected: true,
-          },
-          {
-            url: "/static/image/deshan2.jpg",
-            selected: false,
-          },
-          {
-            url: "/static/image/deshan3.jpg",
-            selected: false,
-          },
-        ],
-      },
-      interestList: [
-        {
-          text: "羽毛球",
-          cl: ".bg-cyan.light",
-        },
-        {
-          text: "王者荣耀",
-          cl: ".bg-orange.light",
-        },
-        {
-          text: "摄影",
-          cl: ".bg-grey.light",
-        },
-        {
-          text: "做饭",
-          cl: ".bg-brown.light",
-        },
-        {
-          text: "绘画",
-          cl: ".bg-purple.light",
-        },
-        {
-          text: "旅游",
-          cl: ".bg-blue.light",
-        },
-        {
-          text: "户外探险",
-          cl: ".bg-mauve.light",
-        },
-        {
-          text: "徒步",
-          cl: ".bg-cyan.light",
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     onEdit: function(key, value) {
