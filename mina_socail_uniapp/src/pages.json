@@ -14,6 +14,12 @@
         //     }
         // },
         {
+            "path": "pages/activity/edit/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
             "path": "pages/social/index",
             "style": {
                 "navigationBarTitleText": "my-social"

@@ -78,6 +78,9 @@ export default {
 .pd-40 {
   padding: 40rpx;
 }
+.pd-l-20 {
+  padding-left: 20rpx;
+}
 .pd-l-r-20 {
   padding: 0rpx 20rpx;
 }
@@ -120,6 +123,10 @@ export default {
 
 .ft-bold {
   font-weight: bold;
+}
+
+.ft-cl-gray {
+  color: gray;
 }
 
 .border-bottom {

@@ -20,11 +20,11 @@
       </view>
       <view class="activity-contact">
         <text class="title">联系方式:</text>
-        <text>{{ activity.sponsor.contact }}</text>
+        <text>{{ activity.contact }}</text>
       </view>
       <view class="activity-date">
         <text class="title">时间:</text>
-        {{ activity.date }}
+        {{ activity.startTime }} ~ {{ activity.endTime }}
       </view>
       <view class="activity-addr">
         <text class="title">地点:</text>
@@ -56,12 +56,14 @@
           <view
             class="activity-participant"
             v-for="participant in activity.participants"
-            :key="participant.userId"
-            v-on:click="onCardDetail(participant.userId)"
+            :key="participant.id"
+            v-on:click="onCardDetail(participant.profile.userId)"
           >
             <view class="participant-info">
-              <image :src="participant.avatar"></image>
-              <text class="participant-name">{{ participant.name }}</text>
+              <image :src="participant.profile.avatar"></image>
+              <text class="participant-name">{{
+                participant.profile.name
+              }}</text>
             </view>
           </view>
         </view>
@@ -86,24 +88,32 @@ export default {
       opPattern: {
         buttonColor: "#0574a9",
       },
-      opContent: [
-        {
-          iconPath: "/static/image/tag.png",
-          text: "报名",
-        },
-        {
-          text: "取消",
-        },
-      ],
+      opContent: [],
       activity: {},
     };
   },
   onLoad(option) {
     var activityId = option.activityId;
-    console.log(activityId);
     api.getActivityDetail(activityId).then((res) => {
       console.log("activity=", res);
       this.activity = res;
+      if (this.activity.isMaster) {
+        this.opContent.push({
+          iconPath: "/static/image/edit.png",
+          text: "编辑",
+        });
+      }
+      if (this.activity.isParticipant) {
+        this.opContent.push({
+          iconPath: "/static/image/cancel.png",
+          text: "取消",
+        });
+      } else {
+        this.opContent.push({
+          iconPath: "/static/image/add.png",
+          text: "报名",
+        });
+      }
     });
   },
   methods: {
@@ -131,7 +141,7 @@ export default {
 }
 
 .activity-item {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   margin-bottom: 10rpx;
   padding-bottom: 10rpx;
 }
@@ -144,6 +154,7 @@ export default {
 .activity-title {
   font-size: 40rpx;
   font-weight: bold;
+  color: rgb(193, 99, 0);
 }
 
 .activity-tags {
@@ -151,7 +162,7 @@ export default {
 }
 
 .activity-tags .activity-tag {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   background-color: gray;
   padding: 2rpx 15rpx;
   border-radius: 10rpx;
@@ -162,7 +173,7 @@ export default {
 .activity-sponsor {
   display: flex;
   align-items: center;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-sponsor image {
@@ -172,22 +183,22 @@ export default {
 }
 
 .activity-date {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-addr {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-description {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   border-top: 1rpx #ddd solid;
   padding-top: 10rpx;
   color: gray;
 }
 
 .activity-images {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 .activity-images .image-list {
   text-align: center;
@@ -195,14 +206,14 @@ export default {
 .activity-images .image-list image {
   width: 98%;
   border-radius: 10rpx;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-participants {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   border-top: 1rpx #ddd solid;
   padding-top: 20rpx;
 }

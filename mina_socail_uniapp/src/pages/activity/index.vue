@@ -22,7 +22,7 @@
       </view>
       <view class="activity-date">
         <text class="title">时间:</text>
-        {{ activity.date }}
+        {{ activity.startTime }} ~ {{ activity.endTime }}
       </view>
       <view class="activity-addr">
         <text class="title">地点:</text>
@@ -44,7 +44,7 @@
           v-for="participant in activity.participants"
           :key="participant.id"
         >
-          <image :src="participant.avatar"></image>
+          <image :src="participant.profile.avatar"></image>
         </view>
       </view>
     </view>
@@ -91,7 +91,7 @@ export default {
 }
 
 .activity-item {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   margin-bottom: 60rpx;
   border-bottom: 10rpx #ccc solid;
   padding-bottom: 10rpx;
@@ -111,7 +111,7 @@ export default {
 }
 
 .activity-tags .activity-tag {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   background-color: gray;
   padding: 2rpx 15rpx;
   border-radius: 10rpx;
@@ -122,7 +122,7 @@ export default {
 .activity-sponsor {
   display: flex;
   align-items: center;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-sponsor image {
@@ -132,15 +132,15 @@ export default {
 }
 
 .activity-date {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-addr {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .activity-description {
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   border-top: 1rpx #ddd solid;
   padding-top: 10rpx;
   overflow: hidden;
@@ -154,7 +154,7 @@ export default {
 .activity-participants {
   display: flex;
   align-items: center;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   border-top: 1rpx #ddd solid;
   padding-top: 10rpx;
   min-height: 80rpx;

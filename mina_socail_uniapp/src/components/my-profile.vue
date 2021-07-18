@@ -7,7 +7,7 @@
           :src="myProfile.profile.avatar"
         ></image>
       </view>
-      <view class="right">
+      <view class="right" v-if="myProfile.images">
         <view
           class="img-cover mg-l-20rpx"
           v-for="(image, idx) in myProfile.images"
@@ -15,6 +15,9 @@
         >
           <image :src="image.url" mode="widthFix" v-if="idx < 5"></image>
         </view>
+      </view>
+      <view class="right ft-cl-gray pd-l-20" v-if="!myProfile.images">
+        点击编辑头像和个人图片
       </view>
       <view class="side">
         <text>></text>
@@ -30,7 +33,9 @@
           v-on:click="onEdit('name', myProfile.profile.name)"
         >
           <view class="info-item-title">姓名</view>
-          <view class="info-item-value">{{ myProfile.profile.name }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.name ? myProfile.profile.name : "点击填写姓名"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
@@ -39,7 +44,21 @@
         >
           <view class="info-item-title">性别</view>
           <view class="info-item-value">{{
-            myProfile.profile.gender === "FEMALE" ? "女" : "男"
+            myProfile.profile.gender
+              ? myProfile.profile.gender === "FEMALE"
+                ? "女"
+                : "男"
+              : "点击选择性别"
+          }}</view>
+          <view class="info-item-ops">></view>
+        </view>
+        <view
+          class="info-item"
+          v-on:click="onEdit('height', myProfile.profile.height)"
+        >
+          <view class="info-item-title">身高</view>
+          <view class="info-item-value">{{
+            myProfile.profile.height ? myProfile.profile.height : "点击填写身高"
           }}</view>
           <view class="info-item-ops">></view>
         </view>
@@ -48,7 +67,11 @@
           v-on:click="onEdit('birthday', myProfile.profile.birthday)"
         >
           <view class="info-item-title">生日</view>
-          <view class="info-item-value">{{ myProfile.profile.birthday }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.birthday
+              ? myProfile.profile.birthday
+              : "点击选择生日"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
@@ -56,7 +79,11 @@
           v-on:click="onEdit('bornCity', myProfile.profile.bornCity)"
         >
           <view class="info-item-title">籍贯</view>
-          <view class="info-item-value">{{ myProfile.profile.bornCity }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.bornCity
+              ? myProfile.profile.bornCity
+              : "点击填写籍贯"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
@@ -64,7 +91,11 @@
           v-on:click="onEdit('liveCity', myProfile.profile.liveCity)"
         >
           <view class="info-item-title">现居地</view>
-          <view class="info-item-value">{{ myProfile.profile.liveCity }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.liveCity
+              ? myProfile.profile.liveCity
+              : "点击填写现居地"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
@@ -72,7 +103,21 @@
           v-on:click="onEdit('edu', myProfile.profile.edu)"
         >
           <view class="info-item-title">学校</view>
-          <view class="info-item-value">{{ myProfile.profile.edu }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.edu ? myProfile.profile.edu : "点击填写毕业高校"
+          }}</view>
+          <view class="info-item-ops">></view>
+        </view>
+        <view
+          class="info-item"
+          v-on:click="onEdit('eduDegree', myProfile.profile.eduDegree)"
+        >
+          <view class="info-item-title">学历</view>
+          <view class="info-item-value">{{
+            myProfile.profile.eduDegree
+              ? myProfile.profile.eduDegree
+              : "点击选择学历"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
         <view
@@ -80,7 +125,9 @@
           v-on:click="onEdit('job', myProfile.profile.job)"
         >
           <view class="info-item-title">工作</view>
-          <view class="info-item-value">{{ myProfile.profile.job }}</view>
+          <view class="info-item-value">{{
+            myProfile.profile.job ? myProfile.profile.job : "点击填写工作行业"
+          }}</view>
           <view class="info-item-ops">></view>
         </view>
       </view>
@@ -89,7 +136,7 @@
       <view class="panel-head">
         <view class="panel-head-title">个人爱好</view>
       </view>
-      <view class="panel-body pd">
+      <view class="panel-body pd" v-if="myProfile.hobbies">
         <span
           class="my-tag"
           v-bind:class="tag.cl"
@@ -98,6 +145,9 @@
         >
           {{ tag.content }}
         </span>
+      </view>
+      <view class="panel-body pd ft-cl-gray" v-if="!myProfile.hobbies">
+        <text>点击填写兴趣爱好</text>
       </view>
     </view>
     <view class="panel">
@@ -113,10 +163,13 @@
             class="info-content"
             v-on:click="onEdit('selfInfo', myProfile.love.selfInfo)"
           >
-            <text>{{ myProfile.love.selfInfo }}</text>
+            <text v-if="myProfile.love.selfInfo">{{
+              myProfile.love.selfInfo
+            }}</text>
+            <text v-if="!myProfile.love.selfInfo">点击填写个人信息</text>
           </view>
         </view>
-        <view class="self-intro">
+        <!-- <view class="self-intro">
           <view class="info-title">
             <text>性格爱好</text>
           </view>
@@ -126,14 +179,17 @@
           >
             <text>{{ myProfile.love.interest }}</text>
           </view>
-        </view>
+        </view> -->
         <view class="self-intro">
           <view class="info-title"> 家庭背景 </view>
           <view
             class="info-content"
             v-on:click="onEdit('family', myProfile.love.family)"
           >
-            <text>{{ myProfile.love.family }}</text>
+            <text v-if="myProfile.love.family">{{
+              myProfile.love.family
+            }}</text>
+            <text v-if="!myProfile.love.family">点击填写家庭背景</text>
           </view>
         </view>
         <view class="self-intro">
@@ -142,7 +198,10 @@
             class="info-content"
             v-on:click="onEdit('expected', myProfile.love.expected)"
           >
-            <text>{{ myProfile.love.expected }}</text>
+            <text v-if="myProfile.love.expected">{{
+              myProfile.love.expected
+            }}</text>
+            <text v-if="!myProfile.love.expected">点击填写对另一半的期望</text>
           </view>
         </view>
       </view>
@@ -161,30 +220,17 @@ export default {
   },
   methods: {
     onEdit: function(key, value) {
-      var url = `/pages/me/editor/index?key=${key}&value=${value}`;
+      var url = `/pages/me/editor/index?key=${key}`;
+      if (value != undefined) {
+        url = `/pages/me/editor/index?key=${key}&value=${value}`;
+      }
       console.log(url);
       uni.navigateTo({
         url: url,
-        events: {
-          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function(data) {
-            console.log(data);
-          },
-          someEvent: function(data) {
-            console.log(data);
-          },
-        },
-        success: function(res) {
-          console.log("success", res);
-        },
-        fail: function(res) {
-          console.log("fail", res);
-        },
       });
     },
     onEditTags: function(key, value) {
-      var url = `/pages/me/tags/index?key=${key}&value=${value}`;
-      console.log(url);
+      var url = `/pages/me/tags/index?key=${key}`;
       uni.navigateTo({
         url: url,
         events: {

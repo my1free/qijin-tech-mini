@@ -11,6 +11,17 @@
         @blur="onKeyBlur"
       />
     </view>
+    <view class="width100" v-if="key === 'height'">
+      <view class="pd-40 text-bold ft-35">身高</view>
+      <input
+        class="pd-l-r-40"
+        :value="value"
+        placeholder="请输入您的身高(cm)"
+        focus="true"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
     <view class="width100" v-if="key === 'gender'">
       <view class="pd-40 text-bold ft-35">性别</view>
       <picker
@@ -59,7 +70,18 @@
       <input
         class="pd-l-r-40"
         :value="value"
-        placeholder="请输入学校"
+        placeholder="请填写毕业学校"
+        focus="true"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
+    <view class="width100" v-if="key === 'eduDegree'">
+      <view class="pd-40 text-bold ft-35">学历</view>
+      <input
+        class="pd-l-r-40"
+        :value="value"
+        placeholder="请填写学历，如学士、硕士、博士"
         focus="true"
         @input="onKeyInput"
         @blur="onKeyBlur"
@@ -186,7 +208,6 @@ export default {
         field = "EXPECTED";
       }
       data[field] = this.value;
-
       if (
         field != "SELF_INFO" &&
         field != "FAMILY" &&

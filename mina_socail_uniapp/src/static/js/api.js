@@ -157,17 +157,17 @@ function getGallery() {
 }
 
 function updateProfile(data = {}) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/api/v1/user/profile/update", data);
 }
 
 function addUserImage(data = {}) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/api/v1/user/image/add", data);
 }
 
 function replaceUserImage(data = {}) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/api/v1/user/image/replace", data);
 }
 
@@ -177,17 +177,17 @@ function getHobbies() {
 }
 
 function addHobby(content) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/me/hobby/add", { content: content });
 }
 
 function delHobby(content) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/me/hobby/del", { content: content });
 }
 
 function updateLove(data) {
-  if (isMock) return;
+  if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/me/love/update", data);
 }
 
