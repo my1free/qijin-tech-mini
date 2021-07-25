@@ -12,6 +12,22 @@
       />
     </view>
     <view class="width100">
+      <view class="pd-40 text-bold ft-35">活动标签</view>
+      <view class="activity-tags pd-lr-40">
+        <view
+          class="activity-tag"
+          v-for="(tag, idx) in tags"
+          :key="tag"
+          v-on:longpress="deleteTag(idx)"
+        >
+          {{ tag }}
+        </view>
+        <span class="activity-tag customize-tag" @click="openTagSelfDefined">
+          自定义
+        </span>
+      </view>
+    </view>
+    <view class="width100">
       <view class="pd-40 text-bold ft-35">联系方式</view>
       <input
         id="contact"
@@ -28,7 +44,7 @@
         type="date"
         :value="startTime"
         start="1900-1-1"
-        end="2100-1-1"
+        :end="startTime"
         @change="startTimeChange"
       ></uni-datetime-picker>
     </view>
@@ -60,6 +76,7 @@
         class="pd-l-r-40 width100"
         :value="description"
         placeholder="输入活动简介"
+        maxlength="-1"
         @input="onKeyInput"
         @blur="onKeyBlur"
         auto-height
@@ -81,7 +98,9 @@
         <image src="/static/image/plus-gray.png" mode="widthFix"></image>
       </view>
     </view>
-
+    <view class="tips width100">
+      <text>注：图片和标签均可通过长按删除</text>
+    </view>
     <view
       class="width100"
       style="text-align:right; margin-right: 100rpx; margin-top: 20rpx"
@@ -94,13 +113,36 @@
       <uni-popup-dialog
         mode="base"
         type="warn"
-        message="成功消息"
         title="删除确认"
         content="确认删除图片？"
         :duration="2000"
         :before-close="true"
         @close="closePopup"
         @confirm="confirmDeleteImage"
+      ></uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="delTagPopup" type="dialog">
+      <uni-popup-dialog
+        mode="base"
+        type="warn"
+        title="删除确认"
+        content="确认删除标签？"
+        :duration="2000"
+        :before-close="true"
+        @close="closeDelTagPopup"
+        @confirm="confirmDelTag"
+      ></uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="tagPopup" type="dialog">
+      <uni-popup-dialog
+        title="活动标签"
+        placeholder="请输入标签"
+        :value="selfDefined"
+        mode="input"
+        message="成功"
+        :duration="2000"
+        @close="cancelTagSelfDefined"
+        @confirm="addTagSelfDefined"
       ></uni-popup-dialog>
     </uni-popup>
   </view>
@@ -112,6 +154,7 @@ export default {
   components: {},
   data() {
     return {
+      activityId: 0,
       title: "",
       contact: "",
       startTime: "",
@@ -119,20 +162,27 @@ export default {
       location: "",
       description: "",
       imageIdx: 0,
-      images: [
-        {
-          url: "http://img.qijin.tech/misc/1.jpg",
-        },
-        {
-          url: "http://img.qijin.tech/misc/2.jpg",
-        },
-        {
-          url: "http://img.qijin.tech/misc/3.jpg",
-        },
-      ],
+      tagIdx: 0,
+      images: [],
+      tags: [],
+      selfDefined: "",
     };
   },
-  onLoad(option) {},
+  onLoad(option) {
+    this.activityId = option.activityId;
+    if (this.activityId != undefined && this.activityId > 0) {
+      api.getActivityDetail(this.activityId).then((result) => {
+        this.title = result.title;
+        this.contact = result.contact;
+        this.startTime = result.startTime;
+        this.endTime = result.endTime;
+        this.location = result.location;
+        this.description = result.description;
+        this.images = result.images;
+        this.tags = result.tags;
+      });
+    }
+  },
   methods: {
     onKeyInput: function(event) {
       var id = event.target.id;
@@ -168,8 +218,28 @@ export default {
       this.imageIdx = idx;
       this.$refs.popup.open();
     },
+    deleteTag(idx) {
+      this.tagIdx = idx;
+      this.$refs.delTagPopup.open();
+    },
     closePopup() {
       this.$refs.popup.close();
+    },
+    closeDelTagPopup() {
+      this.$refs.delTagPopup.close();
+    },
+    openTagSelfDefined() {
+      this.$refs.tagPopup.open();
+    },
+    cancelTagSelfDefined() {
+      this.$refs.tagPopup.close();
+    },
+    addTagSelfDefined(done, value) {
+      var tag = value;
+      if (!this.tags.includes(tag)) {
+        this.tags.push(tag);
+      }
+      done();
     },
     confirmDeleteImage() {
       console.log("confirmDeleteImage=", this.imageIdx);
@@ -182,6 +252,17 @@ export default {
       this.images = newImages;
       this.$refs.popup.close();
     },
+    confirmDelTag() {
+      console.log("confirmDelTag=", this.tagIdx);
+      var tags = [];
+      for (var i = 0; i < this.tags.length; i++) {
+        if (this.tagIdx != i) {
+          tags.push(this.tags[i]);
+        }
+      }
+      this.tags = tags;
+      this.$refs.delTagPopup.close();
+    },
     choseImage() {
       uni.chooseImage({
         count: 1,
@@ -191,7 +272,30 @@ export default {
           console.log("chooseImage=", chooseImageRes.tempFilePaths);
           this.cutImage = true;
           const tempFilePaths = chooseImageRes.tempFilePaths;
-          this.images.push({ url: tempFilePaths });
+          api.uploadImageWithPath(tempFilePaths[0]).then((res) => {
+            console.log("res=", res);
+            uni.hideLoading();
+            if (res[1].statusCode != 200) {
+              uni.showToast({
+                title: res[1].statusCode,
+                icon: "error",
+              });
+              return;
+            }
+            var result = JSON.parse(res[1].data);
+            console.log("result=", result);
+            if (result.code != 200) {
+              uni.showToast({
+                title: "上传图片失败",
+                icon: "error",
+              });
+              return;
+            }
+            var url = result.data.url;
+            this.images.push({
+              url: url,
+            });
+          });
         },
       });
     },
@@ -218,7 +322,22 @@ export default {
       if (this.images != undefined && this.images.length > 0) {
         data.images = this.images;
       }
+      if (this.activityId != undefined && this.activityId > 0) {
+        data.activityId = this.activityId;
+      }
+      if (this.tags != undefined && this.tags.length > 0) {
+        data.tags = this.tags;
+      }
       console.log("data=", data);
+      api.saveOrUpdateActivity(data).then((result) => {
+        uni.showToast({
+          title: "添加活动成功",
+          icon: "success",
+        });
+        uni.switchTab({
+          url: "/pages/activity/index",
+        });
+      });
     },
   },
 };
@@ -261,5 +380,28 @@ export default {
 .cover-area .add image {
   width: 200rpx;
   height: 160rpx;
+}
+
+.activity-tags {
+  display: flex;
+}
+
+.activity-tags .activity-tag {
+  margin-top: 20rpx;
+  background-color: gray;
+  padding: 2rpx 15rpx;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+  color: white;
+}
+
+.customize-tag {
+  border: 1rpx gray dashed;
+  background-color: white !important;
+  color: gray !important;
+}
+.tips {
+  color: gray;
+  padding-left: 40rpx;
 }
 </style>

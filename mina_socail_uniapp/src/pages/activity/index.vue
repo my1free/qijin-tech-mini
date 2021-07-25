@@ -9,7 +9,10 @@
       <view class="activity-title">
         {{ activity.title }}
       </view>
-      <view class="activity-tags">
+      <view
+        class="activity-tags"
+        v-if="activity.tags && activity.tags.length > 0"
+      >
         <view class="activity-tag" v-for="tag in activity.tags" :key="tag">
           {{ tag }}
         </view>
@@ -24,7 +27,7 @@
         <text class="title">时间:</text>
         {{ activity.startTime }} ~ {{ activity.endTime }}
       </view>
-      <view class="activity-addr">
+      <view class="activity-addr" v-if="activity.location">
         <text class="title">地点:</text>
         {{ activity.location }}
       </view>
@@ -48,6 +51,15 @@
         </view>
       </view>
     </view>
+    <view class="activity-op">
+      <uni-fab
+        :pattern="opPattern"
+        horizontal="right"
+        direction="horizontal"
+        :content="opContent"
+        @trigger="trigger"
+      ></uni-fab>
+    </view>
   </view>
 </template>
 
@@ -56,10 +68,19 @@ import api from "@/static/js/api.js";
 export default {
   data() {
     return {
+      opPattern: {
+        buttonColor: "#0574a9",
+      },
+      opContent: [
+        {
+          iconPath: "/static/image/horn.png",
+          text: "发起活动",
+        },
+      ],
       activities: [],
     };
   },
-  onLoad() {
+  onShow() {
     api.listActivity().then((res) => {
       console.log("activities=", res);
       this.activities = res.activities;
@@ -70,6 +91,11 @@ export default {
       console.log(activityId);
       uni.navigateTo({
         url: "./detail/index?activityId=" + activityId,
+      });
+    },
+    trigger(event) {
+      uni.navigateTo({
+        url: "./edit/index",
       });
     },
   },
@@ -98,6 +124,7 @@ export default {
 }
 .activity-list {
   padding: 40rpx;
+  margin-bottom: 200rpx;
 }
 
 .activity-title {

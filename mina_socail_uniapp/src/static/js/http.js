@@ -55,6 +55,9 @@ const http = (url, data = {}, option = {}) => {
           if (!hideMsg) showToast(result.message);
           if (result.code === 401) {
             api.login();
+            uni.switchTab({
+              url: "/pages/social/index",
+            });
           }
         } else {
           // 返回值非 200，强制显示提示信息

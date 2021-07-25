@@ -26,19 +26,19 @@
         <text class="title">时间:</text>
         {{ activity.startTime }} ~ {{ activity.endTime }}
       </view>
-      <view class="activity-addr">
+      <view class="activity-addr" v-if="activity.location">
         <text class="title">地点:</text>
         {{ activity.location }}
       </view>
       <view class="activity-description">
         <text>{{ activity.description }}</text>
       </view>
-      <view class="activity-images" v-if="activity.imageList.length > 0">
+      <view class="activity-images" v-if="activity.images.length > 0">
         <view class="width100">
           <text class="ft-bold">相关图片</text>
         </view>
         <view class="image-list">
-          <view v-for="image in activity.imageList" :key="image.id">
+          <view v-for="image in activity.images" :key="image.id">
             <image :src="image.url" mode="widthFix"></image>
           </view>
         </view>
@@ -75,8 +75,22 @@
         horizontal="right"
         direction="horizontal"
         :content="opContent"
+        @trigger="trigger"
       ></uni-fab>
     </view>
+    <uni-popup ref="popup" type="dialog">
+      <uni-popup-dialog
+        mode="base"
+        type="warn"
+        message="成功消息"
+        title="关闭活动确认"
+        content="确认关闭活动？"
+        :duration="2000"
+        :before-close="true"
+        @close="closePopup"
+        @confirm="closeActivity"
+      ></uni-popup-dialog>
+    </uni-popup>
   </view>
 </template>
 
@@ -90,36 +104,108 @@ export default {
       },
       opContent: [],
       activity: {},
+      activityId: 0,
     };
   },
   onLoad(option) {
     var activityId = option.activityId;
-    api.getActivityDetail(activityId).then((res) => {
-      console.log("activity=", res);
-      this.activity = res;
-      if (this.activity.isMaster) {
-        this.opContent.push({
-          iconPath: "/static/image/edit.png",
-          text: "编辑",
-        });
-      }
-      if (this.activity.isParticipant) {
-        this.opContent.push({
-          iconPath: "/static/image/cancel.png",
-          text: "取消",
-        });
-      } else {
-        this.opContent.push({
-          iconPath: "/static/image/add.png",
-          text: "报名",
-        });
-      }
-    });
+    this.activityId = activityId;
+    this.refreshActivityDetail(activityId);
   },
   methods: {
     onCardDetail(uid) {
       uni.navigateTo({
         url: "/pages/social/detail/index?userId=" + uid,
+      });
+    },
+    refreshActivityDetail(activityId) {
+      api.getActivityDetail(activityId).then((res) => {
+        console.log("activity=", res);
+        this.activity = res;
+        this.refreshOpContent();
+      });
+    },
+    refreshOpContent() {
+      var opContent = [];
+      if (this.activity.isMaster) {
+        opContent.push({
+          iconPath: "/static/image/edit.png",
+          text: "编辑活动",
+        });
+        opContent.push({
+          iconPath: "/static/image/close.png",
+          text: "关闭活动",
+        });
+      }
+      if (this.activity.isParticipant) {
+        opContent.push({
+          iconPath: "/static/image/cancel.png",
+          text: "取消报名",
+        });
+      } else {
+        opContent.push({
+          iconPath: "/static/image/add.png",
+          text: "报名",
+        });
+      }
+      this.opContent = opContent;
+    },
+    trigger(event) {
+      console.log("event=", event);
+      if (event.item.text == "编辑活动") {
+        this.editActivity();
+      } else if (event.item.text == "报名") {
+        this.joinActivity();
+      } else if (event.item.text == "取消报名") {
+        this.cancelActivity();
+      } else if (event.item.text == "关闭活动") {
+        this.showCloseActivityDialog();
+      }
+    },
+    closePopup() {
+      this.$refs.popup.close();
+    },
+    editActivity() {
+      console.log("editActivity");
+      uni.navigateTo({
+        url: "../edit/index?activityId=" + this.activityId,
+      });
+    },
+    joinActivity() {
+      api.joinActivity({ activityId: this.activityId }).then((result) => {
+        uni.showToast({
+          title: "报名成功",
+          icon: "success",
+        });
+        // this.activity.isParticipant = true;
+        this.refreshActivityDetail(this.activityId);
+      });
+    },
+    cancelActivity() {
+      api.cancelActivity({ activityId: this.activityId }).then((result) => {
+        uni.showToast({
+          title: "取消成功",
+          icon: "success",
+        });
+      });
+      // this.activity.isParticipant = false;
+      this.refreshActivityDetail(this.activityId);
+    },
+    showCloseActivityDialog() {
+      this.$refs.popup.open();
+    },
+    closeActivity() {
+      this.$refs.popup.close();
+      api.closeActivity({ activityId: this.activityId }).then((result) => {
+        uni.showToast({
+          title: "关闭成功",
+          icon: "success",
+        });
+        api.sleep(1000).then((result) => {
+          uni.switchTab({
+            url: "/pages/activity/index",
+          });
+        });
       });
     },
   },

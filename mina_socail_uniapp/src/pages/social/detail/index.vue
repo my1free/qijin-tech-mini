@@ -85,7 +85,7 @@
       :tabCur.sync="TabCur"
       @change="tabChange"
     ></wuc-tab> -->
-    <view v-show="showType === 'info'">
+    <view v-show="showType === 'info'" class="width100">
       <!-- <view class="personal-tag panel">
         <uni-card
           title="个人标签"
@@ -114,14 +114,19 @@
           thumbnail="/static/image/mm.png"
           extra="斜杠青年"
         >
-          <span
-            class="my-tag"
-            v-bind:class="tag.cl"
-            v-for="tag in cardDetail.hobbies"
-            :key="tag.id"
-          >
-            {{ tag.content }}
-          </span>
+          <view v-if="cardDetail.hobbies && cardDetail.hobbies.length > 0">
+            <span
+              class="my-tag"
+              v-bind:class="tag.cl"
+              v-for="tag in cardDetail.hobbies"
+              :key="tag.id"
+            >
+              {{ tag.content }}
+            </span>
+          </view>
+          <view v-if="!cardDetail.hobbies || cardDetail.hobbies.length == 0">
+            <text class="ft-cl-gray">这个人很懒，还没有填写 ╮(╯▽╰)╭</text>
+          </view>
         </uni-card>
       </view>
       <view class="personal-tag panel">
@@ -138,7 +143,11 @@
               <text>个人信息</text>
             </view>
             <view class="info-content">
-              {{ cardDetail.love.selfInfo }}
+              {{
+                cardDetail.love.selfInfo
+                  ? cardDetail.love.selfInfo
+                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+              }}
             </view>
           </view>
           <view class="self-intro">
@@ -146,19 +155,31 @@
               <text>性格爱好</text>
             </view>
             <view class="info-content">
-              {{ cardDetail.love.interest }}
+              {{
+                cardDetail.love.interest
+                  ? cardDetail.love.interest
+                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+              }}
             </view>
           </view>
           <view class="self-intro">
             <view class="info-title"> 家庭背景 </view>
             <view class="info-content">
-              {{ cardDetail.love.family }}
+              {{
+                cardDetail.love.family
+                  ? cardDetail.love.family
+                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+              }}
             </view>
           </view>
           <view class="self-intro">
             <view class="info-title"> 期望的另一半 </view>
             <view class="info-content">
-              {{ cardDetail.love.expected }}
+              {{
+                cardDetail.love.expected
+                  ? cardDetail.love.expected
+                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+              }}
             </view>
           </view>
         </uni-card>

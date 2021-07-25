@@ -166,6 +166,11 @@ function addUserImage(data = {}) {
   return http.post("/api/v1/user/image/add", data);
 }
 
+function delUserImage(data = {}) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/api/v1/user/image/delete", data);
+}
+
 function replaceUserImage(data = {}) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/api/v1/user/image/replace", data);
@@ -189,6 +194,26 @@ function delHobby(content) {
 function updateLove(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/me/love/update", data);
+}
+
+function saveOrUpdateActivity(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/update", data);
+}
+
+function joinActivity(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/join", data);
+}
+
+function cancelActivity(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/cancel", data);
+}
+
+function closeActivity(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/close", data);
 }
 
 // ====== 以下是基础方法 ========
@@ -257,9 +282,14 @@ export default {
   getGallery,
   updateProfile,
   addUserImage,
+  delUserImage,
   replaceUserImage,
   getHobbies,
   addHobby,
   delHobby,
   updateLove,
+  saveOrUpdateActivity,
+  joinActivity,
+  cancelActivity,
+  closeActivity,
 };

@@ -25,13 +25,30 @@
         v-for="(cover, idx) in gallery.images"
         :key="cover.url"
         v-on:click="choseImage('cover', idx)"
+        v-on:longpress="deleteImage(idx)"
       >
         <image :src="cover.url" mode="widthFix"></image>
       </view>
       <view class="cover" v-on:click="choseImage('add', 0)">
         <image src="/static/image/plus-gray.png" mode="widthFix"></image>
       </view>
+      <view class="width100 tips ">
+        <text>注：短按替换图片，长按删除图片</text>
+      </view>
     </view>
+
+    <uni-popup ref="delImagePopup" type="dialog">
+      <uni-popup-dialog
+        mode="base"
+        type="warn"
+        title="删除确认"
+        content="确认删除图片？"
+        :duration="2000"
+        :before-close="true"
+        @close="closeDelImagePopup"
+        @confirm="confirmDelImage"
+      ></uni-popup-dialog>
+    </uni-popup>
     <view class="container" v-if="cutImage === true">
       <view class="cropper-wrap">
         <image-cropper
@@ -103,12 +120,25 @@ export default {
         this.interestList.splice(index, 1);
       }
     },
+    deleteImage(idx) {
+      this.idx = idx;
+      this.$refs.delImagePopup.open("center");
+    },
+    closeDelImagePopup() {
+      this.$refs.delImagePopup.close();
+    },
+    confirmDelImage() {
+      this.closeDelImagePopup();
+      console.log("confirmDelImage=", this.gallery.images[this.idx]);
+      var image = this.gallery.images[this.idx];
+      api.delUserImage({ id: image.id }).then((result) => {
+        this.gallery.images.splice(this.idx, 1);
+      });
+    },
     open() {
       this.$refs.popup.open("center");
     },
     selfDefinedConfirm(e) {
-      console.log(e);
-      console.log(this.selfDefined);
       this.$refs.popup.close();
     },
     selfDefinedClose() {
@@ -309,5 +339,10 @@ page {
 
 .cropper-ops text {
   margin-right: 40rpx;
+}
+.tips {
+  color: gray;
+  margin-top: 20rpx;
+  padding-left: 40rpx;
 }
 </style>

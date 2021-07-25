@@ -62,14 +62,12 @@ export default {
   },
   onLoad() {
     api.getHobbies().then((result) => {
-      console.log("getHobbies", result);
       this.hobbies = result.hobbies;
       this.hobbyUnits = result.hobbyUnits;
     });
   },
   methods: {
     addIntrest(content) {
-      console.log("addIntrest", content);
       api.addHobby(content).then((result) => {
         var t = {
           content: content,

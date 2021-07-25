@@ -53,7 +53,7 @@
                   unselected: !image.selected,
                 }"
               >
-                <image :src="image.url" mode="widthFix"></image>
+                <image :src="image.url" mode="heightFix"></image>
               </view>
               <text class="mg-l-20rpx"
                 >{{ card.currThumbnailIdx + 1 }}/{{ card.images.length }}</text
@@ -202,11 +202,13 @@ export default {
   display: inline-block;
   vertical-align: top;
   height: 100rpx;
-  width: 63rpx;
+  width: 80rpx;
   margin-top: 10rpx;
   margin-right: 12rpx;
   border-radius: 10rpx;
   overflow: hidden;
+  text-align: center;
+  background-color: white;
 }
 
 .info-area .thumbnail-list .selected {
