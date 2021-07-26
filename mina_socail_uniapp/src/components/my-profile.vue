@@ -7,7 +7,10 @@
           :src="myProfile.profile.avatar"
         ></image>
       </view>
-      <view class="right" v-if="myProfile.images">
+      <view
+        class="right"
+        v-if="myProfile.images && myProfile.images.length > 0"
+      >
         <view
           class="img-cover mg-l-20rpx"
           v-for="(image, idx) in myProfile.images"
@@ -16,12 +19,21 @@
           <image :src="image.url" mode="widthFix" v-if="idx < 5"></image>
         </view>
       </view>
-      <view class="right ft-cl-gray pd-l-20" v-if="!myProfile.images">
+      <view
+        class="right ft-cl-gray pd-l-20"
+        v-if="!myProfile.images || myProfile.images.length == 0"
+      >
         点击编辑头像和个人图片
       </view>
       <view class="side">
         <text>></text>
       </view>
+    </view>
+    <view class="panel tips width100" v-if="myProfile.shouldShow == false">
+      <text
+        >* 注：\r
+        只有姓名、头像、性别、生日均不为空，并且至少有一张个人图片的情况下，才会被别人看到哦~</text
+      >
     </view>
     <view class="panel">
       <view class="panel-head">
@@ -136,7 +148,10 @@
       <view class="panel-head">
         <view class="panel-head-title">个人爱好</view>
       </view>
-      <view class="panel-body pd" v-if="myProfile.hobbies">
+      <view
+        class="panel-body pd"
+        v-if="myProfile.hobbies && myProfile.hobbies.length > 0"
+      >
         <span
           class="my-tag"
           v-bind:class="tag.cl"
@@ -146,7 +161,10 @@
           {{ tag.content }}
         </span>
       </view>
-      <view class="panel-body pd ft-cl-gray" v-if="!myProfile.hobbies">
+      <view
+        class="panel-body pd ft-cl-gray"
+        v-if="!myProfile.hobbies || myProfile.hobbies.length == 0"
+      >
         <text>点击填写兴趣爱好</text>
       </view>
     </view>
@@ -398,5 +416,12 @@ export default {
   width: 68rpx;
   height: 100rpx;
   border-radius: 10rpx;
+}
+.tips {
+  padding: 20rpx 0rpx 20rpx 40rpx;
+  background-color: white;
+  margin-bottom: 10rpx;
+  color: red;
+  font-size: 25rpx;
 }
 </style>

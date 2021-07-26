@@ -18,7 +18,7 @@
     </view>
     <view class="cover-area">
       <view class="title pd-20 width100">
-        编辑画廊
+        编辑个人图片
       </view>
       <view
         class="cover"

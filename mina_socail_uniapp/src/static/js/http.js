@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:8080";
+const env = "local";
 
 import api from "./api.js";
 const showToast = (title) => {
@@ -7,6 +7,15 @@ const showToast = (title) => {
     icon: "none",
   });
 };
+
+function host() {
+  if (env === "local") {
+    return "http://127.0.0.1:25321";
+  } else {
+    // return "http://49.233.184.252:25321";
+    return "https://www.qijin.tech";
+  }
+}
 
 const get = (url, data = {}, option = {}) => {
   return http(url, data, { method: "GET" });
@@ -35,7 +44,7 @@ const http = (url, data = {}, option = {}) => {
   }
   return new Promise((resolve, reject) => {
     uni.request({
-      url: baseUrl + url,
+      url: host() + url,
       method: option.method || "POST", // 默认 post 请求
       header: {
         token: token,
@@ -55,9 +64,6 @@ const http = (url, data = {}, option = {}) => {
           if (!hideMsg) showToast(result.message);
           if (result.code === 401) {
             api.login();
-            uni.switchTab({
-              url: "/pages/social/index",
-            });
           }
         } else {
           // 返回值非 200，强制显示提示信息
@@ -87,6 +93,7 @@ function getToken() {
   }
 }
 export default {
+  host,
   http,
   post,
   get,

@@ -1,6 +1,5 @@
 // import request from '@/api/request'; // 引入封装好的request
 
-const host = "http://127.0.0.1:8080";
 const isMock = false;
 
 import mock from "./mock.js";
@@ -14,7 +13,7 @@ const headers = {
 
 // 上传图片
 function uploadImageWithFile(file) {
-  var url = host + "/api/v1/base/upload/image";
+  var url = http.host() + "/api/v1/base/upload/image";
   headers.token = http.getToken();
   return uni.uploadFile({
     url: url,
@@ -28,7 +27,7 @@ function uploadImageWithFile(file) {
 
 function uploadImageWithPath(filePath) {
   headers.token = http.getToken();
-  var url = host + "/api/v1/base/upload/image";
+  var url = http.host() + "/api/v1/base/upload/image";
   uni.showLoading({
     title: "加载中...",
     mask: true,
@@ -42,19 +41,24 @@ function uploadImageWithPath(filePath) {
 }
 
 function login() {
-  console.log("ssssssssss");
-  //   var url = host + "/api/v1/user/account/login/mini";
   wx.login({
     success(res) {
-      console.log("resssssss=", res);
       http
         .post("/api/v1/user/account/login/mini", { code: res.code })
         .then((res) => {
+          console.log("login=", res);
           uni.setStorage({
             key: "token",
             data: res.token,
             success: function() {},
           });
+          if (res.loginStatus == "NEW") {
+            uni.navigateTo({ url: "/pages/login/profile/index" });
+          } else {
+            uni.switchTab({
+              url: "/pages/social/index",
+            });
+          }
         });
     },
     fail(err) {
@@ -73,7 +77,7 @@ function getToken() {
 }
 
 function saveProfile(avatar, name, gender) {
-  var url = host + "/api/v1/user/profile/mini/update";
+  var url = http.host() + "/api/v1/user/profile/mini/update";
   var data = {
     avatar: avatar,
     name: name,

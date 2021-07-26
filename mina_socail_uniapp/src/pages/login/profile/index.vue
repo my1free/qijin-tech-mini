@@ -24,9 +24,7 @@ export default {
       name: "",
     };
   },
-  onLoad() {
-    api.login();
-  },
+  onLoad() {},
   methods: {
     authorizeProfile() {
       var that = this;
@@ -39,7 +37,28 @@ export default {
           var gender = userInfo.gender;
           that.avatar = avatar;
           that.name = name;
-          api.saveProfile(avatar, name, gender);
+          var genderStr = "MALE";
+          if (gender == 2) {
+            genderStr = "FEMALE";
+          }
+          api
+            .updateProfile({ avatar: avatar, name: name, gender: genderStr })
+            .then((result) => {
+              uni.showToast({
+                title: "更新资料成功",
+                icon: "success",
+              });
+              api.sleep(1000).then((result) => {
+                uni.switchTab({
+                  url: "/pages/social/index",
+                  success() {
+                    let page = getCurrentPages().pop();
+                    if (page == undefined || page == null) return;
+                    page.onLoad();
+                  },
+                });
+              });
+            });
         },
       });
     },
