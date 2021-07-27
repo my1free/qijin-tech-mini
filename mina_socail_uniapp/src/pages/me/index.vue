@@ -2,6 +2,7 @@
   <view class="content">
     <my-me-head class="width100" :name="name" :avatar="avatar" />
     <my-profile class="width100" :myProfile="meInfo" />
+    <view class="placeholder"></view>
   </view>
 </template>
 
@@ -44,5 +45,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.placeholder {
+  width: 100%;
+  height: 100rpx;
 }
 </style>

@@ -16,8 +16,14 @@
             <uni-row class="demo-uni-row">
               <text class="name">{{ card.profile.name }}</text>
               <image
+                v-if="card.profile.gender === 'FEMALE'"
                 class="seximg mg-l-20rpx"
                 src="/static/image/sexw.png"
+              ></image>
+              <image
+                v-if="card.profile.gender === 'MALE'"
+                class="seximg mg-l-20rpx"
+                src="/static/image/sexm.png"
               ></image>
               <text class="mg-l-20rpx"
                 >{{ card.profile.gender === "FEMALE" ? "女" : "男" }}/{{
@@ -27,19 +33,33 @@
             </uni-row>
             <uni-row class="demo-uni-row">
               <uni-col :span="16">
-                <text>籍贯: {{ card.profile.bornCity }}</text>
+                <text>
+                  籍贯:&nbsp;{{
+                    card.profile.bornCity ? card.profile.bornCity : "未知"
+                  }}
+                </text>
               </uni-col>
               <uni-col :span="8">
-                <text>现居地: {{ card.profile.liveCity }}</text>
+                <text>
+                  身高:&nbsp;{{
+                    card.profile.height ? card.profile.height : 0
+                  }}cm
+                </text>
               </uni-col>
             </uni-row>
             <uni-row class="demo-uni-row">
               <uni-col :span="16">
-                <text>学校: {{ card.profile.edu }}</text>
-                <text class="mg-l-15rpx">{{ card.profile.eduDegree }}</text>
+                <text>
+                  学校:&nbsp;{{ card.profile.edu ? card.profile.edu : "未知" }}
+                </text>
+                <text class="mg-l-15rpx">
+                  {{ card.profile.eduDegree ? card.profile.eduDegree : "" }}
+                </text>
               </uni-col>
               <uni-col :span="8">
-                <text>工作: {{ card.profile.job }}</text>
+                <text>
+                  工作:&nbsp;{{ card.profile.job ? card.profile.job : "未知" }}
+                </text>
               </uni-col>
             </uni-row>
             <view class="thumbnail-list">

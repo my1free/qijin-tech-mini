@@ -27,7 +27,16 @@
     <view class="info-area">
       <uni-row class="demo-uni-row">
         <text class="name">{{ cardDetail.profile.name }}</text>
-        <image class="seximg mg-l-20rpx" src="/static/image/sexw.png"></image>
+        <image
+          v-if="cardDetail.profile.gender === 'FEMALE'"
+          class="seximg mg-l-20rpx"
+          src="/static/image/sexw.png"
+        ></image>
+        <image
+          v-if="cardDetail.profile.gender === 'MALE'"
+          class="seximg mg-l-20rpx"
+          src="/static/image/sexm.png"
+        ></image>
         <text class="mg-l-20rpx"
           >{{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}/{{
             cardDetail.profile.age
@@ -37,45 +46,73 @@
       <uni-row class="demo-uni-row">
         <uni-col :span="6">
           <uni-tag
-            text="真实头像"
+            text="真人认证"
             type="success"
             :circle="true"
             size="small"
           ></uni-tag>
         </uni-col>
-        <uni-col :span="6" :offset="1">
+        <!-- <uni-col :span="6" :offset="1">
           <uni-tag
             text="实名认证"
             type="success"
             :circle="true"
             size="small"
           ></uni-tag>
-        </uni-col>
+        </uni-col> -->
         <uni-col :span="6" :offset="1">
           <uni-tag
             text="学历认证"
-            type="default"
+            type="success"
             :circle="true"
             size="small"
-            disabled="true"
           ></uni-tag>
         </uni-col>
       </uni-row>
       <uni-row class="demo-uni-row">
         <uni-col :span="12">
-          <text>籍贯: {{ cardDetail.profile.bornCity }}</text>
+          <text>
+            籍贯:&nbsp;{{
+              cardDetail.profile.bornCity ? cardDetail.profile.bornCity : "未知"
+            }}
+          </text>
         </uni-col>
         <uni-col :span="12">
-          <text>现居地: {{ cardDetail.profile.liveCity }}</text>
+          <text>
+            身高:&nbsp;{{
+              cardDetail.profile.height ? cardDetail.profile.height : 0
+            }}cm
+          </text>
         </uni-col>
       </uni-row>
       <uni-row class="demo-uni-row">
         <uni-col :span="12">
-          <text>学校: {{ cardDetail.profile.edu }}</text>
-          <text class="mg-l-15rpx">{{ cardDetail.profile.eduDegree }}</text>
+          <text>
+            现居地:&nbsp;{{
+              cardDetail.profile.liveCity ? cardDetail.profile.liveCity : "未知"
+            }}
+          </text>
+        </uni-col>
+      </uni-row>
+      <uni-row class="demo-uni-row">
+        <uni-col :span="12">
+          <text>
+            学校:&nbsp;{{
+              cardDetail.profile.edu ? cardDetail.profile.edu : "未知"
+            }}
+          </text>
+          <text class="mg-l-15rpx">
+            {{
+              cardDetail.profile.eduDegree ? cardDetail.profile.eduDegree : ""
+            }}
+          </text>
         </uni-col>
         <uni-col :span="12">
-          <text>工作: {{ cardDetail.profile.job }}</text>
+          <text>
+            工作:&nbsp;{{
+              cardDetail.profile.job ? cardDetail.profile.job : "未知"
+            }}
+          </text>
         </uni-col>
       </uni-row>
     </view>
@@ -306,7 +343,7 @@ swiper {
 
 .info-area {
   width: 95%;
-  height: 300rpx;
+  height: 360rpx;
   padding-left: 5%;
   justify-content: center;
   bottom: 20rpx;

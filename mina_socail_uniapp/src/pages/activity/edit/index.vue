@@ -269,31 +269,46 @@ export default {
         sizeType: ["original"],
         sourceType: ["album", "camera"],
         success: (chooseImageRes) => {
-          console.log("chooseImage=", chooseImageRes.tempFilePaths);
-          this.cutImage = true;
-          const tempFilePaths = chooseImageRes.tempFilePaths;
-          api.uploadImageWithPath(tempFilePaths[0]).then((res) => {
-            console.log("res=", res);
-            uni.hideLoading();
-            if (res[1].statusCode != 200) {
-              uni.showToast({
-                title: res[1].statusCode,
-                icon: "error",
-              });
-              return;
+          wx.getImageInfo({
+            src: chooseImageRes.tempFilePaths[0],
+          }).then((result) => {
+            var max = Math.max(result.width, result.height);
+            var rate = 100;
+            if (max > 600) {
+              rate = 100 / (max / 600);
             }
-            var result = JSON.parse(res[1].data);
-            console.log("result=", result);
-            if (result.code != 200) {
-              uni.showToast({
-                title: "上传图片失败",
-                icon: "error",
+            console.log("rate=", rate);
+            console.log("filePath=", chooseImageRes.tempFilePaths[0]);
+            wx.compressImage({
+              src: chooseImageRes.tempFilePaths[0], // 图片路径
+              quality: rate, // 压缩质量
+            }).then((result) => {
+              const tempFilePaths = result.tempFilePath;
+              console.log("url=", tempFilePaths);
+              api.uploadImageWithPath(tempFilePaths).then((res) => {
+                console.log("res=", res);
+                uni.hideLoading();
+                if (res[1].statusCode != 200) {
+                  uni.showToast({
+                    title: res[1].statusCode,
+                    icon: "error",
+                  });
+                  return;
+                }
+                var result = JSON.parse(res[1].data);
+                console.log("result=", result);
+                if (result.code != 200) {
+                  uni.showToast({
+                    title: "上传图片失败",
+                    icon: "error",
+                  });
+                  return;
+                }
+                var url = result.data.url;
+                this.images.push({
+                  url: url,
+                });
               });
-              return;
-            }
-            var url = result.data.url;
-            this.images.push({
-              url: url,
             });
           });
         },
@@ -349,7 +364,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 80rpx;
+  margin-bottom: 200rpx;
+  padding-bottom: 200rpx;
 }
 
 .cover-area {

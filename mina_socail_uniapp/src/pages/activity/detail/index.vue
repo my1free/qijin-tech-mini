@@ -235,6 +235,7 @@ export default {
 .activity-list {
   padding: 40rpx;
   margin-bottom: 200rpx;
+  padding-bottom: 200rpx;
 }
 
 .activity-title {
@@ -307,11 +308,11 @@ export default {
 .participants-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .activity-participant {
-  padding: 10rpx;
+  padding: 5rpx;
 }
 
 .activity-participant image {

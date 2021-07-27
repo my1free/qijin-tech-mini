@@ -1,5 +1,5 @@
 <template>
-  <view class="width100">
+  <view class="width100 content">
     <view class="avatar-area pd-20">
       <view class="title pd-tb-20 width100">
         编辑头像
@@ -249,8 +249,9 @@ page {
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  margin-bottom: 200rpx;
+  padding-bottom: 200rpx;
 }
 
 .title {

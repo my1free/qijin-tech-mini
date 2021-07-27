@@ -125,6 +125,7 @@ export default {
 .activity-list {
   padding: 40rpx;
   margin-bottom: 200rpx;
+  padding-bottom: 200rpx;
 }
 
 .activity-title {
