@@ -49,7 +49,7 @@
         @confirm="confirmDelImage"
       ></uni-popup-dialog>
     </uni-popup>
-    <view class="container" v-if="cutImage === true">
+    <!-- <view class="container" v-if="cutImage === true">
       <view class="cropper-wrap">
         <image-cropper
           id="image-cropper"
@@ -58,14 +58,14 @@
           :src="src"
           :cutWidth="cutWidth"
           :cutHeight="cutHeight"
-          canvasBackground="#eeeeee"
+          canvasBackground="#ffffff"
           @cropped="cropped"
           @afterDraw="afterDraw"
           @beforeDraw="beforeDraw"
           @load="load"
           maskType="outline"
           keepRatio="true"
-          boundDetect="true"
+          boundDetect="false"
           disableRotate="true"
         />
       </view>
@@ -73,12 +73,33 @@
         <text v-on:click="cutImageCancel()">取消</text>
         <text v-on:click="cutImageConfirm()">确定</text>
       </view>
-    </view>
+    </view> -->
+    <image-cropper
+      :crop-fixed="true"
+      :src="src"
+      :crop-width="cutWidth"
+      :crop-height="cutHeight"
+      @confirm="cutImageConfirm"
+      @cancel="cutImageCancel"
+    ></image-cropper>
+    <!-- <view class="container" v-if="cutImage === true">
+      <view class="cropper-wrap">
+        <image-cropper
+          :crop-fixed="true"
+          :src="src"
+          :crop-width="cutWidth"
+          :crop-height="cutHeight"
+          @confirm="cutImageConfirm"
+          @cancel="cutImageCancel"
+        ></image-cropper>
+      </view>
+    </view> -->
   </view>
 </template>
 
 <script>
-import ImageCropper from "@/components/nice-cropper/cropper.vue";
+// import ImageCropper from "@/components/nice-cropper/cropper.vue";
+import ImageCropper from "@/components/invinbg-image-cropper.vue";
 import api from "@/static/js/api.js";
 export default {
   components: {
@@ -90,8 +111,8 @@ export default {
       type: "",
       idx: 0,
       cutImage: false,
-      cutWidth: "50%",
-      cutHeight: "50%",
+      cutWidth: 300,
+      cutHeight: 300,
       imagePath: "",
       gallery: {},
     };
@@ -110,6 +131,13 @@ export default {
     load(img) {},
     cropped(imagePath, imageInfo) {
       this.imagePath = imagePath;
+      console.log("imagePath=", this.imagePath);
+      wx.getFileInfo({
+        filePath: imagePath,
+        success(res) {
+          console.log("imagePath fileInfo=", res);
+        },
+      });
     },
     addIntrest(tag) {
       this.interestList.push(tag);
@@ -148,89 +176,115 @@ export default {
       this.type = type;
       this.idx = idx;
       if ("avatar" === this.type) {
-        this.cutWidth = "50%";
-        this.cutHeight = "50%";
+        this.cutWidth = 340;
+        this.cutHeight = 340;
       }
       if ("add" === this.type || "cover" === this.type) {
-        this.cutWidth = "50%";
-        this.cutHeight = "80%";
+        this.cutWidth = 340;
+        this.cutHeight = 544;
       }
 
       uni.chooseImage({
         count: 1,
-        sizeType: ["original"],
+        sizeType: ["compressed"],
         sourceType: ["album", "camera"],
         success: (chooseImageRes) => {
-          this.cutImage = true;
-          const tempFilePaths = chooseImageRes.tempFilePaths;
-          this.src = tempFilePaths[0];
+          // this.cutImage = true;
+          console.log("xxx", chooseImageRes.tempFilePaths[0]);
+          this.src = chooseImageRes.tempFilePaths[0];
         },
       });
     },
     cutImageCancel() {
       this.cutImage = false;
     },
-    cutImageConfirm() {
+    cutImageConfirm(res) {
+      var filePath = res.detail.tempFilePath;
       this.cutImage = false;
-      api.uploadImageWithPath(this.imagePath).then((res) => {
-        uni.hideLoading();
-        if (res[1].statusCode != 200) {
-          uni.showToast({
-            title: res[1].statusCode,
-            icon: "error",
-          });
-          return;
+      wx.getImageInfo({
+        src: filePath,
+      }).then((result) => {
+        var max = Math.max(result.width, result.height);
+        var rate = 100;
+        if (max > 600) {
+          rate = 100 / (max / 600);
         }
-        var result = JSON.parse(res[1].data);
-        console.log("result=", result);
-        if (result.code != 200) {
-          uni.showToast({
-            title: "上传图片失败",
-            icon: "error",
-          });
-          return;
-        }
-        var url = result.data.url;
-        if ("avatar" === this.type) {
-          api.updateProfile({ avatar: url }).then((result) => {
-            this.gallery.profile.avatar = url;
-            uni.showToast({
-              title: "更新头像成功",
-              icon: "success",
-            });
-          });
-        }
-        if ("add" === this.type) {
-          api.addUserImage({ url: url }).then((result) => {
-            this.gallery.images.push({
-              id: result,
-              url: url,
-            });
-            uni.showToast({
-              title: "添加图片成功",
-              icon: "success",
-            });
-          });
-        }
-        if ("cover" === this.type) {
-          for (var i = 0; i < this.gallery.images.length; i++) {
-            console.log(i, this.idx);
-            if (i === this.idx) {
-              api
-                .replaceUserImage({ url: url, id: this.gallery.images[i].id })
-                .then((result) => {
-                  this.gallery.images[i].url = url;
-                  uni.showToast({
-                    title: "更新图片成功",
-                    icon: "success",
-                  });
-                });
-
-              break;
+        console.log("rate=", rate);
+        wx.compressImage({
+          src: filePath, // 图片路径
+          quality: rate, // 压缩质量
+        }).then((result) => {
+          // wx.getFileInfo({
+          //   filePath: result.tempFilePath,
+          //   success(res) {
+          //     console.log("fileInfo=", res);
+          //   },
+          // });
+          api.uploadImageWithPath(result.tempFilePath).then((res) => {
+            uni.hideLoading();
+            if (res[1].statusCode != 200) {
+              uni.showToast({
+                title: res[1].statusCode,
+                icon: "error",
+              });
+              return;
             }
-          }
-        }
+            var result = JSON.parse(res[1].data);
+            console.log("result=", result);
+            if (result.code != 200) {
+              uni.showToast({
+                title: "上传图片失败",
+                icon: "error",
+              });
+              return;
+            }
+            var url = result.data.url;
+            if ("avatar" === this.type) {
+              api.updateProfile({ avatar: url }).then((result) => {
+                this.gallery.profile.avatar = url;
+                uni.showToast({
+                  title: "更新头像成功",
+                  icon: "success",
+                });
+              });
+            }
+            if ("add" === this.type) {
+              api.addUserImage({ url: url }).then((result) => {
+                this.gallery.images.push({
+                  id: result,
+                  url: url,
+                });
+                uni.showToast({
+                  title: "添加图片成功",
+                  icon: "success",
+                });
+              });
+            }
+            if ("cover" === this.type) {
+              for (var i = 0; i < this.gallery.images.length; i++) {
+                console.log(i, this.idx);
+                if (i === this.idx) {
+                  api
+                    .replaceUserImage({
+                      url: url,
+                      id: this.gallery.images[i].id,
+                    })
+                    .then((result) => {
+                      this.gallery.images[i].url = url;
+                      uni.showToast({
+                        title: "更新图片成功",
+                        icon: "success",
+                      });
+                    });
+
+                  break;
+                }
+              }
+            }
+          });
+        });
       });
+      return;
     },
   },
 };
@@ -332,7 +386,7 @@ page {
 .cropper-ops {
   position: relative;
   color: white;
-  top: -140rpx;
+  top: -180rpx;
   font-size: 35rpx;
   right: 10rpx;
   text-align: right;

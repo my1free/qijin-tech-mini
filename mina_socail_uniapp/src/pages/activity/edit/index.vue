@@ -178,7 +178,7 @@ export default {
         this.endTime = result.endTime;
         this.location = result.location;
         this.description = result.description;
-        this.images = result.images;
+        this.images = result.images ? result.images : [];
         this.tags = result.tags;
       });
     }
@@ -266,7 +266,7 @@ export default {
     choseImage() {
       uni.chooseImage({
         count: 1,
-        sizeType: ["original"],
+        sizeType: ["compressed"],
         sourceType: ["album", "camera"],
         success: (chooseImageRes) => {
           wx.getImageInfo({
@@ -277,37 +277,46 @@ export default {
             if (max > 600) {
               rate = 100 / (max / 600);
             }
-            console.log("rate=", rate);
-            console.log("filePath=", chooseImageRes.tempFilePaths[0]);
             wx.compressImage({
               src: chooseImageRes.tempFilePaths[0], // 图片路径
               quality: rate, // 压缩质量
             }).then((result) => {
               const tempFilePaths = result.tempFilePath;
-              console.log("url=", tempFilePaths);
-              api.uploadImageWithPath(tempFilePaths).then((res) => {
-                console.log("res=", res);
-                uni.hideLoading();
-                if (res[1].statusCode != 200) {
+              wx.getFileInfo({
+                filePath: tempFilePaths,
+              }).then((res) => {
+                console.log("imageSize=", res.size);
+                if (res.size > 800 * 1024) {
                   uni.showToast({
-                    title: res[1].statusCode,
+                    title: "图片不能超过800kB",
                     icon: "error",
                   });
-                  return;
-                }
-                var result = JSON.parse(res[1].data);
-                console.log("result=", result);
-                if (result.code != 200) {
-                  uni.showToast({
-                    title: "上传图片失败",
-                    icon: "error",
+                } else {
+                  api.uploadImageWithPath(tempFilePaths).then((res) => {
+                    console.log("res=", res);
+                    uni.hideLoading();
+                    if (res[1].statusCode != 200) {
+                      uni.showToast({
+                        title: res[1].statusCode,
+                        icon: "error",
+                      });
+                      return;
+                    }
+                    var result = JSON.parse(res[1].data);
+                    console.log("result=", result);
+                    if (result.code != 200) {
+                      uni.showToast({
+                        title: "上传图片失败",
+                        icon: "error",
+                      });
+                      return;
+                    }
+                    var url = result.data.url;
+                    this.images.push({
+                      url: url,
+                    });
                   });
-                  return;
                 }
-                var url = result.data.url;
-                this.images.push({
-                  url: url,
-                });
               });
             });
           });
