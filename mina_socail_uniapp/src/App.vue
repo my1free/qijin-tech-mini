@@ -32,6 +32,13 @@ export default {
   padding-left: 5rpx;
 }
 
+.redpoint {
+  background-color: red;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
 .demo-uni-row {
   margin-bottom: 10px;
   /* QQ、字节小程序文档写有 :host，但实测不生效 */
@@ -131,5 +138,10 @@ export default {
 
 .border-bottom {
   border-bottom: 1rpx gray solid;
+}
+
+.required {
+  color: red;
+  padding-left: 12rpx;
 }
 </style>

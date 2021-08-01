@@ -57,6 +57,11 @@ function login() {
           } else {
             uni.switchTab({
               url: "/pages/social/index",
+              success() {
+                let page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              },
             });
           }
         });

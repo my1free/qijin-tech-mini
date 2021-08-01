@@ -9,7 +9,7 @@
           class="my-tag"
           v-bind:class="tag.cl"
           v-for="tag in hobbies"
-          :key="tag.id"
+          :key="tag.content"
           v-on:click="removeIntrest(tag)"
         >
           {{ tag.content }}
@@ -55,7 +55,7 @@ export default {
   components: {},
   data() {
     return {
-      selfDefined: "ssss",
+      selfDefined: "",
       hobbies: [],
       hobbyUnits: [],
     };
@@ -69,11 +69,7 @@ export default {
   methods: {
     addIntrest(content) {
       api.addHobby(content).then((result) => {
-        var t = {
-          content: content,
-          cl: "bg-gray.light",
-        };
-        this.hobbies.push(t);
+        this.pushHobby(content);
       });
     },
     removeIntrest(tag) {
@@ -87,11 +83,24 @@ export default {
     open() {
       this.$refs.popup.open("center");
     },
-    selfDefinedConfirm(e) {
-      this.$refs.popup.close();
+    selfDefinedConfirm(done, value) {
+      this.addIntrest(value);
+      done();
     },
     selfDefinedClose() {
       this.$refs.popup.close();
+    },
+    pushHobby(content) {
+      for (var i = 0; i < this.hobbies.length; i++) {
+        if (this.hobbies[i].content == content) {
+          return;
+        }
+      }
+      var t = {
+        content: content,
+        cl: "bg-gray.light",
+      };
+      this.hobbies.push(t);
     },
   },
 };

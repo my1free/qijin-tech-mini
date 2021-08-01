@@ -28,12 +28,13 @@
       <view class="side">
         <text>></text>
       </view>
+      <view
+        class="redpoint"
+        v-if="!myProfile.images || myProfile.images.length == 0"
+      ></view>
     </view>
     <view class="panel tips width100" v-if="myProfile.shouldShow == false">
-      <text
-        >* 注：\r
-        只有姓名、头像、性别、生日均不为空，并且至少有一张个人图片的情况下，才会被别人看到哦~</text
-      >
+      <text>* 注：\r 至少添加一张照片，才会被别人看到哦~</text>
     </view>
     <view class="panel">
       <view class="panel-head">
@@ -85,6 +86,12 @@
               : "点击选择生日"
           }}</view>
           <view class="info-item-ops">></view>
+          <!-- <view
+            class="redpoint"
+            v-if="
+              !myProfile.profile.birthday || myProfile.profile.birthday == ''
+            "
+          ></view> -->
         </view>
         <view
           class="info-item"
@@ -199,7 +206,7 @@
           </view>
         </view> -->
         <view class="self-intro">
-          <view class="info-title"> 家庭背景 </view>
+          <view class="info-title"> 家庭情况 </view>
           <view
             class="info-content"
             v-on:click="onEdit('family', myProfile.love.family)"
@@ -207,7 +214,7 @@
             <text v-if="myProfile.love.family">{{
               myProfile.love.family
             }}</text>
-            <text v-if="!myProfile.love.family">点击填写家庭背景</text>
+            <text v-if="!myProfile.love.family">点击填写家庭情况</text>
           </view>
         </view>
         <view class="self-intro">

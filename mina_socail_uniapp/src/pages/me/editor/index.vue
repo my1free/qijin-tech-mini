@@ -48,7 +48,7 @@
       <input
         class="pd-l-r-40"
         :value="value"
-        placeholder="请输入您的出生地"
+        placeholder="如: 山东济南"
         focus="true"
         @input="onKeyInput"
         @blur="onKeyBlur"
@@ -59,7 +59,7 @@
       <input
         class="pd-l-r-40"
         :value="value"
-        placeholder="请输入您的现在居住城市"
+        placeholder="如: 北京市海淀区"
         focus="true"
         @input="onKeyInput"
         @blur="onKeyBlur"
@@ -124,11 +124,11 @@
       />
     </view>
     <view class="width100" v-if="key === 'family'">
-      <view class="pd-40 text-bold ft-35">家庭背景</view>
+      <view class="pd-40 text-bold ft-35">家庭情况</view>
       <textarea
         class="pd-l-r-40 width100"
         :value="value"
-        placeholder="介绍下自己的家庭背景"
+        placeholder="介绍下自己的家庭情况"
         focus="true"
         @input="onKeyInput"
         @blur="onKeyBlur"

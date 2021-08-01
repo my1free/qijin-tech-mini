@@ -1,7 +1,10 @@
 <template>
   <view class="content">
     <view class="width100">
-      <view class="pd-40 text-bold ft-35">活动名称</view>
+      <view class="pd-40 text-bold ft-35">
+        活动名称
+        <span class="required">*</span>
+      </view>
       <input
         id="title"
         class="pd-l-r-40"
@@ -28,7 +31,10 @@
       </view>
     </view>
     <view class="width100">
-      <view class="pd-40 text-bold ft-35">联系方式</view>
+      <view class="pd-40 text-bold ft-35">
+        联系方式
+        <span class="required">*</span>
+      </view>
       <input
         id="contact"
         class="pd-l-r-40"
@@ -39,19 +45,25 @@
       />
     </view>
     <view class="width100">
-      <view class="pd-40 text-bold ft-35">开始时间</view>
+      <view class="pd-40 text-bold ft-35">
+        开始时间
+        <span class="required">*</span>
+      </view>
       <uni-datetime-picker
-        type="date"
+        type="datetime"
         :value="startTime"
         start="1900-1-1"
-        :end="startTime"
+        end="2100-1-1"
         @change="startTimeChange"
       ></uni-datetime-picker>
     </view>
     <view class="width100">
-      <view class="pd-40 text-bold ft-35">结束时间</view>
+      <view class="pd-40 text-bold ft-35">
+        结束时间
+        <span class="required">*</span>
+      </view>
       <uni-datetime-picker
-        type="date"
+        type="datetime"
         :value="endTime"
         start="1900-1-1"
         end="2100-1-1"
@@ -70,7 +82,10 @@
       />
     </view>
     <view class="width100">
-      <view class="pd-40 text-bold ft-35">活动简介</view>
+      <view class="pd-40 text-bold ft-35">
+        活动简介
+        <span class="required">*</span>
+      </view>
       <textarea
         id="description"
         class="pd-l-r-40 width100"

@@ -44,14 +44,14 @@
         >
       </uni-row>
       <uni-row class="demo-uni-row">
-        <uni-col :span="6">
+        <!-- <uni-col :span="6">
           <uni-tag
             text="真人认证"
             type="success"
             :circle="true"
             size="small"
           ></uni-tag>
-        </uni-col>
+        </uni-col> -->
         <!-- <uni-col :span="6" :offset="1">
           <uni-tag
             text="实名认证"
@@ -60,14 +60,14 @@
             size="small"
           ></uni-tag>
         </uni-col> -->
-        <uni-col :span="6" :offset="1">
+        <!-- <uni-col :span="6" :offset="1">
           <uni-tag
             text="学历认证"
             type="success"
             :circle="true"
             size="small"
           ></uni-tag>
-        </uni-col>
+        </uni-col> -->
       </uni-row>
       <uni-row class="demo-uni-row">
         <uni-col :span="12">
@@ -200,7 +200,7 @@
             </view>
           </view>
           <view class="self-intro">
-            <view class="info-title"> 家庭背景 </view>
+            <view class="info-title"> 家庭情况 </view>
             <view class="info-content">
               {{
                 cardDetail.love.family
