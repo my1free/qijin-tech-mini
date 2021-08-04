@@ -187,7 +187,7 @@
               }}
             </view>
           </view>
-          <view class="self-intro">
+          <!-- <view class="self-intro">
             <view class="info-title">
               <text>性格爱好</text>
             </view>
@@ -198,7 +198,7 @@
                   : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
               }}
             </view>
-          </view>
+          </view> -->
           <view class="self-intro">
             <view class="info-title"> 家庭情况 </view>
             <view class="info-content">

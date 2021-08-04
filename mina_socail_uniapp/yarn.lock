@@ -3603,6 +3603,11 @@
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
 
+"classnames@^2.2.6":
+  "integrity" "sha1-38+jiR4wbsHa0QXQ6I9EF7hTXo4="
+  "resolved" "https://registry.npm.taobao.org/classnames/download/classnames-2.3.1.tgz"
+  "version" "2.3.1"
+
 "clean-css@4.2.x":
   "integrity" "sha1-UHtd59l7SO5T2ErbAWD/YhY4D3g="
   "resolved" "https://registry.npm.taobao.org/clean-css/download/clean-css-4.2.3.tgz"
@@ -4371,6 +4376,11 @@
   "resolved" "https://registry.npm.taobao.org/de-indent/download/de-indent-1.0.2.tgz"
   "version" "1.0.2"
 
+"debounce@^1.2.0":
+  "integrity" "sha1-OIgdj0FmpcWEgCDBGCe4NLyz4KU="
+  "resolved" "https://registry.npm.taobao.org/debounce/download/debounce-1.2.1.tgz"
+  "version" "1.2.1"
+
 "debug@^2.2.0":
   "integrity" "sha1-XRKFFd8TT/Mn6QpMk/Tgd6U2NB8="
   "resolved" "https://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz?cache=0&sync_timestamp=1607566571506&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-2.6.9.tgz"
@@ -4751,6 +4761,11 @@
     "inherits" "^2.0.1"
     "readable-stream" "^2.0.0"
     "stream-shift" "^1.0.0"
+
+"easy-bem@^1.0.2":
+  "integrity" "sha1-G/zBBCVJgJC8/dwPnAAKupE5ngM="
+  "resolved" "https://registry.npm.taobao.org/easy-bem/download/easy-bem-1.1.1.tgz"
+  "version" "1.1.1"
 
 "easy-stack@^1.0.1":
   "integrity" "sha1-iv5CZGJpiMq7EfPHBMzQyDVBEGY="
@@ -11897,6 +11912,15 @@
   "resolved" "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz"
   "version" "1.1.2"
 
+"vue-advanced-cropper@^1.7.0":
+  "integrity" "sha1-igMGAJzpmDvlE4Xfap1T55/tGGM="
+  "resolved" "https://registry.nlark.com/vue-advanced-cropper/download/vue-advanced-cropper-1.7.0.tgz"
+  "version" "1.7.0"
+  dependencies:
+    "classnames" "^2.2.6"
+    "debounce" "^1.2.0"
+    "easy-bem" "^1.0.2"
+
 "vue-awesome-swiper@^4.1.1":
   "integrity" "sha1-j3qyIa0AMCHXVrhqphj0KZJJAP4="
   "resolved" "https://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-4.1.1.tgz"
@@ -11948,7 +11972,7 @@
   "resolved" "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.5.17", "vue@^2.6.11", "vue@2.x":
+"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.5.17", "vue@^2.6.11", "vue@^2.6.6", "vue@2.x":
   "integrity" "sha1-9evU+mvShpQD4pqJau1JBEVskSM="
   "resolved" "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz"
   "version" "2.6.12"

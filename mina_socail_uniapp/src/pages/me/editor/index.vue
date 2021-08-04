@@ -173,7 +173,7 @@ export default {
   onLoad(option) {
     this.key = option.key;
     this.value = option.value;
-    if (option.key == "gender" && option.value == "女") {
+    if (option.key == "gender" && option.value == "FEMALE") {
       this.genderIdx = 1;
     }
   },

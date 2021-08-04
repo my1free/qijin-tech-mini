@@ -35,7 +35,7 @@
           :src="src"
           alt="cropper-img"
           ref="cropperImg"
-          mode="scaleToFill"
+          mode="aspectFit"
           class="uni-image"
         ></image>
       </view>
@@ -74,7 +74,7 @@
               rotate * 90 +
               'deg)',
           }"
-          mode="scaleToFill"
+          mode="aspectFill"
           :src="src"
           alt="cropper-img"
         ></image>
@@ -262,6 +262,8 @@ export default {
     },
     // 等比缩放后的宽度
     imageWidth() {
+      return this.windowWidth;
+      console.log("imageWidth", this.imageRatio);
       if (this.imageRatio >= 1) {
         return this.windowWidth;
       }
@@ -269,10 +271,12 @@ export default {
     },
     // 等比缩放后的高度
     imageHeight() {
+      // return this.windowHeight;
+      console.log("imageHeight", this.windowHeight);
       if (this.imageRatio >= 1) {
         return this.windowWidth / this.imageRatio;
       }
-      return this.windowWidth;
+      return this.windowHeight;
     },
   },
   methods: {
@@ -579,7 +583,8 @@ export default {
   direction: ltr;
   touch-action: none;
   text-align: left;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC");
+  background-color: #eee;
+  /* background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC"); */
 }
 
 .cropper-canvas {
@@ -675,7 +680,7 @@ export default {
   flex: 1;
   color: #3cc51f;
   text-decoration: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: rgba(238, 237, 237, 0);
   position: relative;
   text-align: center;
   background-color: #fff;

@@ -82,18 +82,6 @@
       @confirm="cutImageConfirm"
       @cancel="cutImageCancel"
     ></image-cropper>
-    <!-- <view class="container" v-if="cutImage === true">
-      <view class="cropper-wrap">
-        <image-cropper
-          :crop-fixed="true"
-          :src="src"
-          :crop-width="cutWidth"
-          :crop-height="cutHeight"
-          @confirm="cutImageConfirm"
-          @cancel="cutImageCancel"
-        ></image-cropper>
-      </view>
-    </view> -->
   </view>
 </template>
 
@@ -381,6 +369,7 @@ page {
 .cropper-wrap {
   /* height: calc(100% - 96rpx); */
   height: 100%;
+  height: 90vh;
 }
 
 .cropper-ops {

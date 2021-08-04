@@ -23,8 +23,12 @@
         <text>{{ activity.contact }}</text>
       </view>
       <view class="activity-date">
-        <text class="title">时间:</text>
-        {{ activity.startTime }} ~ {{ activity.endTime }}
+        <text class="title">开始时间:</text>
+        {{ activity.startTime }}
+      </view>
+      <view class="activity-date">
+        <text class="title">结束时间:</text>
+        {{ activity.endTime }}
       </view>
       <view class="activity-addr" v-if="activity.location">
         <text class="title">地点:</text>
