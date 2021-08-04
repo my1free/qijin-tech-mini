@@ -42,7 +42,7 @@
         <text class="ft-bold">参与者</text>
         <text
           >({{
-            activity.participants ? activity.participants.length : 0
+            activity.participantCount ? activity.participantCount : 0
           }}人)</text
         >
         <text class="title">:</text>
