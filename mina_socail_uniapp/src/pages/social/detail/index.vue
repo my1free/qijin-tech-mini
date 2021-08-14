@@ -1,50 +1,63 @@
 <template>
   <view class="content">
-    <view class="detail-card">
-      <uni-swiper-dot
-        :info="cardDetail.images"
-        :current="currCardIdx"
-        field="content"
-        mode="round"
-        :dotsStyles="dotsStyles"
-      >
-        <swiper
-          class="swiper-box thumbnail-list"
-          :duration="500"
-          @change="onCardSwiperChange"
+    <view class="width100" v-bind:class="{ blur: withNoGroup }">
+      <view class="detail-card">
+        <uni-swiper-dot
+          :info="cardDetail.images"
+          :current="currCardIdx"
+          field="content"
+          mode="round"
+          :dotsStyles="dotsStyles"
         >
-          <swiper-item
-            v-for="thumbnail in cardDetail.images"
-            :key="thumbnail.url"
+          <swiper
+            class="swiper-box thumbnail-list"
+            :duration="500"
+            @change="onCardSwiperChange"
           >
-            <view class="card">
-              <image class="cover" :src="thumbnail.url" mode="widthFix"></image>
+            <swiper-item
+              v-for="thumbnail in cardDetail.images"
+              :key="thumbnail.url"
+            >
+              <view class="card">
+                <image
+                  class="cover"
+                  :src="thumbnail.url"
+                  mode="widthFix"
+                ></image>
+              </view>
+            </swiper-item>
+          </swiper>
+        </uni-swiper-dot>
+      </view>
+      <view class="info-area">
+        <uni-row class="demo-uni-row">
+          <view class="info-head">
+            <view class="name">
+              <text>{{ cardDetail.profile.name }}</text>
             </view>
-          </swiper-item>
-        </swiper>
-      </uni-swiper-dot>
-    </view>
-    <view class="info-area">
-      <uni-row class="demo-uni-row">
-        <text class="name">{{ cardDetail.profile.name }}</text>
-        <image
-          v-if="cardDetail.profile.gender === 'FEMALE'"
-          class="seximg mg-l-20rpx"
-          src="/static/image/sexw.png"
-        ></image>
-        <image
-          v-if="cardDetail.profile.gender === 'MALE'"
-          class="seximg mg-l-20rpx"
-          src="/static/image/sexm.png"
-        ></image>
-        <text class="mg-l-20rpx"
-          >{{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}/{{
-            cardDetail.profile.age
-          }}/{{ cardDetail.profile.constellation }}</text
-        >
-      </uni-row>
-      <uni-row class="demo-uni-row">
-        <!-- <uni-col :span="6">
+            <view class="gender">
+              <image
+                v-if="cardDetail.profile.gender === 'FEMALE'"
+                class="seximg mg-l-20rpx"
+                src="/static/image/sexw.png"
+              ></image>
+              <image
+                v-if="cardDetail.profile.gender === 'MALE'"
+                class="seximg mg-l-20rpx"
+                src="/static/image/sexm.png"
+              ></image>
+            </view>
+            <view class="birthday">
+              <text class="mg-l-20rpx sub-info">
+                {{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}/{{
+                  cardDetail.profile.birthday
+                }}年/{{ cardDetail.profile.constellation }}
+              </text>
+            </view>
+          </view>
+        </uni-row>
+        <uni-row class="demo-uni-row">
+          <!-- <uni-col :span="6">
           <uni-tag
             text="真人认证"
             type="success"
@@ -52,7 +65,7 @@
             size="small"
           ></uni-tag>
         </uni-col> -->
-        <!-- <uni-col :span="6" :offset="1">
+          <!-- <uni-col :span="6" :offset="1">
           <uni-tag
             text="实名认证"
             type="success"
@@ -60,7 +73,7 @@
             size="small"
           ></uni-tag>
         </uni-col> -->
-        <!-- <uni-col :span="6" :offset="1">
+          <!-- <uni-col :span="6" :offset="1">
           <uni-tag
             text="学历认证"
             type="success"
@@ -68,62 +81,66 @@
             size="small"
           ></uni-tag>
         </uni-col> -->
-      </uni-row>
-      <uni-row class="demo-uni-row">
-        <uni-col :span="12">
-          <text>
-            籍贯:&nbsp;{{
-              cardDetail.profile.bornCity ? cardDetail.profile.bornCity : "未知"
-            }}
-          </text>
-        </uni-col>
-        <uni-col :span="12">
-          <text>
-            身高:&nbsp;{{
-              cardDetail.profile.height ? cardDetail.profile.height : 0
-            }}cm
-          </text>
-        </uni-col>
-      </uni-row>
-      <uni-row class="demo-uni-row">
-        <uni-col :span="12">
-          <text>
-            现居地:&nbsp;{{
-              cardDetail.profile.liveCity ? cardDetail.profile.liveCity : "未知"
-            }}
-          </text>
-        </uni-col>
-      </uni-row>
-      <uni-row class="demo-uni-row">
-        <uni-col :span="12">
-          <text>
-            学校:&nbsp;{{
-              cardDetail.profile.edu ? cardDetail.profile.edu : "未知"
-            }}
-          </text>
-          <text class="mg-l-15rpx">
-            {{
-              cardDetail.profile.eduDegree ? cardDetail.profile.eduDegree : ""
-            }}
-          </text>
-        </uni-col>
-        <uni-col :span="12">
-          <text>
-            工作:&nbsp;{{
-              cardDetail.profile.job ? cardDetail.profile.job : "未知"
-            }}
-          </text>
-        </uni-col>
-      </uni-row>
-    </view>
-    <!-- <wuc-tab
+        </uni-row>
+        <uni-row class="demo-uni-row">
+          <uni-col :span="12">
+            <text>
+              籍贯:&nbsp;{{
+                cardDetail.profile.bornCity
+                  ? cardDetail.profile.bornCity
+                  : "未知"
+              }}
+            </text>
+          </uni-col>
+          <uni-col :span="12">
+            <text>
+              身高:&nbsp;{{
+                cardDetail.profile.height ? cardDetail.profile.height : 0
+              }}cm
+            </text>
+          </uni-col>
+        </uni-row>
+        <uni-row class="demo-uni-row">
+          <uni-col :span="12">
+            <text>
+              现居地:&nbsp;{{
+                cardDetail.profile.liveCity
+                  ? cardDetail.profile.liveCity
+                  : "未知"
+              }}
+            </text>
+          </uni-col>
+        </uni-row>
+        <uni-row class="demo-uni-row">
+          <uni-col :span="12">
+            <text>
+              学校:&nbsp;{{
+                cardDetail.profile.edu ? cardDetail.profile.edu : "未知"
+              }}
+            </text>
+            <text class="mg-l-15rpx">
+              {{
+                cardDetail.profile.eduDegree ? cardDetail.profile.eduDegree : ""
+              }}
+            </text>
+          </uni-col>
+          <uni-col :span="12">
+            <text>
+              工作:&nbsp;{{
+                cardDetail.profile.job ? cardDetail.profile.job : "未知"
+              }}
+            </text>
+          </uni-col>
+        </uni-row>
+      </view>
+      <!-- <wuc-tab
       class="wuc-tab-style"
       :tab-list="tabList"
       :tabCur.sync="TabCur"
       @change="tabChange"
     ></wuc-tab> -->
-    <view v-show="showType === 'info'" class="width100">
-      <!-- <view class="personal-tag panel">
+      <view v-show="showType === 'info'" class="width100">
+        <!-- <view class="personal-tag panel">
         <uni-card
           title="个人标签"
           mode="title"
@@ -142,52 +159,52 @@
           </span>
         </uni-card>
       </view> -->
-      <view class="personal-tag panel">
-        <uni-card
-          title="个人爱好"
-          mode="title"
-          :is-shadow="true"
-          is-full="true"
-          thumbnail="/static/image/mm.png"
-          extra="斜杠青年"
-        >
-          <view v-if="cardDetail.hobbies && cardDetail.hobbies.length > 0">
-            <span
-              class="my-tag"
-              v-bind:class="tag.cl"
-              v-for="tag in cardDetail.hobbies"
-              :key="tag.id"
-            >
-              {{ tag.content }}
-            </span>
-          </view>
-          <view v-if="!cardDetail.hobbies || cardDetail.hobbies.length == 0">
-            <text class="ft-cl-gray">这个人很懒，还没有填写 ╮(╯▽╰)╭</text>
-          </view>
-        </uni-card>
-      </view>
-      <view class="personal-tag panel">
-        <uni-card
-          title="自我介绍"
-          mode="title"
-          :is-shadow="true"
-          is-full="true"
-          thumbnail="/static/image/aa.png"
-          extra="知己知彼"
-        >
-          <view class="self-intro">
-            <view class="info-title">
-              <text>个人信息</text>
+        <view class="personal-tag panel">
+          <uni-card
+            title="个人爱好"
+            mode="title"
+            :is-shadow="true"
+            is-full="true"
+            thumbnail="/static/image/mm.png"
+            extra="斜杠青年"
+          >
+            <view v-if="cardDetail.hobbies && cardDetail.hobbies.length > 0">
+              <span
+                class="my-tag"
+                v-bind:class="tag.cl"
+                v-for="tag in cardDetail.hobbies"
+                :key="tag.id"
+              >
+                {{ tag.content }}
+              </span>
             </view>
-            <view class="info-content">
-              {{
-                cardDetail.love.selfInfo
-                  ? cardDetail.love.selfInfo
-                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
-              }}
+            <view v-if="!cardDetail.hobbies || cardDetail.hobbies.length == 0">
+              <text class="ft-cl-gray">这个人很懒，还没有填写 ╮(╯▽╰)╭</text>
             </view>
-          </view>
-          <!-- <view class="self-intro">
+          </uni-card>
+        </view>
+        <view class="personal-tag panel">
+          <uni-card
+            title="自我介绍"
+            mode="title"
+            :is-shadow="true"
+            is-full="true"
+            thumbnail="/static/image/aa.png"
+            extra="知己知彼"
+          >
+            <view class="self-intro">
+              <view class="info-title">
+                <text>个人信息</text>
+              </view>
+              <view class="info-content">
+                {{
+                  cardDetail.love.selfInfo
+                    ? cardDetail.love.selfInfo
+                    : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+                }}
+              </view>
+            </view>
+            <!-- <view class="self-intro">
             <view class="info-title">
               <text>性格爱好</text>
             </view>
@@ -199,32 +216,36 @@
               }}
             </view>
           </view> -->
-          <view class="self-intro">
-            <view class="info-title"> 家庭情况 </view>
-            <view class="info-content">
-              {{
-                cardDetail.love.family
-                  ? cardDetail.love.family
-                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
-              }}
+            <view class="self-intro">
+              <view class="info-title"> 家庭情况 </view>
+              <view class="info-content">
+                {{
+                  cardDetail.love.family
+                    ? cardDetail.love.family
+                    : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+                }}
+              </view>
             </view>
-          </view>
-          <view class="self-intro">
-            <view class="info-title"> 期望的另一半 </view>
-            <view class="info-content">
-              {{
-                cardDetail.love.expected
-                  ? cardDetail.love.expected
-                  : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
-              }}
+            <view class="self-intro">
+              <view class="info-title"> 期望的另一半 </view>
+              <view class="info-content">
+                {{
+                  cardDetail.love.expected
+                    ? cardDetail.love.expected
+                    : "这个人很懒，还没有填写 ╮(╯▽╰)╭"
+                }}
+              </view>
             </view>
-          </view>
-        </uni-card>
+          </uni-card>
+        </view>
       </view>
     </view>
-    <!-- <view v-show="showType === 'square'">
-      <my-square :itemList="itemList" kind="me" />
-    </view> -->
+    <view class="mask" v-if="withNoGroup">
+      <view class="auth-tips">
+        <text>你还不是群成员，没有权限查看</text>
+      </view>
+      <button type="warn" @click="applyGroup">点击申请入群</button>
+    </view>
   </view>
 </template>
 
@@ -240,6 +261,7 @@ export default {
   },
   data() {
     return {
+      withNoGroup: true,
       TabCur: 0,
       tabList: [
         {
@@ -292,6 +314,11 @@ export default {
       this.showType = this.tabList[index].type;
       this.TabCur = index;
       console.log(this.showType);
+    },
+    applyGroup() {
+      uni.navigateTo({
+        url: "/pages/group/join/index?groupId=1",
+      });
     },
   },
 };
@@ -352,10 +379,19 @@ swiper {
   margin-top: 25rpx;
 }
 
+.info-area .info-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .info-area .name {
-  width: 100%;
   text-align: left;
   font-size: 50rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300rpx;
   color: black;
 }
 

@@ -32,6 +32,10 @@ export default {
   padding-left: 5rpx;
 }
 
+.mg-r-20 {
+  margin-right: 20rpx;
+}
+
 .redpoint {
   background-color: red;
   width: 12rpx;
@@ -88,6 +92,9 @@ export default {
 .pd-l-20 {
   padding-left: 20rpx;
 }
+.pd-l-40 {
+  padding-left: 40rpx;
+}
 .pd-l-r-20 {
   padding: 0rpx 20rpx;
 }
@@ -124,6 +131,14 @@ export default {
   margin-top: 40rpx;
 }
 
+.mg-r-40 {
+  margin-right: 40rpx;
+}
+
+.mg-r-60 {
+  margin-right: 60rpx;
+}
+
 .ft-35 {
   font-size: 35rpx;
 }
@@ -136,6 +151,10 @@ export default {
   color: gray;
 }
 
+.ft-cl-red {
+  color: red;
+}
+
 .border-bottom {
   border-bottom: 1rpx gray solid;
 }
@@ -143,5 +162,37 @@ export default {
 .required {
   color: red;
   padding-left: 12rpx;
+}
+
+.mask {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-tips {
+  width: 600rpx;
+  height: 100rpx;
+  color: white;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  background-color: #e64340;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+.blur {
+  -webkit-filter: blur(5px); /* Chrome, Opera */
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+.box-shadow {
+  box-shadow: 0 0 0.1em #ddd, 0 0 0.6em #ddd;
 }
 </style>

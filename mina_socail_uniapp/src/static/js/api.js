@@ -225,6 +225,59 @@ function closeActivity(data) {
   return http.post("/incubator/social/activity/close", data);
 }
 
+// ====== group =======
+function getGroupInfo(groupId) {
+  return http.get("/incubator/social/group/info?groupId=" + groupId);
+}
+function joinGroupTip(groupId) {
+  return http.get("/incubator/social/group/join/tip?groupId=" + groupId);
+}
+
+function listGroupMember(groupId) {
+  if (isMock)
+    return new Promise((resolve) => resolve(mock.listGroupMember().data));
+  return http.get("/incubator/social/group/members?groupId=" + groupId);
+}
+function updateGroup(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/update", data);
+}
+
+function applyGroup(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/apply/post", data);
+}
+
+function cancelApply(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/apply/cancel", data);
+}
+
+function listApply(groupId) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.get(
+    "/incubator/social/group/admin/apply/list?groupId=" + groupId
+  );
+}
+
+function applyDetail(userId, groupId) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.get(
+    "/incubator/social/group/admin/apply/detail?userId=" +
+      userId +
+      "&groupId=" +
+      groupId
+  );
+}
+function acceptApply(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/admin/apply/accept", data);
+}
+
+function rejectApply(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/admin/apply/reject", data);
+}
 // ====== 以下是基础方法 ========
 
 function ppost(url, data) {
@@ -297,8 +350,22 @@ export default {
   addHobby,
   delHobby,
   updateLove,
+
+  // activity
   saveOrUpdateActivity,
   joinActivity,
   cancelActivity,
   closeActivity,
+
+  // group
+  getGroupInfo,
+  joinGroupTip,
+  listGroupMember,
+  updateGroup,
+  applyGroup,
+  cancelApply,
+  listApply,
+  applyDetail,
+  acceptApply,
+  rejectApply,
 };

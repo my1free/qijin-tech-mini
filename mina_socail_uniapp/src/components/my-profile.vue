@@ -36,6 +36,28 @@
     <view class="panel tips width100" v-if="myProfile.shouldShow == false">
       <text>* 注：\r 至少添加一张照片，才会被别人看到哦~</text>
     </view>
+    <view
+      class="panel pd-20 img-edit group"
+      v-on:click="onGroupMember(group.id)"
+      v-for="group in myProfile.groups"
+      :key="group.id"
+    >
+      <view class="left">
+        <image class="img-avatar mg-l-20rpx" :src="group.logoSmall"></image>
+      </view>
+      <view class="right">
+        <view class="group-title width100 pd-l-20">
+          {{ group.name }}
+        </view>
+        <view class="group-info width100 pd-l-20">
+          {{ group.memberCount }} 人 ( 男: {{ group.maleCount }} / 女:
+          {{ group.femaleCount }} )
+        </view>
+      </view>
+      <view class="side">
+        <text>></text>
+      </view>
+    </view>
     <view class="panel">
       <view class="panel-head">
         <view class="panel-head-title">个人信息</view>
@@ -249,7 +271,12 @@ export default {
       if (value != undefined) {
         url = `/pages/me/editor/index?key=${key}&value=${value}`;
       }
-      console.log(url);
+      uni.navigateTo({
+        url: url,
+      });
+    },
+    onGroupMember: function(groupId) {
+      var url = `/pages/group/member/index?groupId=${groupId}`;
       uni.navigateTo({
         url: url,
       });
@@ -424,6 +451,26 @@ export default {
   height: 100rpx;
   border-radius: 10rpx;
 }
+
+.group .right {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-items: left;
+  text-align: left;
+  color: gray;
+  font-size: 30rpx;
+}
+
+.group .group-title {
+  font-size: 38rpx;
+  color: black;
+}
+
+.group .group-info {
+  font-size: 26rpx;
+}
+
 .tips {
   padding: 20rpx 0rpx 20rpx 40rpx;
   background-color: white;

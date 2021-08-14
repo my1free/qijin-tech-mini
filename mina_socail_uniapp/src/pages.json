@@ -7,14 +7,16 @@
         }
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-        // {
-        //     "path": "pages/activity/edit/index",
-        //     "style": {
-        //         "navigationBarTitleText": "my-social"
-        //     }
-        // },
+        
+        
         {
             "path": "pages/social/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/social/detail/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }
@@ -38,13 +40,6 @@
             }
         },
         
-        
-        {
-            "path": "pages/social/detail/index",
-            "style": {
-                "navigationBarTitleText": "my-social"
-            }
-        },
         {
             "path": "pages/im/index",
             "style": {
@@ -71,6 +66,36 @@
         },
         {
             "path": "pages/group/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/group/join/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/group/apply/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/group/member/index",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "[pages/group/apply/detail/index]",
+            "style": {
+                "navigationBarTitleText": "my-social"
+            }
+        },
+        {
+            "path": "pages/group/edit/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }

@@ -38,9 +38,10 @@ export default {
 .card-body {
   width: 100%;
   min-height: 400rpx;
-  background-color: #333333;
+  background-color: #520b6f;
   border-radius: 15rpx;
   margin-top: 30rpx;
+  box-shadow: 0 1upx 6upx rgba(0, 0, 0, 0.1);
 }
 
 .card-body .card-title {
@@ -51,7 +52,7 @@ export default {
 }
 
 .card-body .card-content {
-  color: #ccc;
+  color: #ddd;
   padding: 20rpx;
 }
 </style>

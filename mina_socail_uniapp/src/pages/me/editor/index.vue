@@ -222,7 +222,6 @@ export default {
           uni.navigateBack();
         });
       } else {
-        console.log("love");
         data["loveKind"] = field;
         data["content"] = this.value;
         api.updateLove(data).then((result) => {

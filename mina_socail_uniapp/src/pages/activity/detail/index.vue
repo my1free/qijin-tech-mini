@@ -50,13 +50,14 @@
       <view class="activity-participants">
         <view class="width100">
           <text class="ft-bold">参与者</text>
-          <text
-            >({{
-              activity.participants ? activity.participants.length : 0
-            }}人)</text
-          >
+          <text>
+            ({{ activity.participants ? activity.participants.length : 0 }}人)
+          </text>
         </view>
-        <view class="participants-list width100">
+        <view
+          class="participants-list width100"
+          v-if="!activity.isAdmin || activity.isAdmin == false"
+        >
           <view
             class="activity-participant"
             v-for="participant in activity.participants"
@@ -68,6 +69,47 @@
               <text class="participant-name">{{
                 participant.profile.name
               }}</text>
+            </view>
+          </view>
+        </view>
+        <view
+          class="participants-list-admin width100"
+          v-if="activity.isAdmin && activity.isAdmin == true"
+        >
+          <view
+            class="activity-participant-admin"
+            v-for="participant in activity.participants"
+            :key="participant.id"
+            v-on:click="onCardDetail(participant.profile.userId)"
+          >
+            <view class="participant-info">
+              <view class="avatar">
+                <image :src="participant.profile.avatar"></image>
+              </view>
+              <view class="participaint-info-detail">
+                <view>
+                  <text class="participant-name">
+                    {{ participant.profile.name }}
+                  </text>
+                  <image
+                    v-if="participant.profile.gender === 'FEMALE'"
+                    class="seximg mg-l-20rpx"
+                    src="/static/image/sexw.png"
+                  ></image>
+                  <image
+                    v-if="participant.profile.gender === 'MALE'"
+                    class="seximg mg-l-20rpx"
+                    src="/static/image/sexm.png"
+                  ></image>
+                </view>
+                <text class="participant-contact">
+                  {{
+                    participant.profile.mobile
+                      ? participant.profile.mobile
+                      : "无手机号"
+                  }}
+                </text>
+              </view>
             </view>
           </view>
         </view>
@@ -131,7 +173,7 @@ export default {
     },
     refreshOpContent() {
       var opContent = [];
-      if (this.activity.isMaster) {
+      if (this.activity.isMaster || this.activity.isAdmin) {
         opContent.push({
           iconPath: "/static/image/edit.png",
           text: "编辑活动",
@@ -312,6 +354,7 @@ export default {
 .participants-list {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20rpx;
   justify-content: flex-start;
 }
 
@@ -337,5 +380,52 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.participants-list-admin {
+  display: flex;
+  margin-top: 20rpx;
+  flex-direction: column;
+}
+
+.activity-participant-admin {
+  padding: 5rpx;
+  width: 100%;
+}
+
+.activity-participant-admin .avatar image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20%;
+  border: 4rpx white solid;
+}
+
+.activity-participant-admin .participant-info {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.activity-participant-admin .participaint-info-detail {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.activity-participant-admin .participant-info .participant-name {
+  color: black;
+  font-size: 35rpx;
+  width: 100rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10rpx;
+}
+.activity-participant-admin .participant-info .participant-contact {
+  padding-left: 10rpx;
+  color: gray;
+}
+.activity-participant-admin .seximg {
+  width: 28rpx;
+  height: 28rpx;
 }
 </style>

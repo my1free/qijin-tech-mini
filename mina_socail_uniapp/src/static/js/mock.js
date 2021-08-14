@@ -61,6 +61,12 @@ function getHobbies() {
   return JSON.parse(data);
 }
 
+function listGroupMember() {
+  var data =
+    '{"code":200,"data":{"admins":[{"groupId":1,"profile":{"age":0,"avatar":"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLThAyqO9ic7pzQqpzluKRvM2JQP9AxoiaX0NNqNOFq0ucdGIAv2KYu3KPcLkIwqXzcAib88xalNFfWQ/132","constellation":"","gender":"FEMALE","name":"齐晋","userId":10023},"userId":10023},{"groupId":1,"profile":{"age":0,"avatar":"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLThAyqO9ic7pzQqpzluKRvM2JQP9AxoiaX0NNqNOFq0ucdGIAv2KYu3KPcLkIwqXzcAib88xalNFfWQ/132","constellation":"","gender":"MALE","name":"齐晋","userId":10024},"userId":10024}],"group":{"createTime":1628395605000,"creator":10001,"description":"asdfasdfasdf","id":1,"logoSmall":"https://img.qijin.tech/social/nankai.png","name":"南开单身俱乐部"},"members":[{"groupId":1,"profile":{"age":21,"avatar":"http://img.qijin.tech/4SKvTfWC7eOZ59c4c0644de85871928c19c97e450dde.png","birthday":"2000-08-11","bornCity":"山东西城","constellation":"狮子座","edu":"南开大学","eduDegree":"学士","gender":"FEMALE","height":"180","job":"互联网","liveCity":"北京西城","mobile":"18810442532","name":"德善","userId":10001},"userId":10001},{"groupId":1,"profile":{"age":22,"avatar":"http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png","birthday":"2000-07-11","bornCity":"首尔","constellation":"巨蟹座","edu":"延世大学","eduDegree":"学士","gender":"FEMALE","job":"航空","liveCity":"首尔","mobile":"18810441071","name":"德善","userId":10002},"userId":10002},{"groupId":1,"profile":{"age":22,"avatar":"http://img.qijin.tech/social/WX20210713-110710@2x.png","birthday":"2000-07-11","bornCity":"首尔","constellation":"巨蟹座","edu":"韩国棋学院","eduDegree":"博士","gender":"MALE","job":"棋士","liveCity":"首尔","mobile":"18810442532","name":"阿泽","userId":10003},"userId":10003},{"groupId":1,"profile":{"age":22,"avatar":"http://img.qijin.tech/social/WX20210713-110603@2x.png","birthday":"2000-07-11","bornCity":"首尔","constellation":"巨蟹座","edu":"首尔大学","eduDegree":"博士","gender":"FEMALE","job":"投行","liveCity":"首尔","name":"宝拉","userId":10004},"userId":10004},{"groupId":1,"profile":{"age":22,"avatar":"http://img.qijin.tech/social/WX20210713-110756@2x.png","birthday":"2000-07-11","bornCity":"首尔","constellation":"巨蟹座","edu":"空军学院","eduDegree":"学士","gender":"MALE","job":"空军","liveCity":"首尔","name":"狗焕","userId":10005},"userId":10005},{"groupId":1,"profile":{"age":22,"avatar":"http://img.qijin.tech/social/WX20210713-110840@2x.png","birthday":"2000-07-11","bornCity":"首尔","constellation":"巨蟹座","edu":"家里蹲大学","eduDegree":"学士","gender":"FEMALE","job":"经理","liveCity":"首尔","name":"娃娃鱼","userId":10006},"userId":10006},{"groupId":1,"profile":{"age":1,"avatar":"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLThAyqO9ic7pzQqpzluKRvM2JQP9AxoiaX0NNqNOFq0ucdGIAv2KYu3KPcLkIwqXzcAib88xalNFfWQ/132","birthday":"2021-07-27","constellation":"狮子座","gender":"FEMALE","name":"齐晋","userId":10021},"userId":10021},{"groupId":1,"profile":{"age":0,"avatar":"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLThAyqO9ic7pzQqpzluKRvM2JQP9AxoiaX0NNqNOFq0ucdGIAv2KYu3KPcLkIwqXzcAib88xalNFfWQ/132","constellation":"","gender":"FEMALE","name":"齐晋","userId":10023},"userId":10023},{"groupId":1,"profile":{"age":0,"avatar":"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLThAyqO9ic7pzQqpzluKRvM2JQP9AxoiaX0NNqNOFq0ucdGIAv2KYu3KPcLkIwqXzcAib88xalNFfWQ/132","constellation":"","gender":"MALE","name":"齐晋","userId":10024},"userId":10024}]},"message":"success"}';
+  return JSON.parse(data);
+}
+
 export default {
   listCard,
   getCardDetail,
@@ -69,4 +75,5 @@ export default {
   getMe,
   getGallery,
   getHobbies,
+  listGroupMember,
 };

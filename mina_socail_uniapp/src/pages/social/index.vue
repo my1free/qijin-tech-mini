@@ -1,88 +1,113 @@
 <template>
   <view class="content">
-    <view class="card-bg" v-if="cards == null || cards.length <= 0">
-      <uni-load-more :status="loadingStatus" class="card-load"></uni-load-more>
-    </view>
-    <swiper
-      class="swiper card-list"
-      :duration="500"
-      @change="onCardSwiperChange"
-      v-if="cards.length > 0"
-    >
-      <swiper-item v-for="card in cards" :key="card.userId">
-        <view class="card" v-on:click="onCardDetail(card.userId)">
-          <image class="cover" :src="card.cover" mode="heightFix"></image>
-          <view class="info-area">
-            <uni-row class="demo-uni-row">
-              <text class="name">{{ card.profile.name }}</text>
-              <image
-                v-if="card.profile.gender === 'FEMALE'"
-                class="seximg mg-l-20rpx"
-                src="/static/image/sexw.png"
-              ></image>
-              <image
-                v-if="card.profile.gender === 'MALE'"
-                class="seximg mg-l-20rpx"
-                src="/static/image/sexm.png"
-              ></image>
-              <text class="mg-l-20rpx"
-                >{{ card.profile.gender === "FEMALE" ? "女" : "男" }}/{{
-                  card.profile.age
-                }}/{{ card.profile.constellation }}</text
-              >
-            </uni-row>
-            <uni-row class="demo-uni-row">
-              <uni-col :span="16">
-                <text>
-                  籍贯:&nbsp;{{
-                    card.profile.bornCity ? card.profile.bornCity : "未知"
-                  }}
-                </text>
-              </uni-col>
-              <uni-col :span="8">
-                <text>
-                  身高:&nbsp;{{
-                    card.profile.height ? card.profile.height : 0
-                  }}cm
-                </text>
-              </uni-col>
-            </uni-row>
-            <uni-row class="demo-uni-row">
-              <uni-col :span="16">
-                <text>
-                  学校:&nbsp;{{ card.profile.edu ? card.profile.edu : "未知" }}
-                </text>
-                <text class="mg-l-15rpx">
-                  {{ card.profile.eduDegree ? card.profile.eduDegree : "" }}
-                </text>
-              </uni-col>
-              <uni-col :span="8">
-                <text>
-                  工作:&nbsp;{{ card.profile.job ? card.profile.job : "未知" }}
-                </text>
-              </uni-col>
-            </uni-row>
-            <view class="thumbnail-list">
-              <view
-                class="thumbnail"
-                v-for="(image, idx) in card.images"
-                :key="image.id"
-                @click.stop="onClickThumbnail(idx, image)"
-                v-bind:class="{
-                  selected: image.selected,
-                  unselected: !image.selected,
-                }"
-              >
-                <image :src="image.url" mode="heightFix"></image>
+    <view class="width100" v-bind:class="{ blur: withNoGroup }">
+      <view class="card-bg" v-if="cards == null || cards.length <= 0">
+        <uni-load-more
+          :status="loadingStatus"
+          class="card-load"
+        ></uni-load-more>
+      </view>
+      <swiper
+        class="swiper card-list"
+        :duration="500"
+        @change="onCardSwiperChange"
+        v-if="cards.length > 0"
+      >
+        <swiper-item v-for="card in cards" :key="card.userId">
+          <view class="card" v-on:click="onCardDetail(card.userId)">
+            <image class="cover" :src="card.cover" mode="heightFix"></image>
+            <view class="info-area">
+              <uni-row class="demo-uni-row">
+                <view class="info-head">
+                  <view class="name">
+                    <text>{{ card.profile.name }}</text>
+                  </view>
+                  <view class="gender">
+                    <image
+                      v-if="card.profile.gender === 'FEMALE'"
+                      class="seximg mg-l-20rpx"
+                      src="/static/image/sexw.png"
+                    ></image>
+                    <image
+                      v-if="card.profile.gender === 'MALE'"
+                      class="seximg mg-l-20rpx"
+                      src="/static/image/sexm.png"
+                    ></image>
+                  </view>
+                  <view class="birthday">
+                    <text class="mg-l-20rpx sub-info">
+                      {{ card.profile.gender === "FEMALE" ? "女" : "男" }}/{{
+                        card.profile.birthday
+                      }}年/{{ card.profile.constellation }}
+                    </text>
+                  </view>
+                </view>
+              </uni-row>
+              <uni-row class="demo-uni-row">
+                <uni-col :span="16">
+                  <text>
+                    籍贯:&nbsp;{{
+                      card.profile.bornCity ? card.profile.bornCity : "未知"
+                    }}
+                  </text>
+                </uni-col>
+                <uni-col :span="8">
+                  <text>
+                    身高:&nbsp;{{
+                      card.profile.height ? card.profile.height : 0
+                    }}&nbsp;cm
+                  </text>
+                </uni-col>
+              </uni-row>
+              <uni-row class="demo-uni-row">
+                <uni-col :span="16">
+                  <text>
+                    学校:&nbsp;{{
+                      card.profile.edu ? card.profile.edu : "未知"
+                    }}
+                  </text>
+                  <text class="mg-l-15rpx">
+                    {{ card.profile.eduDegree ? card.profile.eduDegree : "" }}
+                  </text>
+                </uni-col>
+                <uni-col :span="8">
+                  <text>
+                    工作:&nbsp;{{
+                      card.profile.job ? card.profile.job : "未知"
+                    }}
+                  </text>
+                </uni-col>
+              </uni-row>
+              <view class="thumbnail-list">
+                <view
+                  class="thumbnail"
+                  v-for="(image, idx) in card.images"
+                  :key="image.id"
+                  @click.stop="onClickThumbnail(idx, image)"
+                  v-bind:class="{
+                    selected: image.selected,
+                    unselected: !image.selected,
+                  }"
+                >
+                  <image :src="image.url" mode="heightFix"></image>
+                </view>
+                <text class="mg-l-20rpx"
+                  >{{ card.currThumbnailIdx + 1 }}/{{
+                    card.images.length
+                  }}</text
+                >
               </view>
-              <text class="mg-l-20rpx"
-                >{{ card.currThumbnailIdx + 1 }}/{{ card.images.length }}</text
-              >
             </view>
           </view>
-        </view>
-      </swiper-item>
-    </swiper>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="mask" v-if="withNoGroup">
+      <view class="auth-tips">
+        <text>你还不是群成员，没有权限查看</text>
+      </view>
+      <button type="warn" @click="applyGroup">点击申请入群</button>
+    </view>
   </view>
 </template>
 
@@ -91,6 +116,7 @@ import api from "@/static/js/api.js";
 export default {
   data() {
     return {
+      withNoGroup: false,
       cards: [],
       loadingStatus: "noMore",
       currCardIdx: 0,
@@ -106,7 +132,7 @@ export default {
   onLoad() {
     // api.login();
     api.listCard().then((res) => {
-      console.log("listCard=", res);
+      console.log("listCards=", res);
       var cards = res.cards;
       for (var i = 0; i < cards.length; i++) {
         var card = cards[i];
@@ -116,6 +142,7 @@ export default {
         card.currThumbnailIdx = 0;
       }
       this.cards = cards;
+      this.withNoGroup = res.withNoGroup;
     });
   },
   methods: {
@@ -134,6 +161,11 @@ export default {
       currCard.images[currCard.currThumbnailIdx].selected = false;
       currCard.currThumbnailIdx = idx;
       currCard.images[idx].selected = true;
+    },
+    applyGroup() {
+      uni.navigateTo({
+        url: "/pages/group/join/index?groupId=1",
+      });
     },
   },
 };
@@ -197,10 +229,19 @@ export default {
   text-shadow: 0 0 0.1em #000, 0 0 0.1em #000;
 }
 
+.info-area .info-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .info-area .name {
-  width: 100%;
   text-align: left;
   font-size: 50rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300rpx;
 }
 
 .info-area .seximg {
@@ -248,5 +289,34 @@ export default {
   width: 100%;
   height: 100vh;
   padding-top: 20%;
+}
+.sub-info {
+  font-size: 30rpx;
+}
+
+/* image {
+  filter: blur(10px);
+} */
+.mask {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-tips {
+  width: 600rpx;
+  height: 100rpx;
+  color: white;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  background-color: #e64340;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40rpx;
 }
 </style>
