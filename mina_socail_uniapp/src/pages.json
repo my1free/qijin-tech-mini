@@ -12,7 +12,8 @@
         {
             "path": "pages/social/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "my-social",
+                "enablePullDownRefresh": true
             }
         },
         {
@@ -89,7 +90,7 @@
             }
         },
         {
-            "path": "[pages/group/apply/detail/index]",
+            "path": "pages/group/apply/detail/index",
             "style": {
                 "navigationBarTitleText": "my-social"
             }

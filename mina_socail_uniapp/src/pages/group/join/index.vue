@@ -61,12 +61,15 @@
             </view>
             <view v-if="needBirthday" class="pd-20">
               <text class="profile-title">生日: </text>
-              <text class="ft-cl-gray" v-if="profile.birthday">
-                {{ profile.birthday }}
+              <text
+                class="ft-cl-gray"
+                v-if="profile.birthday && profile.age > 12"
+              >
+                {{ profile.birthday }}&nbsp;年
               </text>
               <text
                 class="ft-cl-red"
-                v-if="!profile.birthday"
+                v-if="!profile.birthday || profile.age < 12"
                 v-on:click="onEdit('birthday', profile.birthday)"
               >
                 未知，点击此处填写 >>
@@ -327,9 +330,7 @@ export default {
                       return;
                     }
                     var url = result.data.url;
-                    this.images.push({
-                      url: url,
-                    });
+                    this.images.push(url);
                   });
                 }
               });

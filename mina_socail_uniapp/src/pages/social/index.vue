@@ -130,22 +130,28 @@ export default {
   },
 
   onLoad() {
-    // api.login();
-    api.listCard().then((res) => {
-      console.log("listCards=", res);
-      var cards = res.cards;
-      for (var i = 0; i < cards.length; i++) {
-        var card = cards[i];
-        card.images[0].selected = true;
-        // TODO default cover
-        card.cover = card.images[0].url;
-        card.currThumbnailIdx = 0;
-      }
-      this.cards = cards;
-      this.withNoGroup = res.withNoGroup;
-    });
+    this.onLoadData();
+  },
+  onPullDownRefresh() {
+    this.onLoadData();
   },
   methods: {
+    onLoadData() {
+      api.listCard().then((res) => {
+        console.log("listCards=", res);
+        var cards = res.cards;
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          card.images[0].selected = true;
+          // TODO default cover
+          card.cover = card.images[0].url;
+          card.currThumbnailIdx = 0;
+        }
+        this.cards = cards;
+        this.withNoGroup = res.withNoGroup;
+        uni.stopPullDownRefresh();
+      });
+    },
     onCardDetail(userId) {
       uni.navigateTo({
         url: "./detail/index?userId=" + userId,

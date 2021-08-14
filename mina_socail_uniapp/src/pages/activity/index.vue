@@ -80,7 +80,7 @@ import api from "@/static/js/api.js";
 export default {
   data() {
     return {
-      withNoGroup: true,
+      withNoGroup: false,
       opPattern: {
         buttonColor: "#0574a9",
       },

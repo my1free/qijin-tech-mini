@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <view class="width100" v-bind:class="{ blur: withNoGroup }">
+    <view class="width100" v-bind:class="{ blur: cardDetail.withNoGroup }">
       <view class="detail-card">
         <uni-swiper-dot
           :info="cardDetail.images"
@@ -240,7 +240,7 @@
         </view>
       </view>
     </view>
-    <view class="mask" v-if="withNoGroup">
+    <view class="mask" v-if="cardDetail.withNoGroup">
       <view class="auth-tips">
         <text>你还不是群成员，没有权限查看</text>
       </view>
@@ -261,7 +261,6 @@ export default {
   },
   data() {
     return {
-      withNoGroup: true,
       TabCur: 0,
       tabList: [
         {
