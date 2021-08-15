@@ -278,6 +278,11 @@ function rejectApply(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/group/admin/apply/reject", data);
 }
+function kickOutFromGroup(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/group/admin/kickOut", data);
+}
+
 // ====== 以下是基础方法 ========
 
 function ppost(url, data) {
@@ -368,4 +373,5 @@ export default {
   applyDetail,
   acceptApply,
   rejectApply,
+  kickOutFromGroup,
 };

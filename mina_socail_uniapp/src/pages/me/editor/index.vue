@@ -11,6 +11,17 @@
         @blur="onKeyBlur"
       />
     </view>
+    <view class="width100" v-if="key === 'mobile'">
+      <view class="pd-40 text-bold ft-35">手机号</view>
+      <input
+        class="pd-l-r-40"
+        :value="value"
+        placeholder="请输入手机号"
+        focus="true"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
     <view class="width100" v-if="key === 'height'">
       <view class="pd-40 text-bold ft-35">身高</view>
       <input

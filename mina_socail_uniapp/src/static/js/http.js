@@ -1,4 +1,4 @@
-const env = "prod";
+const env = "local";
 
 import api from "./api.js";
 const showToast = (title) => {
@@ -58,6 +58,10 @@ const http = (url, data = {}, option = {}) => {
           let result = res.data;
           if (result.code === 200) {
             resolve(result.data);
+            return;
+          }
+          if (result.code > 10000) {
+            resolve(result.code);
             return;
           }
           reject(result.message);

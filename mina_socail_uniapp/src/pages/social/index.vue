@@ -207,6 +207,7 @@ export default {
   position: relative;
   border-radius: 10rpx;
   overflow: hidden;
+  margin-left: 2%;
 }
 
 .content .card-list .card {

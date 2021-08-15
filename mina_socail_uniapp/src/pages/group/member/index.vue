@@ -45,18 +45,13 @@
         <text>成员</text>
         <text class="num">( {{ members.length }} 人 )</text>
       </view>
-      <view
-        class="member"
-        v-for="member in members"
-        :key="member.userId"
-        v-on:click="onCardDetail(member.userId)"
-      >
+      <view class="member" v-for="member in members" :key="member.userId">
         <view class="avatar-name">
-          <view class="avatar">
+          <view class="avatar" v-on:click="onCardDetail(member.userId)">
             <image :src="member.profile.avatar"></image>
           </view>
         </view>
-        <view class="info">
+        <view class="info" v-on:click="onCardDetail(member.userId)">
           <view class="name">
             {{ member.profile.name }}
             <image
@@ -99,13 +94,7 @@ export default {
     };
   },
   onShow() {
-    api.listGroupMember(this.groupId).then((result) => {
-      console.log("listGroupMember=", result);
-      this.admins = result.admins;
-      this.members = result.members;
-      this.group = result.group;
-      this.applies = result.applies;
-    });
+    this.onDataReload();
   },
   onLoad(option) {
     var groupId = option.groupId;
@@ -114,8 +103,28 @@ export default {
     console.log("groupId=", groupId);
   },
   methods: {
+    onDataReload() {
+      api.listGroupMember(this.groupId).then((result) => {
+        console.log("listGroupMember=", result);
+        this.admins = result.admins;
+        this.members = result.members;
+        this.group = result.group;
+        this.applies = result.applies;
+      });
+    },
     kickOut(userId) {
       console.log("kickOut=", userId);
+      api
+        .kickOutFromGroup({ userId: userId, groupId: this.groupId })
+        .then((result) => {
+          uni.showToast({
+            title: "踢除成功",
+            icon: "success",
+          });
+          api.sleep(2000).then((result) => {
+            this.onDataReload();
+          });
+        });
     },
     onCardDetail(uid) {
       uni.navigateTo({

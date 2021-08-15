@@ -219,12 +219,25 @@ export default {
     },
     joinActivity() {
       api.joinActivity({ activityId: this.activityId }).then((result) => {
+        if (typeof result === "number") {
+          if (result == 10002) {
+            uni.showModal({
+              title: "提示",
+              content: "报名活动需要在个人资料中补全手机号",
+              showCancel: false,
+              success: function(res) {},
+            });
+          }
+          return;
+        }
         uni.showToast({
           title: "报名成功",
           icon: "success",
         });
         // this.activity.isParticipant = true;
-        this.refreshActivityDetail(this.activityId);
+        api.sleep(2000).then((result) => {
+          this.refreshActivityDetail(this.activityId);
+        });
       });
     },
     cancelActivity() {
@@ -235,7 +248,9 @@ export default {
         });
       });
       // this.activity.isParticipant = false;
-      this.refreshActivityDetail(this.activityId);
+      api.sleep(2000).then((result) => {
+        this.refreshActivityDetail(this.activityId);
+      });
     },
     showCloseActivityDialog() {
       this.$refs.popup.open();

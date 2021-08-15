@@ -75,6 +75,18 @@
         </view>
         <view
           class="info-item"
+          v-on:click="onEdit('mobile', myProfile.profile.mobile)"
+        >
+          <view class="info-item-title">手机号</view>
+          <view class="info-item-value">{{
+            myProfile.profile.mobile
+              ? myProfile.profile.mobile
+              : "点击填写手机号"
+          }}</view>
+          <view class="info-item-ops">></view>
+        </view>
+        <view
+          class="info-item"
           v-on:click="onEdit('gender', myProfile.profile.gender)"
         >
           <view class="info-item-title">性别</view>
