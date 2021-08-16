@@ -181,6 +181,7 @@ export default {
       images: [],
       tags: [],
       selfDefined: "",
+      groupId: 1,
     };
   },
   onLoad(option) {
@@ -195,6 +196,7 @@ export default {
         this.description = result.description;
         this.images = result.images ? result.images : [];
         this.tags = result.tags;
+        this.groupId = result.groupId;
       });
     }
   },
@@ -340,6 +342,7 @@ export default {
     },
     onSave() {
       var data = {};
+      data.groupId = this.groupId;
       if (this.title != "" && this.title != undefined) {
         data.title = this.title;
       }
