@@ -63,9 +63,9 @@
               <text class="profile-title">生日: </text>
               <text
                 class="ft-cl-gray"
-                v-if="profile.birthday && profile.age > 12"
+                v-if="profile.birthdayMonth && profile.age > 12"
               >
-                {{ profile.birthday }}&nbsp;年
+                {{ profile.birthdayMonth }}
               </text>
               <text
                 class="ft-cl-red"
