@@ -12,111 +12,111 @@
         {
             "path": "pages/social/index",
             "style": {
-                "navigationBarTitleText": "my-social",
+                "navigationBarTitleText": "因缘遇见丨单身小站",
                 "enablePullDownRefresh": true
             }
         },
         {
             "path": "pages/social/detail/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/activity/edit/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/login/profile/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/login/mobile/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         
         {
             "path": "pages/im/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/square/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/activity/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/activity/detail/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/join/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/apply/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/member/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/apply/detail/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/edit/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/info/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/group/unauth/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
             "path": "pages/me/index",
             "style": {
-                "navigationBarTitleText": "my-social"
+                "navigationBarTitleText": "因缘遇见丨单身小站"
             }
         },
         {
