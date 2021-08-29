@@ -35,7 +35,7 @@
             <view class="name">
               <text>{{ cardDetail.profile.name }}</text>
             </view>
-            <view class="gender">
+            <!-- <view class="gender">
               <image
                 v-if="cardDetail.profile.gender === 'FEMALE'"
                 class="seximg mg-l-20rpx"
@@ -46,14 +46,14 @@
                 class="seximg mg-l-20rpx"
                 src="/static/image/sexm.png"
               ></image>
-            </view>
-            <view class="birthday">
+            </view> -->
+            <!-- <view class="birthday">
               <text class="mg-l-20rpx sub-info">
                 {{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}/{{
                   cardDetail.profile.birthday
                 }}年/{{ cardDetail.profile.constellation }}
               </text>
-            </view>
+            </view> -->
           </view>
         </uni-row>
         <uni-row class="demo-uni-row">
@@ -85,18 +85,40 @@
         <uni-row class="demo-uni-row">
           <uni-col :span="12">
             <text>
-              籍贯:&nbsp;{{
-                cardDetail.profile.bornCity
-                  ? cardDetail.profile.bornCity
-                  : "未知"
+              性别:&nbsp;
+              <text class="mg-l-20rpx sub-info">
+                {{ cardDetail.profile.gender === "FEMALE" ? "女" : "男" }}
+              </text>
+            </text>
+          </uni-col>
+          <uni-col :span="12">
+            <text>
+              生日:&nbsp;{{
+                cardDetail.profile.birthdayMonth
+                  ? cardDetail.profile.birthdayMonth
+                  : 0
               }}
             </text>
           </uni-col>
+        </uni-row>
+        <uni-row class="demo-uni-row">
           <uni-col :span="12">
             <text>
               身高:&nbsp;{{
                 cardDetail.profile.height ? cardDetail.profile.height : 0
               }}cm
+            </text>
+          </uni-col>
+          <uni-col :span="12">
+            <text>
+              学校:&nbsp;{{
+                cardDetail.profile.edu ? cardDetail.profile.edu : "未知"
+              }}
+            </text>
+            <text class="mg-l-15rpx">
+              {{
+                cardDetail.profile.eduDegree ? cardDetail.profile.eduDegree : ""
+              }}
             </text>
           </uni-col>
         </uni-row>
@@ -110,20 +132,17 @@
               }}
             </text>
           </uni-col>
-        </uni-row>
-        <uni-row class="demo-uni-row">
           <uni-col :span="12">
             <text>
-              学校:&nbsp;{{
-                cardDetail.profile.edu ? cardDetail.profile.edu : "未知"
-              }}
-            </text>
-            <text class="mg-l-15rpx">
-              {{
-                cardDetail.profile.eduDegree ? cardDetail.profile.eduDegree : ""
+              籍贯:&nbsp;{{
+                cardDetail.profile.bornCity
+                  ? cardDetail.profile.bornCity
+                  : "未知"
               }}
             </text>
           </uni-col>
+        </uni-row>
+        <uni-row class="demo-uni-row">
           <uni-col :span="12">
             <text>
               工作:&nbsp;{{
@@ -390,7 +409,7 @@ swiper {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 300rpx;
+  max-width: 600rpx;
   color: black;
 }
 

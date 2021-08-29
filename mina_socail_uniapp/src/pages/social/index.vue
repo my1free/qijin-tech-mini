@@ -37,7 +37,7 @@
                   <view class="birthday">
                     <text class="mg-l-20rpx sub-info">
                       {{ card.profile.gender === "FEMALE" ? "女" : "男" }}/{{
-                        card.profile.birthday
+                        card.profile.birthdayYear
                       }}年/{{ card.profile.constellation }}
                     </text>
                   </view>

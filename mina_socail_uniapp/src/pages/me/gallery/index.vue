@@ -36,6 +36,9 @@
         <text>注：短按替换图片，长按删除图片</text>
       </view>
     </view>
+    <view class="img-cut-tips" v-if="cutImage">
+      <text>缩放图片使填满红框，效果最佳哦</text>
+    </view>
 
     <uni-popup ref="delImagePopup" type="dialog">
       <uni-popup-dialog
@@ -177,7 +180,7 @@ export default {
         sizeType: ["compressed"],
         sourceType: ["album", "camera"],
         success: (chooseImageRes) => {
-          // this.cutImage = true;
+          this.cutImage = true;
           console.log("xxx", chooseImageRes.tempFilePaths[0]);
           this.src = chooseImageRes.tempFilePaths[0];
         },
@@ -388,5 +391,19 @@ page {
   color: gray;
   margin-top: 20rpx;
   padding-left: 40rpx;
+}
+
+.img-cut-tips {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 12rpx;
+  z-index: 999;
+}
+
+.img-cut-tips text {
+  background-color: white;
+  padding: 5rpx 40rpx;
+  border-radius: 5rpx;
 }
 </style>
