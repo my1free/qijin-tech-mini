@@ -7,116 +7,114 @@
         }
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-        
-        
+        {
+            "path": "pages/activity/index",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
         {
             "path": "pages/social/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站",
+                "navigationBarTitleText": "聚缘丨活动报名",
                 "enablePullDownRefresh": true
             }
         },
         {
             "path": "pages/social/detail/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/activity/edit/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/login/profile/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/login/mobile/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         
         {
             "path": "pages/im/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/square/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
-            }
-        },
-        {
-            "path": "pages/activity/index",
-            "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/activity/detail/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/join/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/apply/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/member/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/apply/detail/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/edit/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/info/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/group/unauth/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
             "path": "pages/me/index",
             "style": {
-                "navigationBarTitleText": "因缘遇见丨单身小站"
+                "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
         {
@@ -148,12 +146,12 @@
         "iconWidth": "24px",
         "spacing": "3px",
         "list": [
-            {
-                "pagePath": "pages/social/index",
-                "iconPath": "static/image/card-gray.png",
-                "selectedIconPath": "static/image/card-color.png",
-                "text": "推荐"
-            },
+            // {
+            //     "pagePath": "pages/social/index",
+            //     "iconPath": "static/image/card-gray.png",
+            //     "selectedIconPath": "static/image/card-color.png",
+            //     "text": "推荐"
+            // },
             // {
             //     "pagePath": "pages/square/index",
             //     "iconPath": "static/image/square-gray.png",

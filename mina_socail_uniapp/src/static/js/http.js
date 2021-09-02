@@ -1,4 +1,4 @@
-const env = "prod";
+const env = "local";
 
 import api from "./api.js";
 const showToast = (title) => {

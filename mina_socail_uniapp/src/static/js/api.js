@@ -56,11 +56,13 @@ function login() {
             uni.navigateTo({ url: "/pages/login/profile/index" });
           } else {
             uni.switchTab({
-              url: "/pages/social/index",
+              url: "/pages/activity/index",
+              // url: "/pages/social/index",
               success() {
                 let page = getCurrentPages().pop();
                 if (page == undefined || page == null) return;
-                page.onLoad();
+                // page.onLoad();
+                page.onShow();
               },
             });
           }

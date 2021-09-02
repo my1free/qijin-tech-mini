@@ -160,6 +160,7 @@ export default {
   },
   methods: {
     onCardDetail(uid) {
+      if (this.activity.audited) return;
       uni.navigateTo({
         url: "/pages/social/detail/index?userId=" + uid,
       });

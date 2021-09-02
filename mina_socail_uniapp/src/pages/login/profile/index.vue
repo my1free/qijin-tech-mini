@@ -50,7 +50,8 @@ export default {
               });
               api.sleep(1000).then((result) => {
                 uni.switchTab({
-                  url: "/pages/social/index",
+                  // url: "/pages/social/index",
+                  url: "/pages/activity/index",
                   success() {
                     let page = getCurrentPages().pop();
                     if (page == undefined || page == null) return;

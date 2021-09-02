@@ -33,7 +33,10 @@
         v-if="!myProfile.images || myProfile.images.length == 0"
       ></view>
     </view>
-    <view class="panel tips width100" v-if="myProfile.shouldShow == false">
+    <view
+      class="panel tips width100"
+      v-if="myProfile.shouldShow == false && myProfile.audited != true"
+    >
       <text>* 注：\r 至少添加一张照片，才会被别人看到哦~</text>
     </view>
     <view
@@ -102,6 +105,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('height', myProfile.profile.height)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">身高</view>
           <view class="info-item-value">{{
@@ -112,6 +116,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('birthday', myProfile.profile.birthday)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">生日</view>
           <view class="info-item-value">{{
@@ -130,6 +135,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('bornCity', myProfile.profile.bornCity)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">籍贯</view>
           <view class="info-item-value">{{
@@ -142,6 +148,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('liveCity', myProfile.profile.liveCity)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">现居地</view>
           <view class="info-item-value">{{
@@ -154,6 +161,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('edu', myProfile.profile.edu)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">学校</view>
           <view class="info-item-value">{{
@@ -164,6 +172,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('eduDegree', myProfile.profile.eduDegree)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">学历</view>
           <view class="info-item-value">{{
@@ -176,6 +185,7 @@
         <view
           class="info-item"
           v-on:click="onEdit('job', myProfile.profile.job)"
+          v-if="myProfile.audited != true"
         >
           <view class="info-item-title">工作</view>
           <view class="info-item-value">{{
@@ -185,7 +195,11 @@
         </view>
       </view>
     </view>
-    <view class="panel" v-on:click="onEditTags()">
+    <view
+      class="panel"
+      v-on:click="onEditTags()"
+      v-if="myProfile.audited != true"
+    >
       <view class="panel-head">
         <view class="panel-head-title">个人爱好</view>
       </view>
@@ -209,7 +223,7 @@
         <text>点击填写兴趣爱好</text>
       </view>
     </view>
-    <view class="panel">
+    <view class="panel" v-if="myProfile.audited != true">
       <view class="panel-head">
         <view class="panel-head-title">自我介绍</view>
       </view>
