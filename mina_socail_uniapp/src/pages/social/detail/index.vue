@@ -321,6 +321,7 @@ export default {
     api.getCardDetail(userId).then((res) => {
       console.log("getCardDetail=", res);
       this.cardDetail = res;
+      this.cardDetail.withNoGroup = false;
     });
   },
   methods: {

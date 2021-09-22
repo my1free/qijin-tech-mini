@@ -1,62 +1,131 @@
 <template>
   <view class="with100">
     <view class="activity-list" v-bind:class="{ blur: withNoGroup }">
-      <view
-        class="activity-item"
-        v-for="activity in activities"
-        :key="activity.id"
-        v-on:click="onDetail(activity.id)"
-      >
-        <view class="activity-title">
-          {{ activity.title }}
+      <view v-if="myActivities != null && myActivities.length > 0">
+        <view class="group-title">
+          我发起的活动
         </view>
         <view
-          class="activity-tags"
-          v-if="activity.tags && activity.tags.length > 0"
+          class="activity-item"
+          v-for="activity in myActivities"
+          :key="activity.id"
+          v-on:click="onDetail(activity.id)"
         >
-          <view class="activity-tag" v-for="tag in activity.tags" :key="tag">
-            {{ tag }}
+          <view class="activity-title">
+            {{ activity.title }}
           </view>
-        </view>
-        <view class="activity-sponsor">
-          <text class="title">发起人:</text>
-          <view class="sponsor-avatar">
-            <image :src="activity.sponsor.avatar"></image>
-          </view>
-        </view>
-        <view class="activity-date">
-          <text class="title">开始时间:</text>
-          {{ activity.startTime }}
-        </view>
-        <view class="activity-date">
-          <text class="title">结束时间:</text>
-          {{ activity.endTime }}
-        </view>
-        <view class="activity-addr" v-if="activity.location">
-          <text class="title">地点:</text>
-          {{ activity.location }}
-        </view>
-        <view class="activity-description">
-          <text>{{ activity.description }}</text>
-        </view>
-        <view class="activity-participants">
-          <text class="ft-bold">参与者</text>
-          <text
-            >({{
-              activity.participantCount ? activity.participantCount : 0
-            }}人)</text
-          >
-          <text class="title">:</text>
           <view
-            class="activity-participant"
-            v-for="participant in activity.participants"
-            :key="participant.id"
+            class="activity-tags"
+            v-if="activity.tags && activity.tags.length > 0"
           >
-            <image :src="participant.profile.avatar"></image>
+            <view class="activity-tag" v-for="tag in activity.tags" :key="tag">
+              {{ tag }}
+            </view>
+          </view>
+          <view class="activity-sponsor">
+            <text class="title">发起人:</text>
+            <view class="sponsor-avatar">
+              <image :src="activity.sponsor.avatar"></image>
+            </view>
+          </view>
+          <view class="activity-date">
+            <text class="title">开始时间:</text>
+            {{ activity.startTime }}
+          </view>
+          <view class="activity-date">
+            <text class="title">结束时间:</text>
+            {{ activity.endTime }}
+          </view>
+          <view class="activity-addr" v-if="activity.location">
+            <text class="title">地点:</text>
+            {{ activity.location }}
+          </view>
+          <view class="activity-description">
+            <text>{{ activity.description }}</text>
+          </view>
+          <view class="activity-participants">
+            <text class="ft-bold">参与者</text>
+            <text
+              >({{
+                activity.participantCount ? activity.participantCount : 0
+              }}人)</text
+            >
+            <text class="title">:</text>
+            <view
+              class="activity-participant"
+              v-for="participant in activity.participants"
+              :key="participant.id"
+            >
+              <image :src="participant.profile.avatar"></image>
+            </view>
           </view>
         </view>
       </view>
-      <view class="activity-op">
+
+      <view>
+        <view
+          class="activity-item"
+          v-for="activity in activities"
+          :key="activity.id"
+          v-on:click="onDetail(activity.id)"
+        >
+          <view
+            class="group-title"
+            v-if="myActivities != null && myActivities.length > 0"
+          >
+            其他活动
+          </view>
+          <view class="activity-title">
+            {{ activity.title }}
+          </view>
+          <view
+            class="activity-tags"
+            v-if="activity.tags && activity.tags.length > 0"
+          >
+            <view class="activity-tag" v-for="tag in activity.tags" :key="tag">
+              {{ tag }}
+            </view>
+          </view>
+          <view class="activity-sponsor">
+            <text class="title">发起人:</text>
+            <view class="sponsor-avatar">
+              <image :src="activity.sponsor.avatar"></image>
+            </view>
+          </view>
+          <view class="activity-date">
+            <text class="title">开始时间:</text>
+            {{ activity.startTime }}
+          </view>
+          <view class="activity-date">
+            <text class="title">结束时间:</text>
+            {{ activity.endTime }}
+          </view>
+          <view class="activity-addr" v-if="activity.location">
+            <text class="title">地点:</text>
+            {{ activity.location }}
+          </view>
+          <view class="activity-description">
+            <text>{{ activity.description }}</text>
+          </view>
+          <view class="activity-participants">
+            <text class="ft-bold">参与者</text>
+            <text
+              >({{
+                activity.participantCount ? activity.participantCount : 0
+              }}人)</text
+            >
+            <text class="title">:</text>
+            <view
+              class="activity-participant"
+              v-for="participant in activity.participants"
+              :key="participant.id"
+            >
+              <image :src="participant.profile.avatar"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="activity-op" v-if="hasOp">
         <uni-fab
           :pattern="opPattern"
           horizontal="right"
@@ -81,6 +150,7 @@ export default {
   data() {
     return {
       withNoGroup: false,
+      hasOp: false,
       opPattern: {
         buttonColor: "#0574a9",
       },
@@ -90,6 +160,7 @@ export default {
           text: "发起活动",
         },
       ],
+      myActivities: [],
       activities: [],
     };
   },
@@ -97,7 +168,9 @@ export default {
     api.listActivity().then((res) => {
       console.log("activities=", res);
       this.activities = res.activities;
-      this.withNoGroup = res.withNoGroup;
+      this.myActivities = res.myActivities;
+      // this.withNoGroup = res.withNoGroup;
+      this.hasOp = res.hasOp;
     });
   },
   methods: {
@@ -213,5 +286,15 @@ export default {
   border-radius: 50%;
   border: 4rpx white solid;
   margin-left: -15rpx;
+}
+
+.group-title {
+  background-color: #e66465;
+  font-size: 35rpx;
+  color: white;
+  padding: 10rpx;
+  margin-left: -30rpx;
+  width: 730rpx;
+  margin-bottom: 40rpx;
 }
 </style>

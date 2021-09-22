@@ -217,6 +217,16 @@ function joinActivity(data) {
   return http.post("/incubator/social/activity/join", data);
 }
 
+function joinActivityAudit(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/join/audit", data);
+}
+
+function joinActivityApprove(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/join/approve", data);
+}
+
 function cancelActivity(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/activity/cancel", data);
@@ -280,9 +290,31 @@ function rejectApply(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/group/admin/apply/reject", data);
 }
+
 function kickOutFromGroup(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/group/admin/kickOut", data);
+}
+
+function checkIn(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/participant/arrive", data);
+}
+
+function participantInfo(participantId) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.get(
+    "/incubator/social/activity/participant/info?participantId=" + participantId
+  );
+}
+
+function cardCheck(userId, activityId) {
+  return http.get(
+    "/incubator/social/activity/card/check?userId=" +
+      userId +
+      "&activityId=" +
+      activityId
+  );
 }
 
 // ====== 以下是基础方法 ========
@@ -361,6 +393,8 @@ export default {
   // activity
   saveOrUpdateActivity,
   joinActivity,
+  joinActivityAudit,
+  joinActivityApprove,
   cancelActivity,
   closeActivity,
 
@@ -376,4 +410,7 @@ export default {
   acceptApply,
   rejectApply,
   kickOutFromGroup,
+  checkIn,
+  participantInfo,
+  cardCheck,
 };

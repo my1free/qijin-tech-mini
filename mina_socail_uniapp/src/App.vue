@@ -19,6 +19,9 @@ export default {
 .mg-l-5rpx {
   margin-left: 5rpx;
 }
+.mg-l-10 {
+  margin-left: 10rpx;
+}
 .mg-l-15rpx {
   margin-left: 15rpx;
 }
@@ -194,5 +197,11 @@ export default {
 }
 .box-shadow {
   box-shadow: 0 0 0.1em #ddd, 0 0 0.6em #ddd;
+}
+.bgmale {
+  background-color: rgb(7, 137, 152);
+}
+.bgfemale {
+  background-color: rgb(243, 17, 179);
 }
 </style>
