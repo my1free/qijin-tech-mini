@@ -7,10 +7,12 @@
       class="description"
       v-on:click="onEdit(groupId, 'description', group.description)"
     >
-      <view class="info-content">
-        <text v-if="group.description">{{ group.description }}</text>
-        <text v-if="!group.description">点击填写群组简介</text>
-      </view>
+      <u-parse
+        :content="group.description"
+        noData="正在加载中..."
+        v-if="group.description"
+      />
+      <text v-if="!group.description">点击填写群组简介</text>
     </view>
     <view class="title width100">
       <text>管理员</text>
@@ -82,8 +84,9 @@
 
 <script>
 import api from "@/static/js/api.js";
+import uParse from "@/components/gaoyia-parse/parse.vue"; //引入组件
 export default {
-  components: {},
+  components: { uParse },
   data() {
     return {
       groupId: 0,
@@ -98,7 +101,6 @@ export default {
   },
   onLoad(option) {
     var groupId = option.groupId;
-    groupId = 1;
     this.groupId = groupId;
     console.log("groupId=", groupId);
   },
@@ -237,7 +239,6 @@ export default {
   width: 100%;
   margin-left: 10rpx;
   padding: 20rpx;
-  border-left: 15rpx #ddd solid;
   min-height: 100rpx;
   align-items: center;
   color: gray;

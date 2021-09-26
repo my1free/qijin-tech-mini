@@ -30,6 +30,18 @@
         <text class="title">结束时间:</text>
         {{ activity.endTime }}
       </view>
+      <view class="activity-date">
+        <text class="title">总人数限制:</text>
+        {{ activity.totalLimit }} 人
+      </view>
+      <view class="activity-date">
+        <text class="title">男生人数限制:</text>
+        {{ activity.maleLimit }} 人
+      </view>
+      <view class="activity-date">
+        <text class="title">女生人数限制:</text>
+        {{ activity.femaleLimit }} 人
+      </view>
       <view class="activity-addr" v-if="activity.location">
         <text class="title">地点:</text>
         {{ activity.location }}
@@ -47,17 +59,27 @@
           </view>
         </view>
       </view>
-      <view class="activity-participants">
+      <view class="self-status">
+        <text class="ft-bold pd-r-20">报名状态:</text>
+        <text v-if="activity.selfStatus === 'NULL'">未报名</text>
+        <text v-if="activity.selfStatus === 'AUDIT'">审核中</text>
+        <text v-if="activity.selfStatus === 'JOIN'">已报名</text>
+        <text v-if="activity.selfStatus === 'FORCE_JOIN'">已报名-空降</text>
+        <text v-if="activity.selfStatus === 'WAIT'">候补中</text>
+      </view>
+      <view
+        class="activity-participants"
+        v-if="
+          activity.auditParticipants && activity.auditParticipants.length > 0
+        "
+      >
         <view class="width100">
           <text class="ft-bold">待审核</text>
           <text class="mg-l-10">
             &nbsp;({{ activity.auditParticipants.length }})人
           </text>
         </view>
-        <view
-          class="participants-list width100"
-          v-if="!activity.isAdmin || activity.isAdmin == false"
-        >
+        <view class="participants-list width100">
           <view
             class="activity-participant"
             v-for="participant in activity.auditParticipants"
@@ -135,60 +157,18 @@
             </view>
           </view> -->
           </view>
-          <view
-            class="participants-list-admin width100"
-            v-if="activity.isAdmin && activity.isAdmin == true"
-          >
-            <view
-              class="activity-participant-admin"
-              v-for="participant in activity.participants"
-              :key="participant.id"
-              v-on:click="onCardDetail(participant.profile.userId)"
-            >
-              <view class="participant-info">
-                <view class="avatar">
-                  <image :src="participant.profile.avatar"></image>
-                </view>
-                <view class="participaint-info-detail">
-                  <view>
-                    <text class="participant-name">
-                      {{ participant.profile.name }}
-                    </text>
-                    <image
-                      v-if="participant.profile.gender === 'FEMALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexw.png"
-                    ></image>
-                    <image
-                      v-if="participant.profile.gender === 'MALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexm.png"
-                    ></image>
-                  </view>
-                  <text class="participant-contact">
-                    {{
-                      participant.profile.mobile
-                        ? participant.profile.mobile
-                        : "无手机号"
-                    }}
-                  </text>
-                </view>
-              </view>
-            </view>
-          </view>
         </view>
       </view>
       <view class="activity-participants">
         <view class="width100">
           <text class="ft-bold">参与者</text>
           <text class="mg-l-10">
-            &nbsp;(男:{{ activity.maleCount }}/女:{{ activity.femaleCount }})
+            &nbsp;(男:{{ activity.maleCount }}&nbsp;/&nbsp;女:{{
+              activity.femaleCount
+            }})
           </text>
         </view>
-        <view
-          class="participants-list width100"
-          v-if="!activity.isAdmin || activity.isAdmin == false"
-        >
+        <view class="participants-list width100">
           <view
             class="activity-participant"
             v-for="participant in activity.participants"
@@ -267,47 +247,6 @@
             </view>
           </view> -->
           </view>
-          <view
-            class="participants-list-admin width100"
-            v-if="activity.isAdmin && activity.isAdmin == true"
-          >
-            <view
-              class="activity-participant-admin"
-              v-for="participant in activity.participants"
-              :key="participant.id"
-              v-on:click="onCardDetail(participant.profile.userId)"
-            >
-              <view class="participant-info">
-                <view class="avatar">
-                  <image :src="participant.profile.avatar"></image>
-                </view>
-                <view class="participaint-info-detail">
-                  <view>
-                    <text class="participant-name">
-                      {{ participant.profile.name }}
-                    </text>
-                    <image
-                      v-if="participant.profile.gender === 'FEMALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexw.png"
-                    ></image>
-                    <image
-                      v-if="participant.profile.gender === 'MALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexm.png"
-                    ></image>
-                  </view>
-                  <text class="participant-contact">
-                    {{
-                      participant.profile.mobile
-                        ? participant.profile.mobile
-                        : "无手机号"
-                    }}
-                  </text>
-                </view>
-              </view>
-            </view>
-          </view>
         </view>
       </view>
       <view class="activity-participants" v-if="activity.waitParticipants">
@@ -317,10 +256,7 @@
             ({{ activity.waitParticipants.length }}人)
           </text>
         </view>
-        <view
-          class="participants-list width100"
-          v-if="!activity.isAdmin || activity.isAdmin == false"
-        >
+        <view class="participants-list width100">
           <view
             class="activity-participant"
             v-for="participant in activity.waitParticipants"
@@ -381,62 +317,10 @@
               </view>
               <view
                 class="btn"
-                v-if="participant.hasCheckInBtn"
-                @click.stop="checkIn(participant.id)"
+                v-if="activity.isAdmin"
+                @click.stop="joinActivityForce(participant.id)"
               >
-                签到
-              </view>
-            </view>
-            <!-- <view class="participant-no" v-if="!participant.no">
-              <image
-                v-if="participant.profile.gender === 'FEMALE'"
-                src="/static/image/sexw.png"
-              ></image>
-              <image
-                v-if="participant.profile.gender === 'MALE'"
-                src="/static/image/sexm.png"
-              ></image>
-            </view>
-          </view> -->
-          </view>
-          <view
-            class="participants-list-admin width100"
-            v-if="activity.isAdmin && activity.isAdmin == true"
-          >
-            <view
-              class="activity-participant-admin"
-              v-for="participant in activity.participants"
-              :key="participant.id"
-              v-on:click="onCardDetail(participant.profile.userId)"
-            >
-              <view class="participant-info">
-                <view class="avatar">
-                  <image :src="participant.profile.avatar"></image>
-                </view>
-                <view class="participaint-info-detail">
-                  <view>
-                    <text class="participant-name">
-                      {{ participant.profile.name }}
-                    </text>
-                    <image
-                      v-if="participant.profile.gender === 'FEMALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexw.png"
-                    ></image>
-                    <image
-                      v-if="participant.profile.gender === 'MALE'"
-                      class="seximg mg-l-20rpx"
-                      src="/static/image/sexm.png"
-                    ></image>
-                  </view>
-                  <text class="participant-contact">
-                    {{
-                      participant.profile.mobile
-                        ? participant.profile.mobile
-                        : "无手机号"
-                    }}
-                  </text>
-                </view>
+                空降
               </view>
             </view>
           </view>
@@ -465,24 +349,6 @@
         @confirm="closeActivity"
       ></uni-popup-dialog>
     </uni-popup>
-    <uni-popup ref="msgpopup" type="dialog">
-      <uni-popup-dialog
-        type="warn"
-        :title="msgpopup"
-        :duration="2000"
-        @close="msgclose"
-        @confirm="msgconfirm"
-      ></uni-popup-dialog>
-    </uni-popup>
-    <uni-popup ref="cardpopup" type="dialog">
-      <uni-popup-dialog
-        type="error"
-        title="你还没有报名，不能查看对方详细信息哦"
-        :duration="2000"
-        @close="cardclose"
-        @confirm="cardconfirm"
-      ></uni-popup-dialog>
-    </uni-popup>
   </view>
 </template>
 
@@ -497,7 +363,6 @@ export default {
       opContent: [],
       activity: {},
       activityId: 0,
-      msgpopup: "每天一个微笑😊~",
     };
   },
   onLoad(option) {
@@ -514,7 +379,12 @@ export default {
             url: "/pages/social/detail/index?userId=" + uid,
           });
         } else {
-          this.$refs.cardpopup.open();
+          uni.showModal({
+            title: "提示",
+            content: "你还没有报名，不能查看对方详细信息哦",
+            showCancel: false,
+            success: function(res) {},
+          });
         }
       });
     },
@@ -590,8 +460,12 @@ export default {
           }
           console.log("result=", result);
           if (result.status != undefined && result.status == "WAIT") {
-            this.msgpopup = result.message;
-            this.$refs.msgpopup.open();
+            uni.showModal({
+              title: "提示",
+              content: result.message,
+              showCancel: false,
+              success: function(res) {},
+            });
           } else {
             uni.showToast({
               title: "报名成功",
@@ -641,12 +515,6 @@ export default {
           });
         });
     },
-    msgclose() {
-      this.$refs.msgpopup.close();
-    },
-    msgconfirm() {
-      this.$refs.msgpopup.close();
-    },
     cardclose() {
       this.$refs.cardpopup.close();
     },
@@ -676,9 +544,40 @@ export default {
           activityId: this.activityId,
         })
         .then((result) => {
+          if (typeof result === "number") {
+            if (result == 10002) {
+              uni.showModal({
+                title: "提示",
+                content: "报名活动需要在个人资料中补全手机号",
+                showCancel: false,
+                success: function(res) {},
+              });
+            }
+            return;
+          }
+          uni.showModal({
+            title: "提示",
+            content: "报名成功，等待管理员审核",
+            showCancel: false,
+            success: function(res) {},
+          });
+          api.sleep(2000).then((result) => {
+            this.refreshActivityDetail(this.activityId);
+          });
+        });
+    },
+    joinActivityForce(participantId) {
+      api
+        .joinActivityForce({
+          participantId: participantId,
+        })
+        .then((result) => {
           uni.showToast({
-            title: "报名成功，等待审核",
+            title: "空降成功",
             icon: "success",
+          });
+          api.sleep(2000).then((result) => {
+            this.refreshActivityDetail(this.activityId);
           });
         });
     },
@@ -701,8 +600,12 @@ export default {
           }
           console.log("result=", result);
           if (result.status != undefined && result.status == "WAIT") {
-            this.msgpopup = result.message;
-            this.$refs.msgpopup.open();
+            uni.showModal({
+              title: "提示",
+              content: result.message,
+              showCancel: false,
+              success: function(res) {},
+            });
           } else {
             uni.showToast({
               title: "报名成功",
@@ -803,6 +706,12 @@ export default {
   width: 98%;
   border-radius: 10rpx;
   margin-top: 20rpx;
+}
+
+.self-status {
+  margin-top: 20rpx;
+  border-top: 1rpx #ddd solid;
+  padding-top: 20rpx;
 }
 
 .activity-participants {

@@ -227,6 +227,11 @@ function joinActivityApprove(data) {
   return http.post("/incubator/social/activity/join/approve", data);
 }
 
+function joinActivityForce(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/incubator/social/activity/join/force", data);
+}
+
 function cancelActivity(data) {
   if (isMock) return new Promise((resolve) => resolve());
   return http.post("/incubator/social/activity/cancel", data);
@@ -238,6 +243,24 @@ function closeActivity(data) {
 }
 
 // ====== group =======
+function pageGroup(pageNo, pageSize) {
+  return http.get(
+    "/incubator/social/group/list?pageNo=",
+    pageNo + "&pageSize=",
+    pageSize
+  );
+}
+
+function listAuditGroup() {
+  return http.get("/incubator/social/group/audit/list");
+}
+function listManagedGroup() {
+  return http.get("/incubator/social/group/managed/list");
+}
+function listJoinedGroup() {
+  return http.get("/incubator/social/group/joined/list");
+}
+
 function getGroupInfo(groupId) {
   return http.get("/incubator/social/group/info?groupId=" + groupId);
 }
@@ -395,10 +418,15 @@ export default {
   joinActivity,
   joinActivityAudit,
   joinActivityApprove,
+  joinActivityForce,
   cancelActivity,
   closeActivity,
 
   // group
+  pageGroup,
+  listAuditGroup,
+  listJoinedGroup,
+  listManagedGroup,
   getGroupInfo,
   joinGroupTip,
   listGroupMember,

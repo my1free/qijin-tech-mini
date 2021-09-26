@@ -18,18 +18,19 @@
         </view>
       </view>
       <view class="description">
-        <text>{{ group.description }}</text>
+        <u-parse :content="group.description" noData="没有简介哦..." />
       </view>
       <view class="admin-list">
-        <view class="pd-l-r-20 text-bold ft-35">管理员</view>
-        <view class="admin" v-for="admin in group.admins" :key="admin.userId">
+        <view class="pd-l-r-20 text-bold ft-35 width100">管理员</view>
+        <my-group-admin :admins="group.admins"></my-group-admin>
+        <!-- <view class="admin" v-for="admin in group.admins" :key="admin.userId">
           <view class="avatar">
             <image :src="admin.avatar"></image>
           </view>
           <view class="name">
             <text>{{ admin.name }}</text>
           </view>
-        </view>
+        </view> -->
       </view>
       <view class="reject-info" v-if="applyStatus === 'REJECTED'">
         <text>
@@ -116,7 +117,7 @@
             </view>
           </view>
         </view>
-        <view class="certify">
+        <view class="certify" v-if="group.certifyRequirements">
           <view class="cover-area">
             <view class="pd-40 text-bold ft-35 width100">
               相关证明
@@ -188,8 +189,14 @@
 
 <script>
 import api from "@/static/js/api.js";
+import uParse from "@/components/gaoyia-parse/parse.vue"; //引入组件
+import myGroupAdmin from "@/components/my-group-admin.vue"; //引入组件
+
 export default {
-  components: {},
+  components: {
+    uParse,
+    myGroupAdmin,
+  },
   data() {
     return {
       groupId: 0,
@@ -388,10 +395,10 @@ export default {
 }
 
 .head {
-  padding: 40rpx 0rpx;
+  padding: 40rpx 40rpx;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   box-shadow: 0 0 0.1em #ddd, 0 0 0.6em #ddd;
 }
 
@@ -420,8 +427,8 @@ export default {
 .admin-list {
   width: 100%;
   display: flex;
-  margin-top: 50rpx;
-  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 25rpx;
   padding: 20rpx;
   box-shadow: 0 0 0.1em #ddd, 0 0 0.6em #ddd;
 }

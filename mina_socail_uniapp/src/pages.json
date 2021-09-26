@@ -159,17 +159,17 @@
             //     "text": "广场"
             // },
             {
+                "pagePath": "pages/group/index",
+                "iconPath": "static/image/chat-gray.png",
+                "selectedIconPath": "static/image/chat-color.png",
+                "text": "俱乐部"
+            },
+            {
                 "pagePath": "pages/activity/index",
                 "iconPath": "static/image/activity-gray.png",
                 "selectedIconPath": "static/image/activity-color.png",
                 "text": "活动"
             },
-            // {
-            //     "pagePath": "pages/group/info/index",
-            //     "iconPath": "static/image/chat-gray.png",
-            //     "selectedIconPath": "static/image/chat-color.png",
-            //     "text": "群组"
-            // },
             {
                 "pagePath": "pages/me/index",
                 "iconPath": "static/image/me-gray.png",

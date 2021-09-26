@@ -46,6 +46,45 @@
     </view>
     <view class="width100">
       <view class="pd-40 text-bold ft-35">
+        总人数限制
+      </view>
+      <input
+        id="totalLimit"
+        class="pd-l-r-40"
+        :value="totalLimit"
+        placeholder="默认500"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
+    <view class="width100">
+      <view class="pd-40 text-bold ft-35">
+        男生人数限制
+      </view>
+      <input
+        id="maleLimit"
+        class="pd-l-r-40"
+        :value="maleLimit"
+        placeholder="默认500"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
+    <view class="width100">
+      <view class="pd-40 text-bold ft-35">
+        女生人数限制
+      </view>
+      <input
+        id="femaleLimit"
+        class="pd-l-r-40"
+        :value="femaleLimit"
+        placeholder="默认500"
+        @input="onKeyInput"
+        @blur="onKeyBlur"
+      />
+    </view>
+    <view class="width100">
+      <view class="pd-40 text-bold ft-35">
         开始时间
         <span class="required">*</span>
       </view>
@@ -182,6 +221,9 @@ export default {
       tags: [],
       selfDefined: "",
       groupId: 1,
+      totalLimit: null,
+      maleLimit: null,
+      femaleLimit: null,
     };
   },
   onLoad(option) {
@@ -197,6 +239,9 @@ export default {
         this.images = result.images ? result.images : [];
         this.tags = result.tags;
         this.groupId = result.groupId;
+        this.totalLimit = result.totalLimit;
+        this.maleLimit = result.maleLimit;
+        this.femaleLimit = result.femaleLimit;
       });
     }
   },
@@ -212,6 +257,12 @@ export default {
         this.location = value;
       } else if (id === "description") {
         this.description = value;
+      } else if (id === "totalLimit") {
+        this.totalLimit = value;
+      } else if (id === "maleLimit") {
+        this.maleLimit = value;
+      } else if (id === "femaleLimit") {
+        this.femaleLimit = value;
       }
     },
     onKeyBlur: function(event) {
@@ -369,6 +420,15 @@ export default {
       }
       if (this.tags != undefined && this.tags.length > 0) {
         data.tags = this.tags;
+      }
+      if (this.totalLimit != "" && this.totalLimit != undefined) {
+        data.totalLimit = this.totalLimit;
+      }
+      if (this.maleLimit != "" && this.maleLimit != undefined) {
+        data.maleLimit = this.maleLimit;
+      }
+      if (this.femaleLimit != "" && this.femaleLimit != undefined) {
+        data.femaleLimit = this.femaleLimit;
       }
       console.log("data=", data);
       api.saveOrUpdateActivity(data).then((result) => {

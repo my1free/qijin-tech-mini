@@ -35,6 +35,10 @@ export default {
   padding-left: 5rpx;
 }
 
+.pd-r-20 {
+  padding-right: 20rpx;
+}
+
 .mg-r-20 {
   margin-right: 20rpx;
 }

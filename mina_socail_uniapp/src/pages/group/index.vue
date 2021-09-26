@@ -1,167 +1,76 @@
 <template>
   <view class="content">
-    <view class="my-group">
+    <view
+      class="my-group width100 border-bt"
+      v-if="managedGroups && managedGroups.length > 0"
+    >
+      <view class="g-title">我管理的俱乐部</view>
       <uni-row class="demo-uni-row">
-        <my-group />
+        <my-group :groups="managedGroups" />
+      </uni-row>
+    </view>
+    <view
+      class="my-group width100 border-bt"
+      v-if="auditGroups && auditGroups.length > 0"
+    >
+      <view class="g-title">审核中的俱乐部</view>
+      <uni-row class="demo-uni-row">
+        <my-group :groups="auditGroups" />
+      </uni-row>
+    </view>
+    <view
+      class="my-group width100 border-bt"
+      v-if="joinedGroups && joinedGroups.length > 0"
+    >
+      <view class="g-title">我加入的俱乐部</view>
+      <uni-row class="demo-uni-row">
+        <my-group :groups="joinedGroups" />
+      </uni-row>
+    </view>
+    <view class="my-group width100" v-if="groups && groups.length > 0">
+      <view class="g-title">全部俱乐部</view>
+      <uni-row class="demo-uni-row">
+        <my-group :groups="groups" />
       </uni-row>
     </view>
   </view>
 </template>
 
 <script>
-import myGroup from "../../components/chat-group.vue";
+import api from "@/static/js/api.js";
+import myGroup from "../../components/my-group.vue";
 export default {
   components: {
     myGroup,
   },
   data() {
     return {
-      title: "Hello",
-      itemList: [
-        {
-          id: 20000002,
-          user: {
-            id: 10001,
-            name: "德善",
-            avatar: "/static/image/deshan.jpeg",
-          },
-          content: {
-            type: "text",
-            text:
-              "每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n",
-          },
-          hasLiked: false,
-          doInput: false,
-          likeList: [
-            {
-              uid: 10002,
-              name: "阿泽",
-            },
-            {
-              uid: 10004,
-              name: "狗焕",
-            },
-            {
-              uid: 10005,
-              name: "娃娃鱼",
-            },
-          ],
-          commentList: [
-            {
-              id: 40000001,
-              fromUser: {
-                uid: 10002,
-                name: "阿泽",
-              },
-              text: "我亲爱的德善",
-            },
-            {
-              id: 40000002,
-              fromUser: {
-                uid: 10005,
-                name: "娃娃鱼",
-              },
-              toUser: {
-                uid: 10002,
-                name: "阿泽",
-              },
-              text: "能不能不要这么恶心",
-            },
-            {
-              id: 40000003,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "藏起来~~",
-            },
-            {
-              id: 40000004,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "阿萨德富兰克林水电费尽量少打飞机",
-            },
-            {
-              id: 40000005,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text:
-                "阿士大夫撒旦法 撒打飞机拉双方均对拉丝解放路撒 发苏打绿发撒拉发动机",
-            },
-            {
-              id: 40000006,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "仨",
-            },
-            {
-              id: 40000007,
-              fromUser: {
-                uid: 10004,
-                name: "狗焕",
-              },
-              text: "藏起来~~",
-            },
-          ],
-        },
-        {
-          id: 20000003,
-          user: {
-            id: 10002,
-            name: "阿泽",
-            avatar: "/static/image/aze.jpeg",
-          },
-          content: {
-            type: "image",
-            text: "第一个动态",
-            urls: [
-              "/static/image/deshan2.jpg",
-              "/static/image/deshan3.jpg",
-              "/static/image/aze.jpeg",
-              "/static/image/aze2.jpeg",
-            ],
-          },
-          doInput: false,
-          hasLiked: false,
-        },
-        {
-          id: 20000004,
-          user: {
-            id: 10003,
-            name: "宝拉",
-            avatar: "/static/image/baola.jpeg",
-          },
-          content: {
-            type: "image",
-            text: "每天都要元气满满",
-            urls: ["/static/image/baola3.jpeg"],
-          },
-          doInput: false,
-          hasLiked: false,
-        },
-      ],
-      showPreview: false,
-      imgList: [
-        "/static/image/deshan2.jpg",
-        "/static/image/deshan3.jpg",
-        "/static/image/aze.jpeg",
-        "/static/image/aze2.jpeg",
-      ],
+      groups: [],
+      auditGroups: [],
+      managedGroups: [],
+      joinedGroups: [],
     };
   },
-  onLoad() {},
-  methods: {
-    hhh() {
-      console.log("asdfdf");
-      this.showPreview = true;
-    },
+  onShow() {
+    api.pageGroup(1, 10).then((result) => {
+      console.log("groups=", result);
+      this.groups = result.groups;
+    });
+    api.listAuditGroup(1, 10).then((result) => {
+      console.log("auditGroups=", result);
+      this.auditGroups = result.groups;
+    });
+    api.listManagedGroup(1, 10).then((result) => {
+      console.log("managedGroups=", result);
+      this.managedGroups = result.groups;
+    });
+    api.listJoinedGroup(1, 10).then((result) => {
+      console.log("joinedGroups=", result);
+      this.joinedGroups = result.groups;
+    });
   },
+  onLoad() {},
+  methods: {},
 };
 </script>
 
@@ -175,5 +84,17 @@ export default {
 
 .my-group {
   width: 100%;
+  margin-top: 30rpx;
+}
+
+.g-title {
+  padding-left: 20rpx;
+  padding-bottom: 20rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.border-bt {
+  border-bottom: 1rpx #eeeeee solid;
 }
 </style>

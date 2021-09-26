@@ -36,6 +36,18 @@
             <text class="title">结束时间:</text>
             {{ activity.endTime }}
           </view>
+          <view class="activity-date">
+            <text class="title">总人数限制:</text>
+            {{ activity.totalLimit }} 人
+          </view>
+          <view class="activity-date">
+            <text class="title">男生人数限制:</text>
+            {{ activity.maleLimit }} 人
+          </view>
+          <view class="activity-date">
+            <text class="title">女生人数限制:</text>
+            {{ activity.femaleLimit }} 人
+          </view>
           <view class="activity-addr" v-if="activity.location">
             <text class="title">地点:</text>
             {{ activity.location }}
@@ -99,6 +111,18 @@
           <view class="activity-date">
             <text class="title">结束时间:</text>
             {{ activity.endTime }}
+          </view>
+          <view class="activity-date">
+            <text class="title">总人数限制:</text>
+            {{ activity.totalLimit }} 人
+          </view>
+          <view class="activity-date">
+            <text class="title">男生人数限制:</text>
+            {{ activity.maleLimit }} 人
+          </view>
+          <view class="activity-date">
+            <text class="title">女生人数限制:</text>
+            {{ activity.femaleLimit }} 人
           </view>
           <view class="activity-addr" v-if="activity.location">
             <text class="title">地点:</text>
