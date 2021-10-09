@@ -43,6 +43,7 @@ function uploadImageWithPath(filePath) {
 function login() {
   wx.login({
     success(res) {
+      console.log("wx.login=", res);
       http
         .post("/api/v1/user/account/login/mini", { code: res.code })
         .then((res) => {
@@ -53,16 +54,16 @@ function login() {
             success: function() {},
           });
           if (res.loginStatus == "NEW") {
-            uni.navigateTo({ url: "/pages/login/profile/index" });
+            uni.navigateTo({ url: "/pages/login/profile" });
           } else {
             uni.switchTab({
-              url: "/pages/activity/index",
-              // url: "/pages/social/index",
+              // url: "/pages/activity/index",
+              url: "/pages/social/index",
               success() {
                 let page = getCurrentPages().pop();
                 if (page == undefined || page == null) return;
-                // page.onLoad();
-                page.onShow();
+                page.onLoad();
+                // page.onShow();
               },
             });
           }
@@ -129,6 +130,11 @@ function saveProfile(avatar, name, gender) {
       });
     }
   });
+}
+
+function decodePhone(data) {
+  if (isMock) return new Promise((resolve) => resolve());
+  return http.post("/api/v1/user/account/mini/mobile", data);
 }
 
 function listCard() {
@@ -390,6 +396,8 @@ function sleep(ms) {
 }
 
 export default {
+  // WeChat
+  decodePhone,
   uploadImageWithFile,
   uploadImageWithPath,
   login,

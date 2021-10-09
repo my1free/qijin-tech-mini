@@ -20,7 +20,13 @@
         focus="true"
         @input="onKeyInput"
         @blur="onKeyBlur"
+        v-if="value != ''"
       />
+      <view class="btn" v-if="value === ''">
+        <button open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">
+          点击授权获取手机号
+        </button>
+      </view>
     </view>
     <view class="width100" v-if="key === 'height'">
       <view class="pd-40 text-bold ft-35">身高</view>
@@ -189,6 +195,16 @@ export default {
     }
   },
   methods: {
+    onGetPhoneNumber(e) {
+      var data = {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+      };
+      this.value = "000";
+      api.decodePhone(data).then((result) => {
+        this.value = result;
+      });
+    },
     onKeyInput: function(event) {
       this.value = event.detail.value;
     },

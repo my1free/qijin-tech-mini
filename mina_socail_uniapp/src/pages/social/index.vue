@@ -1,7 +1,20 @@
 <template>
   <view class="content">
-    <view class="width100" v-bind:class="{ blur: withNoGroup }">
-      <view class="card-bg" v-if="cards == null || cards.length <= 0">
+    <view class="width100">
+      <!-- <view class="width100" v-bind:class="{ blur: withNoGroup }"> -->
+      <view
+        class="group-join-tips"
+        v-if="(cards == null || cards.length <= 0) && withNoGroup"
+      >
+        <text class="tips"
+          >为了保护用户隐私，请先加入群组，才能看到群组内人员信息</text
+        >
+        <text class="jump" v-on:click="jumpToGroup()">选择群组 >>> </text>
+      </view>
+      <view
+        class="card-bg"
+        v-if="(cards == null || cards.length <= 0) && !withNoGroup"
+      >
         <uni-load-more
           :status="loadingStatus"
           class="card-load"
@@ -102,12 +115,12 @@
         </swiper-item>
       </swiper>
     </view>
-    <view class="mask" v-if="withNoGroup">
+    <!-- <view class="mask" v-if="withNoGroup">
       <view class="auth-tips">
         <text>你还不是群成员，没有权限查看</text>
       </view>
       <button type="warn" @click="applyGroup">点击申请入群</button>
-    </view>
+    </view> -->
   </view>
 </template>
 
@@ -116,7 +129,7 @@ import api from "@/static/js/api.js";
 export default {
   data() {
     return {
-      withNoGroup: false,
+      withNoGroup: true,
       cards: [],
       loadingStatus: "noMore",
       currCardIdx: 0,
@@ -171,6 +184,12 @@ export default {
     applyGroup() {
       uni.navigateTo({
         url: "/pages/group/join/index?groupId=1",
+      });
+    },
+    jumpToGroup() {
+      console.log("jumpToGroup");
+      uni.switchTab({
+        url: "/pages/group/index",
       });
     },
   },
@@ -325,5 +344,24 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 40rpx;
+}
+
+.group-join-tips {
+  width: 100%;
+  margin-top: 40%;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.group-join-tips .tips {
+  color: gray;
+}
+
+.group-join-tips .jump {
+  color: red;
+  margin-top: 10%;
+  font-size: 40rpx;
 }
 </style>

@@ -1,5 +1,11 @@
 <template>
   <view class="with100">
+    <view
+      class="empty-tips"
+      v-if="myActivities.length == 0 && activities.length == 0"
+    >
+      <text>没有进行中的活动</text>
+    </view>
     <view class="activity-list" v-bind:class="{ blur: withNoGroup }">
       <view v-if="myActivities != null && myActivities.length > 0">
         <view class="group-title">
@@ -76,17 +82,17 @@
 
       <view>
         <view
+          class="group-title"
+          v-if="myActivities != null && myActivities.length > 0"
+        >
+          其他活动
+        </view>
+        <view
           class="activity-item"
           v-for="activity in activities"
           :key="activity.id"
           v-on:click="onDetail(activity.id)"
         >
-          <view
-            class="group-title"
-            v-if="myActivities != null && myActivities.length > 0"
-          >
-            其他活动
-          </view>
           <view class="activity-title">
             {{ activity.title }}
           </view>
@@ -320,5 +326,12 @@ export default {
   margin-left: -30rpx;
   width: 730rpx;
   margin-bottom: 40rpx;
+}
+
+.empty-tips {
+  width: 100%;
+  text-align: center;
+  color: gray;
+  margin-top: 40%;
 }
 </style>

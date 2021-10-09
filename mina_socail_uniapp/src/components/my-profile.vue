@@ -84,7 +84,7 @@
           <view class="info-item-value">{{
             myProfile.profile.mobile
               ? myProfile.profile.mobile
-              : "点击填写手机号"
+              : "点击获取手机号"
           }}</view>
           <view class="info-item-ops">></view>
         </view>

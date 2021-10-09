@@ -8,18 +8,19 @@
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
-            "path": "pages/activity/index",
-            "style": {
-                "navigationBarTitleText": "聚缘丨活动报名"
-            }
-        },
-        {
             "path": "pages/social/index",
             "style": {
                 "navigationBarTitleText": "聚缘丨活动报名",
                 "enablePullDownRefresh": true
             }
         },
+        {
+            "path": "pages/activity/index",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
+        
         {
             "path": "pages/social/detail/index",
             "style": {
@@ -28,6 +29,18 @@
         },
         {
             "path": "pages/activity/edit/index",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
+        {
+            "path": "pages/login/profile",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
+        {
+            "path": "pages/login/mobile",
             "style": {
                 "navigationBarTitleText": "聚缘丨活动报名"
             }
@@ -146,12 +159,12 @@
         "iconWidth": "24px",
         "spacing": "3px",
         "list": [
-            // {
-            //     "pagePath": "pages/social/index",
-            //     "iconPath": "static/image/card-gray.png",
-            //     "selectedIconPath": "static/image/card-color.png",
-            //     "text": "推荐"
-            // },
+            {
+                "pagePath": "pages/social/index",
+                "iconPath": "static/image/card-gray.png",
+                "selectedIconPath": "static/image/card-color.png",
+                "text": "推荐"
+            },
             // {
             //     "pagePath": "pages/square/index",
             //     "iconPath": "static/image/square-gray.png",
@@ -162,7 +175,7 @@
                 "pagePath": "pages/group/index",
                 "iconPath": "static/image/chat-gray.png",
                 "selectedIconPath": "static/image/chat-color.png",
-                "text": "俱乐部"
+                "text": "群组"
             },
             {
                 "pagePath": "pages/activity/index",

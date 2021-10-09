@@ -1,19 +1,18 @@
 <template>
   <view class="content">
+    <view class="head">
+      点击“授权”按钮，获取【头像】【昵称】和【性别】
+    </view>
     <view class="avatar">
       <image :src="avatar"></image>
     </view>
     <view class="name">
       <text>{{ name }}</text>
     </view>
+    <view class="gender"> </view>
     <view class="btn">
       <button type="primary" @click="authorizeProfile">
-        授权获取头像和昵称
-      </button>
-    </view>
-    <view class="btn">
-      <button open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">
-        唤起授权
+        授权
       </button>
     </view>
   </view>
@@ -31,11 +30,6 @@ export default {
   },
   onLoad() {},
   methods: {
-    onGetPhoneNumber(e) {
-      console.log(e.detail.errMsg);
-      console.log(e.detail.iv);
-      console.log(e.detail.encryptedData);
-    },
     authorizeProfile() {
       var that = this;
       wx.getUserProfile({
@@ -54,18 +48,19 @@ export default {
           api
             .updateProfile({ avatar: avatar, name: name, gender: genderStr })
             .then((result) => {
-              uni.showToast({
-                title: "更新资料成功",
-                icon: "success",
-              });
+              // uni.showToast({
+              //   title: "更新资料成功",
+              //   icon: "success",
+              // });
               api.sleep(1000).then((result) => {
                 uni.switchTab({
                   // url: "/pages/social/index",
-                  url: "/pages/activity/index",
+                  url: "/pages/group/index",
+                  // url: "/pages/activity/index",
                   success() {
                     let page = getCurrentPages().pop();
                     if (page == undefined || page == null) return;
-                    page.onLoad();
+                    // page.onLoad();
                   },
                 });
               });
@@ -85,8 +80,12 @@ export default {
   justify-content: center;
 }
 
+.head {
+  margin-top: 20%;
+  color: gray;
+}
 .avatar {
-  margin-top: 30%;
+  margin-top: 20%;
 }
 
 .name {
@@ -101,6 +100,7 @@ export default {
 }
 
 .btn {
+  width: 60%;
   margin-top: 20%;
 }
 </style>

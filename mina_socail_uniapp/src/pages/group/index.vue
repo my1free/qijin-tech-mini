@@ -4,7 +4,7 @@
       class="my-group width100 border-bt"
       v-if="managedGroups && managedGroups.length > 0"
     >
-      <view class="g-title">我管理的俱乐部</view>
+      <view class="g-title">我管理的群组</view>
       <uni-row class="demo-uni-row">
         <my-group :groups="managedGroups" />
       </uni-row>
@@ -13,7 +13,7 @@
       class="my-group width100 border-bt"
       v-if="auditGroups && auditGroups.length > 0"
     >
-      <view class="g-title">审核中的俱乐部</view>
+      <view class="g-title">审核中的群组</view>
       <uni-row class="demo-uni-row">
         <my-group :groups="auditGroups" />
       </uni-row>
@@ -22,13 +22,13 @@
       class="my-group width100 border-bt"
       v-if="joinedGroups && joinedGroups.length > 0"
     >
-      <view class="g-title">我加入的俱乐部</view>
+      <view class="g-title">我加入的群组</view>
       <uni-row class="demo-uni-row">
         <my-group :groups="joinedGroups" />
       </uni-row>
     </view>
     <view class="my-group width100" v-if="groups && groups.length > 0">
-      <view class="g-title">全部俱乐部</view>
+      <view class="g-title">全部群组</view>
       <uni-row class="demo-uni-row">
         <my-group :groups="groups" />
       </uni-row>
