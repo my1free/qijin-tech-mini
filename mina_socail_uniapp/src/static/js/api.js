@@ -137,6 +137,10 @@ function decodePhone(data) {
   return http.post("/api/v1/user/account/mini/mobile", data);
 }
 
+function whisper() {
+  return http.get("/incubator/social/misc/whisper");
+}
+
 function listCard() {
   if (isMock) return new Promise((resolve) => resolve(mock.listCard().data));
   return http.get("/incubator/social/card/recommend");
@@ -171,6 +175,10 @@ function getMe() {
 function getGallery() {
   if (isMock) return new Promise((resolve) => resolve(mock.getGallery().data));
   return http.get("/incubator/social/me/gallery");
+}
+
+function getProfile() {
+  return http.get("/api/v1/user/profile/get");
 }
 
 function updateProfile(data = {}) {
@@ -406,12 +414,15 @@ export default {
   showToast,
 
   // social 业务
+  whisper,
+  // card
   listCard,
   getCardDetail,
   listActivity,
   getActivityDetail,
   getMe,
   getGallery,
+  getProfile,
   updateProfile,
   addUserImage,
   delUserImage,

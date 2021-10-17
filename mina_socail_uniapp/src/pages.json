@@ -8,6 +8,42 @@
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
+            "path": "pages/profile/age",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/profile/edu",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/profile/height",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/profile/marriage",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/profile/avatar",
+            "style": {
+                "navigationBarTitleText": "上传头像",
+                "enablePullDownRefresh": false
+            }
+        },
+        
+        {
             "path": "pages/social/index",
             "style": {
                 "navigationBarTitleText": "聚缘丨活动报名",
