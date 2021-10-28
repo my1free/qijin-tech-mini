@@ -69,6 +69,7 @@
     "regenerator-runtime": "^0.12.1",
     "sass": "^1.32.8",
     "sass-loader": "^10.0.1",
+    "uview-ui": "^1.8.4",
     "vue": "^2.6.11",
     "vue-advanced-cropper": "^1.7.0",
     "vue-awesome-swiper": "^4.1.1",

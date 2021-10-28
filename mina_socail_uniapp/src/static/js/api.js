@@ -178,7 +178,7 @@ function getGallery() {
 }
 
 function getProfile() {
-  return http.get("/api/v1/user/profile/get");
+  return http.get("/api/v1/user/profile/info");
 }
 
 function updateProfile(data = {}) {

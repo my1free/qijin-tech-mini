@@ -38,13 +38,13 @@
               <view class="my-square-text">
                 <text>{{ item.content.text }} </text>
               </view>
-              <view>
+              <view class="my-square-images">
                 <view
                   class="my-square-image-multi"
                   v-on:click="onPreview(0, item.content.urls)"
                   v-if="
                     item.content.type === 'image' &&
-                    item.content.urls.length == 1
+                      item.content.urls.length == 1
                   "
                 >
                   <image
@@ -56,7 +56,7 @@
                 <view
                   v-if="
                     item.content.type === 'image' &&
-                    item.content.urls.length > 1
+                      item.content.urls.length > 1
                   "
                 >
                   <view
@@ -176,10 +176,10 @@ export default {
       },
       currItemIdx: 0,
       previewList: [
-        "/static/image/deshan2.jpg",
-        "/static/image/deshan3.jpg",
-        "/static/image/aze.jpeg",
-        "/static/image/aze2.jpeg",
+        "http://img.qijin.tech/tmp_1aa2181b6367d9a554d07c93689dabd3.png",
+        "http://img.qijin.tech/tmp_0b6e93118439b3ab5558a3eb83f1e415.png",
+        "http://img.qijin.tech/tmp_605d17df94a4f8e8699519759932afab31abc3f0d9628dfe.png",
+        "http://img.qijin.tech/tmp_4afffe948428f5c375ebb86389060792875a7f4dfb29e1f5.png",
       ],
       previewIdx: 0,
       opShow: false,
@@ -198,10 +198,28 @@ export default {
       console.log("触发动画");
     },
     onPreview(idx, urls) {
-      console.log("preview", idx, urls);
-      this.previewIdx = idx;
-      this.previewList = urls;
-      this.showPreview = true;
+      uni.previewImage({
+        urls: urls,
+        longPressActions: {
+          itemList: ["发送给朋友", "保存图片", "收藏"],
+          success: function(data) {
+            console.log(
+              "选中了第" +
+                (data.tapIndex + 1) +
+                "个按钮,第" +
+                (data.index + 1) +
+                "张图片"
+            );
+          },
+          fail: function(err) {
+            console.log(err.errMsg);
+          },
+        },
+      });
+      // console.log("preview", idx, urls);
+      // this.previewIdx = idx;
+      // this.previewList = urls;
+      // this.showPreview = true;
     },
     onLikeTab(itemIdx, likeIdx) {
       console.log("onLikeTab", itemIdx, likeIdx);
@@ -229,7 +247,7 @@ export default {
       if (this.itemList[itemIdx].hasLiked) {
         // 如果已经存在了，则需要删除
         let me = this.me;
-        var flist = likeList.filter(function (like) {
+        var flist = likeList.filter(function(like) {
           return like.uid != me.uid;
         });
         this.itemList[itemIdx].likeList = flist;
@@ -286,17 +304,17 @@ export default {
         url: "/pages/social/detail/index",
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function (data) {
+          acceptDataFromOpenedPage: function(data) {
             console.log(data);
           },
-          someEvent: function (data) {
+          someEvent: function(data) {
             console.log(data);
           },
         },
-        success: function (res) {
+        success: function(res) {
           console.log("success", res);
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log("fail", res);
         },
       });

@@ -3,19 +3,39 @@
         "autoscan": true,
         "custom": {
             // uni-ui 规则如下配置
-            "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+            "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+            "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
         }
     },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
-            "path": "pages/profile/age",
+            "path": "pages/square/detail",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
+        {
+            "path": "pages/square/index",
+            "style": {
+                "navigationBarTitleText": "聚缘丨活动报名"
+            }
+        },
+        {
+            "path": "pages/profile/city",
             "style": {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
         },
         {
-            "path": "pages/profile/edu",
+            "path": "pages/profile/marriage",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/profile/degree",
             "style": {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -29,7 +49,7 @@
             }
         },
         {
-            "path": "pages/profile/marriage",
+            "path": "pages/profile/birthday",
             "style": {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -100,12 +120,7 @@
                 "navigationBarTitleText": "聚缘丨活动报名"
             }
         },
-        {
-            "path": "pages/square/index",
-            "style": {
-                "navigationBarTitleText": "聚缘丨活动报名"
-            }
-        },
+        
         {
             "path": "pages/activity/detail/index",
             "style": {

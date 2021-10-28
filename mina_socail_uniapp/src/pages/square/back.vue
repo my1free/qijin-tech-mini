@@ -1,17 +1,150 @@
 <template>
-  <view class="content">
-    <view class="item" v-for="item in itemList" :key="item.id">
-      <feed-item :item="item"></feed-item>
+<view class="content" v-bind:class="{ 'fix-full': isPreview }">
+    <view class="big-operation">
+        <swiper class="swiper" autoplay="true" interval="3000" duration="500">
+            <swiper-item>
+                <view class="swiper-item uni-bg-red">
+                    <image src="/static/image/1.jpg">
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper-item uni-bg-green">
+                    <image src="/static/image/2.jpg">
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper-item uni-bg-blue">
+                    <image src="/static/image/3.jpg">
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <!-- <view class="small-operation"> 小运营位 </view> -->
+    <view class="my-square-list">
+        <view class="my-square-item" v-for="(item, itemIdx) in itemList" :key="item.id">
+            <uni-row class="demo-uni-row">
+                <uni-col :span="22" :offset="1">
+                    <!-- 头像区域 -->
+                    <uni-row class="demo-uni-row">
+                        <uni-col :span="4">
+                            <image class="my-square-avatar" :src="item.user.avatar" v-on:click="onCardDetail(item.user.id)"></image>
+                        </uni-col>
+                        <uni-col :span="12">
+                            <text class="my-square-name" v-on:click="onCardDetail(item.user.id)">{{ item.user.name }} </text>
+                        </uni-col>
+                    </uni-row>
+                </uni-col>
+            </uni-row>
+            <uni-row class="demo-uni-row">
+                <uni-col :span="22" :offset="1">
+                    <view class="my-square-content">
+                        <view class="my-square-text">
+                            <text>{{ item.content.text }} </text>
+                        </view>
+                        <view class="my-square-images">
+                            <view class="my-square-image-multi" v-on:click="onPreview(0, item.content.urls)" v-if="
+                    item.content.type === 'image' &&
+                    item.content.urls.length == 1
+                  ">
+                                <image class="my-square-image" :src="item.content.urls[0]" mode="widthFix"></image>
+                            </view>
+                            <view v-if="
+                    item.content.type === 'image' &&
+                    item.content.urls.length > 1
+                  ">
+                                <view v-on:click="onPreview(idx, item.content.urls)" v-for="(url, idx) in item.content.urls" :key="url" class="my-square-image-thumbnail">
+                                    <image :src="url" mode="aspectFill"></image>
+                                </view>
+                            </view>
+                            <view v-if="item.content.type === 'video'">
+                                <image class="my-square-image" :src="item.content.url"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="my-square-btn">
+                        <!-- 点赞、评论按钮区域 -->
+
+                        <text :class="{
+                  'cuIcon-like': !item.hasLiked,
+                  'cuIcon-likefill': item.hasLiked,
+                  'text-red': item.hasLiked,
+                }" v-on:click="onLike(itemIdx)"></text>
+                        <text class="number">{{
+                item.likeList ? item.likeList.length : 0
+              }}</text>
+                        <!-- <text class="cuIcon-likefill"></text> -->
+                        <text class="cuIcon-comment" v-on:click="onComment(itemIdx)"></text>
+                        <text class="number">{{
+                item.commentList ? item.commentList.length : 0
+              }}</text>
+                    </view>
+                    <view class="my-square-like" v-if="item.likeList.length > 0">
+                        <!-- 点赞展示区域 -->
+                        <text class="cuIcon-like"></text>
+                        <span class="my-square-like-item" v-for="(like, likeIdx) in item.likeList" :key="like.uid" v-on:click="onLikeTab(itemIdx, likeIdx)">
+                            <!-- v-on:remove="item.likeList.splice(likeIdx, 1)" -->
+                            <text>{{ like.name }}</text>
+                            <text v-if="likeIdx < item.likeList.length - 1">,</text>
+                        </span>
+                    </view>
+                    <view class="my-square-comments" v-if="item.commentList.length > 0">
+                        <!-- 评论展示区域 -->
+                        <view class="my-square-comments-line" v-for="(comment, commentIdx) in item.commentList" :key="comment.id" @click="onCommentLineTab(itemIdx, commentIdx, $event)">
+                            <span class="my-square-comments-name">{{
+                  comment.fromUser.name
+                }}</span>
+                            <span v-if="comment.toUser">回复</span>
+                            <span class="my-square-comments-name" v-if="comment.toUser">{{
+                  comment.toUser.name
+                }}</span>
+                            <text>:</text>
+                            <span class="mg-l-5rpx">{{ comment.text }}</span>
+                        </view>
+                    </view>
+                    <view class="my-square-comment-input" v-if="item.doInput">
+                        <textarea class="uni-input" focus="auto" auto-height="true" @blur="closeKeyboard" @confirm="confirmComment" />
+                        </view>
+          </uni-col>
+        </uni-row>
+      </view>
+    </view>
+    <!-- <view class="my-floating-op-container">
+      <view class="my-floating-op">
+        <uni-row class="demo-uni-row">
+          <uni-col :span="12"> 修改 </uni-col>
+          <uni-col :span="12"> 删除 </uni-col>
+        </uni-row>
+      </view>
+    </view> -->
+
+    <view class="my-image-preview" v-bind:class="{ hide: !isPreview }">
+      <uni-swiper-dot
+        :info="previewList"
+        :current="previewIdx"
+        field="content"
+        mode="round"
+        :dotsStyles="dotsStyles"
+      >
+        <swiper
+          class="swiper-box preview-list"
+          :duration="500"
+          @change="onPreviewSwiperChange"
+          :current="previewIdx"
+        >
+          <swiper-item v-for="preview in previewList" :key="preview">
+            <view class="preview">
+              <image :src="preview" mode="widthFix"></image>
+            </view>
+          </swiper-item>
+        </swiper>
+      </uni-swiper-dot>
+      <view class="preview-close" v-on:click="onPreviewClose()"> x </view>
     </view>
   </view>
 </template>
 
 <script>
-import FeedItem from "@/components/feed-item.vue";
 export default {
-  components: {
-    FeedItem,
-  },
   data() {
     return {
       me: {
@@ -34,52 +167,35 @@ export default {
           user: {
             id: 10001,
             name: "德善",
-            gender: "FEMALE",
             avatar:
               "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
           },
           content: {
             type: "text",
-            text:
-              "我主动打招呼，快12个小时才回，第一句就莫名其妙加个😐，问是什么意思又不说话了，是不是可以直接拉黑了",
-            // "每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n",
+            text: "每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n每天一个问候\n",
           },
           hasLiked: false,
           doInput: false,
           likeList: [
             {
               uid: 10002,
-              avatar:
-                "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
               name: "阿泽",
-              gender: "MALE",
             },
             {
               uid: 10004,
-              avatar:
-                "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
               name: "狗焕",
-              gender: "FMALE",
             },
             {
               uid: 10005,
-              avatar:
-                "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
               name: "娃娃鱼",
-              gender: "MALE",
             },
           ],
-          likeCount: 32,
-          commentCount: 40,
           commentList: [
             {
               id: 40000001,
               fromUser: {
                 uid: 10002,
-                avatar:
-                  "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
                 name: "阿泽",
-                gender: "MALE",
               },
               text: "我亲爱的德善",
             },
@@ -87,17 +203,11 @@ export default {
               id: 40000002,
               fromUser: {
                 uid: 10005,
-                avatar:
-                  "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
                 name: "娃娃鱼",
-                gender: "MALE",
               },
               toUser: {
                 uid: 10002,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "阿泽",
-                gender: "MALE",
               },
               text: "能不能不要这么恶心",
             },
@@ -105,10 +215,7 @@ export default {
               id: 40000003,
               fromUser: {
                 uid: 10004,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "狗焕",
-                gender: "MALE",
               },
               text: "藏起来~~",
             },
@@ -116,10 +223,7 @@ export default {
               id: 40000004,
               fromUser: {
                 uid: 10004,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "狗焕",
-                gender: "MALE",
               },
               text: "阿萨德富兰克林水电费尽量少打飞机",
             },
@@ -127,22 +231,15 @@ export default {
               id: 40000005,
               fromUser: {
                 uid: 10004,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "狗焕",
-                gender: "MALE",
               },
-              text:
-                "阿士大夫撒旦法 撒打飞机拉双方均对拉丝解放路撒 发苏打绿发撒拉发动机",
+              text: "阿士大夫撒旦法 撒打飞机拉双方均对拉丝解放路撒 发苏打绿发撒拉发动机",
             },
             {
               id: 40000006,
               fromUser: {
                 uid: 10004,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "狗焕",
-                gender: "MALE",
               },
               text: "仨",
             },
@@ -150,10 +247,7 @@ export default {
               id: 40000007,
               fromUser: {
                 uid: 10004,
-                avatar:
-                  "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
                 name: "狗焕",
-                gender: "MALE",
               },
               text: "藏起来~~",
             },
@@ -166,38 +260,29 @@ export default {
             name: "阿泽",
             avatar:
               "http://img.qijin.tech/STfnOXeRhE2L939e55e15a4be7339f5d3c0b7d1cd432.png",
-            gender: "MALE",
           },
           content: {
             type: "image",
-            text: "有点耐心，但是你可以把自己心里的想法都说出来",
-            images: [
+            text: "第一个动态",
+            urls: [
               "http://img.qijin.tech/tmp_1aa2181b6367d9a554d07c93689dabd3.png",
               "http://img.qijin.tech/tmp_0b6e93118439b3ab5558a3eb83f1e415.png",
               "http://img.qijin.tech/misc/1.jpg",
-              "http://img.qijin.tech/tmp_908d518ead1d1b3d4f98940fb372dc1a.jpg",
               "http://img.qijin.tech/tmp_908d518ead1d1b3d4f98940fb372dc1a.jpg",
             ],
           },
           likeList: [
             {
               uid: 10001,
-              avatar:
-                "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
               name: "德善",
-              gender: "FEMALE",
             },
           ],
-          likeCount: 1,
           commentList: [
             {
               id: 40000002,
               fromUser: {
                 uid: 10005,
-                avatar:
-                  "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
                 name: "娃娃鱼",
-                gender: "MALE",
               },
               text: "狗粮狗粮",
             },
@@ -205,17 +290,11 @@ export default {
               id: 40000003,
               fromUser: {
                 uid: 10002,
-                avatar:
-                  "http://img.qijin.tech/VjLPWj5VftQJ13fea8ccf05e250236f9f60151b66b41.png",
                 name: "阿泽",
-                gender: "MALE",
               },
               toUser: {
                 uid: 10005,
-                avatar:
-                  "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
                 name: "娃娃鱼",
-                gender: "MALE",
               },
               text: "要勇敢秀出❤️",
             },
@@ -230,14 +309,11 @@ export default {
             name: "宝拉",
             avatar:
               "http://img.qijin.tech/1904DB5uJz009a56520fb877d20934063a15c0340f02.png",
-            gender: "FEMALE",
           },
           content: {
             type: "image",
             text: "每天都要元气满满",
-            images: [
-              "http://img.qijin.tech/tmp_908d518ead1d1b3d4f98940fb372dc1a.jpg",
-            ],
+            urls: ["http://img.qijin.tech/tmp_908d518ead1d1b3d4f98940fb372dc1a.jpg"],
           },
           doInput: false,
           hasLiked: false,
@@ -274,7 +350,7 @@ export default {
         urls: urls,
         longPressActions: {
           itemList: ["发送给朋友", "保存图片", "收藏"],
-          success: function(data) {
+          success: function (data) {
             console.log(
               "选中了第" +
                 (data.tapIndex + 1) +
@@ -283,7 +359,7 @@ export default {
                 "张图片"
             );
           },
-          fail: function(err) {
+          fail: function (err) {
             console.log(err.errMsg);
           },
         },
@@ -321,7 +397,7 @@ export default {
       if (this.itemList[itemIdx].hasLiked) {
         // 如果已经存在了，则需要删除
         let me = this.me;
-        var flist = likeList.filter(function(like) {
+        var flist = likeList.filter(function (like) {
           return like.uid != me.uid;
         });
         this.itemList[itemIdx].likeList = flist;
@@ -378,17 +454,17 @@ export default {
         url: "/pages/social/detail/index",
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function(data) {
+          acceptDataFromOpenedPage: function (data) {
             console.log(data);
           },
-          someEvent: function(data) {
+          someEvent: function (data) {
             console.log(data);
           },
         },
-        success: function(res) {
+        success: function (res) {
           console.log("success", res);
         },
-        fail: function(res) {
+        fail: function (res) {
           console.log("fail", res);
         },
       });
@@ -401,9 +477,7 @@ export default {
 @import "/static/css/square.css";
 @import "/static/css/my-ui.css";
 @import "/static/css/common.css";
-page {
-  background-color: #eeeeee;
-}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -411,7 +485,29 @@ page {
   justify-content: center;
   font-size: 32rpx;
 }
-.item {
+
+.preview:hover {
+  -webkit-transition: width 2s, height 2s, background-color 2s,
+    -webkit-transform 2s;
+  transition: width 2s, height 2s, background-color 2s, transform 2s;
+}
+
+.big-operation {
   width: 100%;
+  background-color: gray;
+  height: 30vh;
+}
+
+.big-operation swiper {
+  height: 100%;
+}
+
+.big-operation .swiper-item {
+  width: 100%;
+  height: 100%;
+}
+
+.big-operation image {
+  width: 750rpx;
 }
 </style>

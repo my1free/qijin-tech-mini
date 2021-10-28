@@ -45,6 +45,12 @@
 			}
 		},
 		{
+			"path": "pages/tabBar/my/image/preview",
+			"style": {
+				"navigationBarTitleText": "图片预览"
+			}
+		},
+		{
 			"path": "pages/tabBar/component/component",
 			"style": {
 				"navigationBarTitleText": "内置组件",

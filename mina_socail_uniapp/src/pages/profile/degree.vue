@@ -22,7 +22,7 @@
     </view>
     <view class="foot">
       <view class="tips">{{ whisper }}</view>
-      <view class="next" v-on:click="onNext()">下一步</view>
+      <view class="next" v-on:click="onNext()">{{ btnText }}</view>
     </view>
   </view>
 </template>
@@ -41,6 +41,7 @@ export default {
       indicatorStyle: `height: 50px; background-color: #eee; opacity: 0.5;`,
       whisper: "",
       type: "single",
+      btnText: "保存",
     };
   },
 
@@ -49,6 +50,25 @@ export default {
     api.whisper().then((result) => {
       this.whisper = result;
     });
+    if (this.type == "single") {
+      api.getProfile().then((result) => {
+        console.log("profile=", result);
+        var degree = result.eduDegree;
+        if (degree != undefined && degree != "") {
+          if (degree == "大专及以下") {
+            this.value = [0];
+          } else if (degree == "本科") {
+            this.value = [1];
+          } else if (degree == "硕士") {
+            this.value = [2];
+          } else if (degree == "博士") {
+            this.value = [3];
+          }
+        }
+      });
+    } else {
+      this.btnText = "下一步";
+    }
   },
   methods: {
     bindChange: function(e) {
@@ -57,7 +77,7 @@ export default {
     },
     onNext: function() {
       var data = {
-        edu: this.edu,
+        eduDegree: this.edu,
       };
       api.updateProfile(data).then((result) => {
         api.sleep(10).then((result) => {

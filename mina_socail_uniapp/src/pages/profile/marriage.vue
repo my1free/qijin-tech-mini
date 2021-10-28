@@ -22,7 +22,7 @@
     </view>
     <view class="foot">
       <view class="tips">{{ whisper }}</view>
-      <view class="next" v-on:click="onNext()">下一步</view>
+      <view class="next" v-on:click="onNext()">{{ btnText }}</view>
     </view>
   </view>
 </template>
@@ -43,6 +43,7 @@ export default {
       whisper: "",
       type: "single",
       maritalStatus: "SINGLE",
+      btnText: "保存",
     };
   },
 
@@ -51,6 +52,23 @@ export default {
     api.whisper().then((result) => {
       this.whisper = result;
     });
+    if (this.type == "single") {
+      api.getProfile().then((result) => {
+        console.log("profile=", result);
+        var maritalStatus = result.maritalStatus;
+        if (maritalStatus != undefined && maritalStatus != "") {
+          if (maritalStatus == "SINGLE") {
+            this.value = [0];
+          } else if (maritalStatus == "DIVORCED") {
+            this.value = [1];
+          } else if (maritalStatus == "WIDOWED") {
+            this.value = [2];
+          }
+        }
+      });
+    } else {
+      this.btnText = "下一步";
+    }
   },
   methods: {
     bindChange: function(e) {

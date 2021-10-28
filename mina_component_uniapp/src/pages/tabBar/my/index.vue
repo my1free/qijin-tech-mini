@@ -3,6 +3,9 @@
     <view class="my-item" @click="myChat">
       IM 聊天
     </view>
+    <view class="my-item" @click="imagePreview">
+      图片预览
+    </view>
   </view>
 </template>
 
@@ -20,6 +23,11 @@ export default {
     myChat: function() {
       uni.navigateTo({
         url: "./chat/chat",
+      });
+    },
+    imagePreview: function() {
+      uni.navigateTo({
+        url: "./image/preview",
       });
     },
   },

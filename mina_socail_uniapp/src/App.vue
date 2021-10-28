@@ -1,3 +1,7 @@
+<style lang="scss">
+/* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
+@import "uview-ui/index.scss";
+</style>
 <script>
 export default {
   onLaunch: function() {
@@ -24,6 +28,9 @@ export default {
 }
 .mg-l-15rpx {
   margin-left: 15rpx;
+}
+.mg-l-20 {
+  margin-left: 20rpx;
 }
 .mg-l-20rpx {
   margin-left: 20rpx;
@@ -130,6 +137,9 @@ export default {
   padding-bottom: 20rpx;
 }
 
+.mg-t-20 {
+  margin-top: 20rpx;
+}
 .mg-top-20 {
   margin-top: 20rpx;
 }
@@ -207,5 +217,44 @@ export default {
 }
 .bgfemale {
   background-color: rgb(243, 17, 179);
+}
+
+.gender-female {
+  background-color: rgb(243, 17, 179);
+  border-radius: 50%;
+  color: white;
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 22rpx;
+  padding: 1rpx;
+  text-align: center;
+  display: inline-block;
+  transform: rotate(45deg);
+}
+
+.gender-female-tiny {
+  background-color: rgb(243, 17, 179);
+  /* border-radius: 50%; */
+  color: white;
+  width: 20rpx;
+  height: 20rpx;
+  font-size: 10rpx;
+  padding: 1rpx;
+  /* text-align: center; */
+  display: inline-block;
+  /* transform: rotate(45deg); */
+}
+
+.gender-male {
+  background-color: rgb(7, 137, 152);
+  border-radius: 50%;
+  color: white;
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 22rpx;
+  padding: 1rpx;
+  text-align: center;
+  display: inline-block;
+  transform: rotate(45deg);
 }
 </style>

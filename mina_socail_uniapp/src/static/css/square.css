@@ -7,7 +7,7 @@
     width: 91%;
     margin-left: 4%;
     border-bottom: 1rpx #eee solid;
-    margin-bottom: 20rpx;
+    margin-bottom: 60rpx;
 }
 
 .my-square-list .my-square-avatar{
@@ -34,23 +34,33 @@
     display: inline-block;
 }
 .my-square-item .my-square-content{
-    padding: 30rpx 20rpx;
+    /* padding: 0rpx 20rpx; */
+    padding-bottom: 30rpx;
 }
 
 .my-square-item .my-square-text{
     margin-bottom: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;     
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+.my-square-item .my-square-images{
+    margin-top: 20rpx;
 }
 
 .my-square-item .my-square-image-multi{
     width: 100%;
 }
 .my-square-item .my-square-image-thumbnail{
-    width: 30%;
-    height: 200rpx;
+    width: 180rpx;
+    height: 180rpx;
     display: inline-block;
     overflow: hidden;
-    height: 173rpx;
-    margin-left: 1%;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
     border-radius: 10rpx;
 }
 .my-square-item .my-square-image-thumbnail image{
