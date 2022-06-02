@@ -65,7 +65,7 @@
     "element-ui": "^2.15.1",
     "flyio": "^0.6.2",
     "i": "^0.3.6",
-    "npm": "^7.11.1",
+    "npm": "^8.11.0",
     "regenerator-runtime": "^0.12.1",
     "sass": "^1.32.8",
     "sass-loader": "^10.0.1",
